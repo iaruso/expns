@@ -4,13 +4,21 @@ import { useGlobalContext } from './context/global'
 
 function App() {
 
-  const { incomes, getIncomes, totalIncomes, getExpenses, totalExpenses, totalBalance } = useGlobalContext();
+  const { incomes, getIncomes, deleteIncome, totalIncomes, expenses, getExpenses, deleteExpense, totalExpenses, totalBalance } = useGlobalContext();
 
   useEffect(() => {
     getIncomes();
 		getExpenses();
 		console.log('aa');
   }, []);
+
+	const handleDeleteIncome = (id) => {
+    deleteIncome(id)
+  }
+
+  const handleDeleteExpense = (id) => {
+    deleteExpense(id)
+  }
 
   return (
     <>
@@ -24,11 +32,29 @@ function App() {
               <p>Type: {income.type}</p>
               <p>Category: {income.category}</p>
               <p>Description: {income.description}</p>
+							<button onClick={() => handleDeleteIncome(income._id)}>Delete</button>
               <hr />
             </div>
           ))
         ) : (
           <p>No incomes to display</p>
+        )}
+      </div>
+			<div>
+        {expenses.length > 0 ? (
+          expenses.map((expense) => (
+            <div key={expense._id}>
+              <p>Title: {expense.title}</p>
+              <p>Amount: {expense.amount}</p>
+              <p>Type: {expense.type}</p>
+              <p>Category: {expense.category}</p>
+              <p>Description: {expense.description}</p>
+							<button onClick={() => handleDeleteExpense(expense._id)}>Delete</button>
+              <hr />
+            </div>
+          ))
+        ) : (
+          <p>No expenses to display</p>
         )}
       </div>
       <div>

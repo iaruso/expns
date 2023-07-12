@@ -31,7 +31,15 @@ export const GlobalProvider = ({ children }) => {
 		}
 	}
 
-	/* Add delete income function here */
+	const deleteIncome = async (id) => {
+		try {
+			const response = await axios.delete(`${BASE_URL}/delete-income/${id}`)
+			console.log(response.data);
+			getIncomes()
+		} catch (error) {
+			console.log(error.message);
+		}
+	}
 
 	const totalIncomes = () => {
 		let total = 0;
@@ -62,7 +70,15 @@ export const GlobalProvider = ({ children }) => {
 		}
 	}
 
-	/* Add delete expense  function here */
+	const deleteExpense = async (id) => {
+		try {
+			const response = await axios.delete(`${BASE_URL}/delete-expense/${id}`)
+			console.log(response.data);
+			getExpenses()
+		} catch (error) {
+			console.log(error.message);
+		}
+	}
 
 	const totalExpenses = () => {
 		let total = 0;
@@ -79,8 +95,8 @@ export const GlobalProvider = ({ children }) => {
 
   return (
     <GlobalContext.Provider value={{ 
-			getIncomes, addIncome, totalIncomes, incomes, 
-			getExpenses, addExpense, totalExpenses, expenses, 
+			getIncomes, addIncome, deleteIncome, totalIncomes, incomes, 
+			getExpenses, addExpense, deleteExpense, totalExpenses, expenses, 
 			totalBalance 
 		}}>
       {children}
