@@ -23,7 +23,11 @@ export const GlobalProvider = ({ children }) => {
 
 	const addIncome = async (income) => {
 		try {
-			const response = await axios.post(`${BASE_URL}/add-income`, income)
+			const response = await axios.post(`${BASE_URL}/add-income`, income, {
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			});
 			console.log(response.data);
 			getIncomes()
 		} catch (error) {
@@ -62,7 +66,11 @@ export const GlobalProvider = ({ children }) => {
 
 	const addExpense = async (expense) => {
 		try {
-			const response = await axios.post(`${BASE_URL}/add-expense`, expense)
+			const response = await axios.post(`${BASE_URL}/add-expense`, expense, {
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			});
 			console.log(response.data);
 			getExpenses()
 		} catch (error) {
