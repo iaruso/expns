@@ -35,6 +35,20 @@ export const GlobalProvider = ({ children }) => {
 		}
 	}
 
+	const updateIncome = async (id, income) => {
+		try {
+			const response = await axios.put(`${BASE_URL}/update-income/${id}`, income, {
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			});
+			console.log(response.data);
+			getIncomes();
+		} catch (error) {
+			console.log(error.message);
+		}
+	};
+
 	const deleteIncome = async (id) => {
 		try {
 			const response = await axios.delete(`${BASE_URL}/delete-income/${id}`)
@@ -78,6 +92,20 @@ export const GlobalProvider = ({ children }) => {
 		}
 	}
 
+	const updateExpense = async (id, expense) => {
+		try {
+			const response = await axios.put(`${BASE_URL}/update-expense/${id}`, expense, {
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			});
+			console.log(response.data);
+			getExpenses();
+		} catch (error) {
+			console.log(error.message);
+		}
+	};
+
 	const deleteExpense = async (id) => {
 		try {
 			const response = await axios.delete(`${BASE_URL}/delete-expense/${id}`)
@@ -103,8 +131,8 @@ export const GlobalProvider = ({ children }) => {
 
   return (
     <GlobalContext.Provider value={{ 
-			getIncomes, addIncome, deleteIncome, totalIncomes, incomes, 
-			getExpenses, addExpense, deleteExpense, totalExpenses, expenses, 
+			getIncomes, addIncome, updateIncome, deleteIncome, totalIncomes, incomes, 
+			getExpenses, addExpense, updateExpense, deleteExpense, totalExpenses, expenses, 
 			totalBalance 
 		}}>
       {children}

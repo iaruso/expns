@@ -6,17 +6,20 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 function App() {
-  const { incomes, getIncomes, addIncome, deleteIncome, totalIncomes, expenses, getExpenses, addExpense, deleteExpense, totalExpenses, totalBalance } = useGlobalContext();
-	// Later create of each one (income and expense)
-	const [selectedCategory, setSelectedCategory] = useState(null);
-	const [selectedDate, setSelectedDate] = useState(null);
-	const [incomeData, setIncomeData] = useState({ title: '', amount: '', category: null, description: '', date: null });
-	const [expenseData, setExpenseData] = useState({ title: '', amount: '', category: null, description: '', date: null });
-	const categoryOptions = [
-		{ value: 'option1', label: 'Option 1' },
-		{ value: 'option2', label: 'Option 2' },
-		{ value: 'option3', label: 'Option 3' },
-	];
+  const { incomes, getIncomes, addIncome, updateIncome, deleteIncome, totalIncomes, expenses, getExpenses, addExpense, updateExpense, deleteExpense, totalExpenses, totalBalance } = useGlobalContext();
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [incomeData, setIncomeData] = useState({ title: '', amount: '', category: null, description: '', date: null });
+  const [expenseData, setExpenseData] = useState({ title: '', amount: '', category: null, description: '', date: null });
+  const categoryOptions = [
+    { value: 'option1', label: 'Option 1' },
+    { value: 'option2', label: 'Option 2' },
+    { value: 'option3', label: 'Option 3' },
+  ];
+  const [selectedIncome, setSelectedIncome] = useState(null);
+	const [selectedExpense, setSelectedExpense] = useState(null);
+  const [isEditIncomeDialogOpen, setIsEditIncomeDialogOpen] = useState(false);
+	const [isEditExpenseDialogOpen, setIsEditExpenseDialogOpen] = useState(false);
 
   useEffect(() => {
     getIncomes();
@@ -40,22 +43,78 @@ function App() {
   };
 
   const handleIncomeSubmit = (e) => {
+    e.preventDefault();
+    const formattedDate = selectedDate.toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' }).replace(/\//g, '-');
+    const updatedIncomeData = { ...incomeData, category: selectedCategory ? selectedCategory.value : 'Other', date: formattedDate };
+    const jsonData = JSON.stringify(updatedIncomeData);
+    addIncome(jsonData);
+    setIncomeData({ title: '', amount: '', category: null, description: '', date: null });
+  };
+
+  const handleExpenseSubmit = (e) => {
+    e.preventDefault();
+    const formattedDate = selectedDate.toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' }).replace(/\//g, '-');
+    const updatedExpenseData = { ...expenseData, category: selectedCategory ? selectedCategory.value : '', date: formattedDate };
+    const jsonData = JSON.stringify(updatedExpenseData);
+    addExpense(jsonData);
+    setExpenseData({ title: '', amount: '', category: null, description: '', date: null });
+  };
+
+  const openEditIncomeDialog = (income) => {
+    setSelectedIncome(income);
+    setIsEditIncomeDialogOpen(true);
+  };
+
+	const openEditExpenseDialog = (expense) => {
+    setSelectedExpense(expense);
+    setIsEditExpenseDialogOpen(true);
+  };
+
+  const handleEditIncomeChange = (e) => {
+    setSelectedIncome({ ...selectedIncome, [e.target.name]: e.target.value });
+  };
+
+	const handleEditExpenseChange = (e) => {
+    setSelectedExpense({ ...selectedExpense, [e.target.name]: e.target.value });
+  };
+
+  const handleEditIncomeSubmit = (e) => {
 		e.preventDefault();
-		const formattedDate = selectedDate.toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' }).replace(/\//g, '-')
-		const updatedIncomeData = { ...incomeData, category: selectedCategory ? selectedCategory.value : 'Other',	date: formattedDate };
+		const formattedDate = selectedDate ? selectedDate.toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' }).replace(/\//g, '-') : selectedIncome.date;
+		const updatedIncomeData = {
+			title: selectedIncome.title,
+			amount: parseFloat(selectedIncome.amount),
+			category: selectedIncome.category.value,
+			description: selectedIncome.description,
+			date: formattedDate
+		};
 		const jsonData = JSON.stringify(updatedIncomeData);
-		addIncome(jsonData);
-		setIncomeData({ title: '',	amount: '',	category: null,	description: '', date: null });
+		console.log(jsonData);
+		updateIncome(selectedIncome._id, jsonData);
+		setIsEditIncomeDialogOpen(false);
 	};
 
-	const handleExpenseSubmit = (e) => {
-		e.preventDefault();
-		const formattedDate = selectedDate.toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' }).replace(/\//g, '-')
-		const updatedExpenseData = { ...expenseData, category: selectedCategory ? selectedCategory.value : '', date: formattedDate };
-		const jsonData = JSON.stringify(updatedExpenseData);
-		addExpense(jsonData);
-		setExpenseData({ title: '',	amount: '',	category: null,	description: '', date: null });
-	};
+	const handleEditExpenseSubmit = (e) => {
+    e.preventDefault();
+    const formattedDate = selectedDate ? selectedDate.toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' }).replace(/\//g, '-') : selectedExpense.date;
+    const updatedExpenseData = {
+      title: selectedExpense.title,
+      amount: parseFloat(selectedExpense.amount),
+      category: selectedExpense.category.value,
+      description: selectedExpense.description,
+      date: formattedDate
+    };
+    const jsonData = JSON.stringify(updatedExpenseData);
+    updateExpense(selectedExpense._id, jsonData);
+    setIsEditExpenseDialogOpen(false);
+  };
+
+  const cancelEditIncome = () => {
+    setIsEditIncomeDialogOpen(false);
+  };
+	const cancelEditExpense = () => {
+    setIsEditExpenseDialogOpen(false);
+  }
 
   return (
     <>
@@ -68,8 +127,9 @@ function App() {
               <p>Amount: {income.amount}</p>
               <p>Category: {income.category}</p>
               <p>Description: {income.description}</p>
-							<p>Date: {new Date(income.date).toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' })}</p>
+              <p>Date: {new Date(income.date).toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' })}</p>
               <button onClick={() => handleDeleteIncome(income._id)}>Delete</button>
+              <button onClick={() => openEditIncomeDialog(income)}>Edit</button>
               <hr />
             </div>
           ))
@@ -85,8 +145,9 @@ function App() {
               <p>Amount: {expense.amount}</p>
               <p>Category: {expense.category}</p>
               <p>Description: {expense.description}</p>
-							<p>Date: {new Date(expense.date).toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' })}</p>
+              <p>Date: {new Date(expense.date).toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' })}</p>
               <button onClick={() => handleDeleteExpense(expense._id)}>Delete</button>
+							<button onClick={() => openEditExpenseDialog(expense)}>Edit</button>
               <hr />
             </div>
           ))
@@ -95,30 +156,58 @@ function App() {
         )}
       </div>
       <div>
-				Create income:
-				<form onSubmit={handleIncomeSubmit}>
-					<input type="text" name="title"	placeholder="Title"	value={incomeData.title} onChange={handleIncomeChange}/>
-					<input type="number" name="amount" placeholder="Amount"	value={incomeData.amount}	onChange={handleIncomeChange}/>
-					<Select options={categoryOptions} value={selectedCategory} onChange={setSelectedCategory} placeholder="Select a category"/>
-					<input type="text" name="description" placeholder="Description" value={incomeData.description} onChange={handleIncomeChange}/>
-					<DatePicker selected={selectedDate} onChange={setSelectedDate} dateFormat="MM-dd-yyyy" placeholderText="Select a date"/>
-					<button type="submit">Add Income</button>
-				</form>
-			</div>
-			<div>
-				Create expense:
-				<form onSubmit={handleExpenseSubmit}>
-					<input type="text" name="title" placeholder="Title" value={expenseData.title} onChange={handleExpenseChange}/>
-					<input type="number" name="amount" placeholder="Amount" value={expenseData.amount} onChange={handleExpenseChange}/>
-					<Select options={categoryOptions} value={selectedCategory} onChange={setSelectedCategory} placeholder="Select a category"/>
-					<input type="text" name="description" placeholder="Description" value={expenseData.description} onChange={handleExpenseChange}/>
-					<DatePicker selected={selectedDate} onChange={setSelectedDate} dateFormat="MM-dd-yyyy" placeholderText="Select a date"/>
-					<button type="submit">Add Expense</button>
-				</form>
-			</div>
+        Create income:
+        <form onSubmit={handleIncomeSubmit}>
+          <input type="text" name="title" placeholder="Title" value={incomeData.title} onChange={handleIncomeChange} />
+          <input type="number" name="amount" placeholder="Amount" value={incomeData.amount} onChange={handleIncomeChange} />
+          <Select options={categoryOptions} value={selectedCategory} onChange={setSelectedCategory} placeholder="Select a category" />
+          <input type="text" name="description" placeholder="Description" value={incomeData.description} onChange={handleIncomeChange} />
+          <DatePicker selected={selectedDate} onChange={setSelectedDate} dateFormat="MM-dd-yyyy" placeholderText="Select a date" />
+          <button type="submit">Add Income</button>
+        </form>
+      </div>
+      <div>
+        Create expense:
+        <form onSubmit={handleExpenseSubmit}>
+          <input type="text" name="title" placeholder="Title" value={expenseData.title} onChange={handleExpenseChange} />
+          <input type="number" name="amount" placeholder="Amount" value={expenseData.amount} onChange={handleExpenseChange} />
+          <Select options={categoryOptions} value={selectedCategory} onChange={setSelectedCategory} placeholder="Select a category" />
+          <input type="text" name="description" placeholder="Description" value={expenseData.description} onChange={handleExpenseChange} />
+          <DatePicker selected={selectedDate} onChange={setSelectedDate} dateFormat="MM-dd-yyyy" placeholderText="Select a date" />
+          <button type="submit">Add Expense</button>
+        </form>
+      </div>
       <div>Income: {totalIncomes()}</div>
       <div>Expenses: {totalExpenses()}</div>
       <div>Difference: {totalBalance()}</div>
+      {isEditIncomeDialogOpen && selectedIncome && (
+        <div>
+          <h3>Edit Income</h3>
+          <form onSubmit={handleEditIncomeSubmit}>
+            <input type="text" name="title" placeholder="Title" value={selectedIncome.title} onChange={handleEditIncomeChange} />
+            <input type="number" name="amount" placeholder="Amount" value={selectedIncome.amount} onChange={handleEditIncomeChange} />
+            <Select options={categoryOptions} value={selectedIncome.category} onChange={(selectedOption) => handleEditIncomeChange({ target: { name: 'category', value: selectedOption } })} placeholder="Select a category" />
+            <input type="text" name="description" placeholder="Description" value={selectedIncome.description} onChange={handleEditIncomeChange} />
+            <DatePicker selected={new Date(selectedIncome.date)} onChange={(date) => handleEditIncomeChange({ target: { name: 'date', value: date } })} dateFormat="MM-dd-yyyy" placeholderText="Select a date" />
+            <button type="submit">Save</button>
+            <button onClick={cancelEditIncome}>Cancel</button>
+          </form>
+        </div>
+      )}
+			{isEditExpenseDialogOpen && selectedExpense && (
+        <div>
+          <h3>Edit Expense</h3>
+          <form onSubmit={handleEditExpenseSubmit}>
+            <input type="text" name="title" placeholder="Title" value={selectedExpense.title} onChange={handleEditExpenseChange} />
+            <input type="number" name="amount" placeholder="Amount" value={selectedExpense.amount} onChange={handleEditExpenseChange} />
+            <Select options={categoryOptions} value={selectedExpense.category} onChange={(selectedOption) => handleEditExpenseChange({ target: { name: 'category', value: selectedOption } })} placeholder="Select a category" />
+            <input type="text" name="description" placeholder="Description" value={selectedExpense.description} onChange={handleEditExpenseChange} />
+            <DatePicker selected={new Date(selectedExpense.date)} onChange={(date) => handleEditExpenseChange({ target: { name: 'date', value: date } })} dateFormat="MM-dd-yyyy" placeholderText="Select a date" />
+            <button type="submit">Save</button>
+            <button onClick={cancelEditExpense}>Cancel</button>
+          </form>
+        </div>
+      )}
     </>
   );
 }
