@@ -6,7 +6,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 function App() {
-  const { incomes, getIncomes, addIncome, updateIncome, deleteIncome, totalIncomes, expenses, getExpenses, addExpense, updateExpense, deleteExpense, totalExpenses, totalBalance } = useGlobalContext();
+  const { incomes, getIncomes, addIncome, updateIncome, deleteIncome, totalIncomes, expenses, getExpenses, addExpense, updateExpense, deleteExpense, totalExpenses, totalBalance, transactionHistory } = useGlobalContext();
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
   const [incomeData, setIncomeData] = useState({ title: '', amount: '', category: null, description: '', date: null });
@@ -20,6 +20,9 @@ function App() {
 	const [selectedExpense, setSelectedExpense] = useState(null);
   const [isEditIncomeDialogOpen, setIsEditIncomeDialogOpen] = useState(false);
 	const [isEditExpenseDialogOpen, setIsEditExpenseDialogOpen] = useState(false);
+	const [sortColumn, setSortColumn] = useState('date');
+	const [isDescending, setIsDescending] = useState(true);
+	const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     getIncomes();
@@ -116,6 +119,14 @@ function App() {
     setIsEditExpenseDialogOpen(false);
   }
 
+	const toggleSortOrder = () => {
+		setIsDescending((prevIsDescending) => !prevIsDescending);
+	};
+
+	const handleSearchChange = (e) => {
+		setSearchQuery(e.target.value);
+	};
+
   return (
     <>
       <h1 className="text-3xl font-bold underline">Hello world!</h1>
@@ -158,22 +169,22 @@ function App() {
       <div>
         Create income:
         <form onSubmit={handleIncomeSubmit}>
-          <input type="text" name="title" placeholder="Title" value={incomeData.title} onChange={handleIncomeChange} />
-          <input type="number" name="amount" placeholder="Amount" value={incomeData.amount} onChange={handleIncomeChange} />
-          <Select options={categoryOptions} value={selectedCategory} onChange={setSelectedCategory} placeholder="Select a category" />
-          <input type="text" name="description" placeholder="Description" value={incomeData.description} onChange={handleIncomeChange} />
-          <DatePicker selected={selectedDate} onChange={setSelectedDate} dateFormat="MM-dd-yyyy" placeholderText="Select a date" />
+          <input type="text" name="title" placeholder="Title" value={incomeData.title} onChange={handleIncomeChange} required/>
+          <input type="number" name="amount" placeholder="Amount" value={incomeData.amount} onChange={handleIncomeChange} required/>
+          <Select options={categoryOptions} value={selectedCategory} onChange={setSelectedCategory} placeholder="Select a category" required/>
+          <input type="text" name="description" placeholder="Description" value={incomeData.description} onChange={handleIncomeChange} /> {/* '' is the default value for description */}
+          <DatePicker selected={selectedDate} onChange={setSelectedDate} dateFormat="MM-dd-yyyy" placeholderText="Select a date" required/> {/* Set the current date by default */}
           <button type="submit">Add Income</button>
         </form>
       </div>
       <div>
         Create expense:
         <form onSubmit={handleExpenseSubmit}>
-          <input type="text" name="title" placeholder="Title" value={expenseData.title} onChange={handleExpenseChange} />
-          <input type="number" name="amount" placeholder="Amount" value={expenseData.amount} onChange={handleExpenseChange} />
-          <Select options={categoryOptions} value={selectedCategory} onChange={setSelectedCategory} placeholder="Select a category" />
-          <input type="text" name="description" placeholder="Description" value={expenseData.description} onChange={handleExpenseChange} />
-          <DatePicker selected={selectedDate} onChange={setSelectedDate} dateFormat="MM-dd-yyyy" placeholderText="Select a date" />
+          <input type="text" name="title" placeholder="Title" value={expenseData.title} onChange={handleExpenseChange} required/>
+          <input type="number" name="amount" placeholder="Amount" value={expenseData.amount} onChange={handleExpenseChange} required/>
+          <Select options={categoryOptions} value={selectedCategory} onChange={setSelectedCategory} placeholder="Select a category" required/>
+          <input type="text" name="description" placeholder="Description" value={expenseData.description} onChange={handleExpenseChange} /> {/* '' is the default value for description */}
+          <DatePicker selected={selectedDate} onChange={setSelectedDate} dateFormat="MM-dd-yyyy" placeholderText="Select a date" required/> {/* Set the current date by default */}
           <button type="submit">Add Expense</button>
         </form>
       </div>
@@ -208,6 +219,40 @@ function App() {
           </form>
         </div>
       )}
+			<div>
+				<div>
+					Sort by:
+					<select value={sortColumn} onChange={(e) => setSortColumn(e.target.value)}>
+						<option value="date">Date</option>
+						<option value="amount">Amount</option>
+					</select>
+					<button onClick={toggleSortOrder}>
+						{isDescending ? 'Descending' : 'Ascending'}
+					</button>
+				</div>
+				<div>
+					Search:
+					<input
+						type="text"
+						value={searchQuery}
+						onChange={handleSearchChange}
+						placeholder="Search by title"
+					/>
+				</div>
+			</div>
+
+			{transactionHistory(searchQuery, sortColumn, isDescending).map((transaction) => (
+				<div key={transaction._id}>
+					<p>Title: {transaction.title}</p>
+					<p>Amount: {transaction.amount}</p>
+					<p>Category: {transaction.category}</p>
+					<p>Description: {transaction.description}</p>
+					<p>Date: {new Date(transaction.date).toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' })}</p>
+					<button onClick={() => handleDeleteExpense(transaction._id)}>Delete</button>
+					<button onClick={() => openEditExpenseDialog(transaction)}>Edit</button>
+					<hr />
+				</div>
+			))}
     </>
   );
 }

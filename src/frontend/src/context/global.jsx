@@ -129,11 +129,34 @@ export const GlobalProvider = ({ children }) => {
 		return totalIncomes() - totalExpenses()
 	}
 
+	const transactionHistory = (searchQuery, orderBy, isDescending) => {
+		const sortedHistory = [...incomes, ...expenses].sort((a, b) => {
+			let comparison = 0;
+			switch (orderBy) {
+				case 'date':
+					comparison = new Date(a.date) - new Date(b.date);
+					break;
+				case 'amount':
+					comparison = a.amount - b.amount;
+					break;
+				default:
+					break;
+			}
+			return isDescending ? -comparison : comparison;
+		});
+
+		const filteredHistory = sortedHistory.filter((transaction) =>
+			transaction.title.toLowerCase().replace(/\s+/g, ' ').includes(searchQuery.toLowerCase().replace(/\s+/g, ' '))
+		);
+
+		return filteredHistory;
+	};
+
   return (
     <GlobalContext.Provider value={{ 
 			getIncomes, addIncome, updateIncome, deleteIncome, totalIncomes, incomes, 
 			getExpenses, addExpense, updateExpense, deleteExpense, totalExpenses, expenses, 
-			totalBalance 
+			totalBalance, transactionHistory
 		}}>
       {children}
     </GlobalContext.Provider>
