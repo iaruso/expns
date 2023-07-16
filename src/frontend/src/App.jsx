@@ -11,18 +11,38 @@ function App() {
   const [selectedDate, setSelectedDate] = useState(null);
   const [incomeData, setIncomeData] = useState({ title: '', amount: '', category: null, description: '', date: null });
   const [expenseData, setExpenseData] = useState({ title: '', amount: '', category: null, description: '', date: null });
-  const categoryOptions = [
-    { value: 'option1', label: 'Option 1' },
-    { value: 'option2', label: 'Option 2' },
-    { value: 'option3', label: 'Option 3' },
-  ];
+  const incomeCategories = [
+		{ value: 'salary', label: 'Salary' },
+		{ value: 'investments', label: 'Investments' },
+		{ value: 'gifts', label: 'Gifts' }
+	];
+
+	const expenseCategories = [
+		{ value: 'housing', label: 'Housing' },
+		{ value: 'transportation', label: 'Transportation' },
+		{ value: 'food', label: 'Food' },
+		{ value: 'health', label: 'Health' },
+		{ value: 'entertainment', label: 'Entertainment' },
+		{ value: 'utilities', label: 'Utilities' },
+		{ value: 'debt', label: 'Debt' },
+		{ value: 'education', label: 'Education' },
+		{ value: 'travel', label: 'Travel' }
+	];
+
+	const incomeCategoryOptions = [ ...incomeCategories, { value: 'other', label: 'Other' } ];
+	const expenseCategoryOptions = [ ...expenseCategories, { value: 'other', label: 'Other' } ];
+	const categoryOptions = [ ...incomeCategories, ...expenseCategories, { value: 'other', label: 'Other' } ];
+
   const [selectedIncome, setSelectedIncome] = useState(null);
 	const [selectedExpense, setSelectedExpense] = useState(null);
+	const [selectedCategories, setSelectedCategories] = useState([]);
   const [isEditIncomeDialogOpen, setIsEditIncomeDialogOpen] = useState(false);
 	const [isEditExpenseDialogOpen, setIsEditExpenseDialogOpen] = useState(false);
 	const [sortColumn, setSortColumn] = useState('date');
 	const [isDescending, setIsDescending] = useState(true);
 	const [searchQuery, setSearchQuery] = useState('');
+	const [startDate, setStartDate] = useState(null);
+	const [endDate, setEndDate] = useState(null);
 
   useEffect(() => {
     getIncomes();
@@ -127,51 +147,57 @@ function App() {
 		setSearchQuery(e.target.value);
 	};
 
+	const getCategoryLabel = (value) => {
+		const allCategories = [...incomeCategories, ...expenseCategories];
+		const category = allCategories.find((cat) => cat.value === value);
+		return category ? category.label : 'Unknown';
+	};
+
   return (
     <>
       <h1 className="text-3xl font-bold underline">Hello world!</h1>
       <div>
-        {incomes.length > 0 ? (
-          incomes.map((income) => (
-            <div key={income._id}>
-              <p>Title: {income.title}</p>
-              <p>Amount: {income.amount}</p>
-              <p>Category: {income.category}</p>
-              <p>Description: {income.description}</p>
-              <p>Date: {new Date(income.date).toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' })}</p>
-              <button onClick={() => handleDeleteIncome(income._id)}>Delete</button>
-              <button onClick={() => openEditIncomeDialog(income)}>Edit</button>
-              <hr />
-            </div>
-          ))
-        ) : (
-          <p>No incomes to display</p>
-        )}
-      </div>
-      <div>
-        {expenses.length > 0 ? (
-          expenses.map((expense) => (
-            <div key={expense._id}>
-              <p>Title: {expense.title}</p>
-              <p>Amount: {expense.amount}</p>
-              <p>Category: {expense.category}</p>
-              <p>Description: {expense.description}</p>
-              <p>Date: {new Date(expense.date).toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' })}</p>
-              <button onClick={() => handleDeleteExpense(expense._id)}>Delete</button>
+				{incomes.length > 0 ? (
+					incomes.map((income) => (
+						<div key={income._id}>
+							<p>Title: {income.title}</p>
+							<p>Amount: {income.amount}</p>
+							<p>Category: {getCategoryLabel(income.category)}</p>
+							<p>Description: {income.description}</p>
+							<p>Date: {new Date(income.date).toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' })}</p>
+							<button onClick={() => handleDeleteIncome(income._id)}>Delete</button>
+							<button onClick={() => openEditIncomeDialog(income)}>Edit</button>
+							<hr />
+						</div>
+					))
+				) : (
+					<p>No incomes to display</p>
+				)}
+			</div>
+			<div>
+				{expenses.length > 0 ? (
+					expenses.map((expense) => (
+						<div key={expense._id}>
+							<p>Title: {expense.title}</p>
+							<p>Amount: {expense.amount}</p>
+							<p>Category: {getCategoryLabel(expense.category)}</p>
+							<p>Description: {expense.description}</p>
+							<p>Date: {new Date(expense.date).toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' })}</p>
+							<button onClick={() => handleDeleteExpense(expense._id)}>Delete</button>
 							<button onClick={() => openEditExpenseDialog(expense)}>Edit</button>
-              <hr />
-            </div>
-          ))
-        ) : (
-          <p>No expenses to display</p>
-        )}
-      </div>
+							<hr />
+						</div>
+					))
+				) : (
+					<p>No expenses to display</p>
+				)}
+			</div>
       <div>
         Create income:
         <form onSubmit={handleIncomeSubmit}>
           <input type="text" name="title" placeholder="Title" value={incomeData.title} onChange={handleIncomeChange} required/>
           <input type="number" name="amount" placeholder="Amount" value={incomeData.amount} onChange={handleIncomeChange} required/>
-          <Select options={categoryOptions} value={selectedCategory} onChange={setSelectedCategory} placeholder="Select a category" required/>
+          <Select options={incomeCategoryOptions} value={selectedCategory} onChange={setSelectedCategory} placeholder="Select a category" required/>
           <input type="text" name="description" placeholder="Description" value={incomeData.description} onChange={handleIncomeChange} /> {/* '' is the default value for description */}
           <DatePicker selected={selectedDate} onChange={setSelectedDate} dateFormat="MM-dd-yyyy" placeholderText="Select a date" required/> {/* Set the current date by default */}
           <button type="submit">Add Income</button>
@@ -182,7 +208,7 @@ function App() {
         <form onSubmit={handleExpenseSubmit}>
           <input type="text" name="title" placeholder="Title" value={expenseData.title} onChange={handleExpenseChange} required/>
           <input type="number" name="amount" placeholder="Amount" value={expenseData.amount} onChange={handleExpenseChange} required/>
-          <Select options={categoryOptions} value={selectedCategory} onChange={setSelectedCategory} placeholder="Select a category" required/>
+          <Select options={expenseCategoryOptions} value={selectedCategory} onChange={setSelectedCategory} placeholder="Select a category" required/>
           <input type="text" name="description" placeholder="Description" value={expenseData.description} onChange={handleExpenseChange} /> {/* '' is the default value for description */}
           <DatePicker selected={selectedDate} onChange={setSelectedDate} dateFormat="MM-dd-yyyy" placeholderText="Select a date" required/> {/* Set the current date by default */}
           <button type="submit">Add Expense</button>
@@ -221,6 +247,10 @@ function App() {
       )}
 			<div>
 				<div>
+					Search:
+					<input type="text" value={searchQuery} onChange={handleSearchChange} placeholder="Search by title"/>
+				</div>
+				<div>
 					Sort by:
 					<select value={sortColumn} onChange={(e) => setSortColumn(e.target.value)}>
 						<option value="date">Date</option>
@@ -230,22 +260,38 @@ function App() {
 						{isDescending ? 'Descending' : 'Ascending'}
 					</button>
 				</div>
-				<div>
-					Search:
-					<input
-						type="text"
-						value={searchQuery}
-						onChange={handleSearchChange}
-						placeholder="Search by title"
-					/>
-				</div>
+				<DatePicker
+					selected={startDate}
+					onChange={(date) => setStartDate(date)}
+					selectsStart
+					startDate={startDate}
+					endDate={endDate}
+					dateFormat="MM-dd-yyyy"
+					placeholderText="Start Date"
+				/>
+				<DatePicker
+					selected={endDate}
+					onChange={(date) => setEndDate(date)}
+					selectsEnd
+					startDate={startDate}
+					endDate={endDate}
+					dateFormat="MM-dd-yyyy"
+					placeholderText="End Date"
+				/>
+				<Select
+					isMulti
+					options={categoryOptions}
+					value={selectedCategories}
+					onChange={setSelectedCategories}
+					className="basic-multi-select"
+					classNamePrefix="select"
+				/>
 			</div>
-
-			{transactionHistory(searchQuery, sortColumn, isDescending).map((transaction) => (
+			{transactionHistory(searchQuery, sortColumn, isDescending, startDate, endDate, selectedCategories).map((transaction) => (
 				<div key={transaction._id}>
 					<p>Title: {transaction.title}</p>
 					<p>Amount: {transaction.amount}</p>
-					<p>Category: {transaction.category}</p>
+					<p>Category: {getCategoryLabel(transaction.category)}</p>
 					<p>Description: {transaction.description}</p>
 					<p>Date: {new Date(transaction.date).toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' })}</p>
 					<button onClick={() => handleDeleteExpense(transaction._id)}>Delete</button>

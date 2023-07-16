@@ -129,8 +129,28 @@ export const GlobalProvider = ({ children }) => {
 		return totalIncomes() - totalExpenses()
 	}
 
-	const transactionHistory = (searchQuery, orderBy, isDescending) => {
-		const sortedHistory = [...incomes, ...expenses].sort((a, b) => {
+	const transactionHistory = (searchQuery, orderBy, isDescending, startDate, endDate, selectedCategories) => {
+		const filteredBySearch = [...incomes, ...expenses].filter((transaction) =>
+			transaction.title.toLowerCase().replace(/\s+/g, ' ').includes(searchQuery.toLowerCase().replace(/\s+/g, ' '))
+		);
+
+		const filteredByDate = filteredBySearch.filter((transaction) => {
+			const transactionDate = new Date(transaction.date);
+			if (startDate && endDate) {
+				return transactionDate >= startDate && transactionDate <= endDate;
+			} else if (startDate) {
+				return transactionDate >= startDate;
+			} else if (endDate) {
+				return transactionDate <= endDate;
+			}
+			return true;
+		});
+
+		const filteredByCategories = selectedCategories.length > 0
+			? filteredByDate.filter((transaction) => selectedCategories.some(category => category.value === transaction.category))
+			: filteredByDate;
+
+		const sortedHistory = filteredByCategories.sort((a, b) => {
 			let comparison = 0;
 			switch (orderBy) {
 				case 'date':
@@ -145,11 +165,7 @@ export const GlobalProvider = ({ children }) => {
 			return isDescending ? -comparison : comparison;
 		});
 
-		const filteredHistory = sortedHistory.filter((transaction) =>
-			transaction.title.toLowerCase().replace(/\s+/g, ' ').includes(searchQuery.toLowerCase().replace(/\s+/g, ' '))
-		);
-
-		return filteredHistory;
+		return sortedHistory;
 	};
 
   return (
