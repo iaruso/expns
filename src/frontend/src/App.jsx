@@ -43,6 +43,9 @@ function App() {
 	const [searchQuery, setSearchQuery] = useState('');
 	const [startDate, setStartDate] = useState(null);
 	const [endDate, setEndDate] = useState(null);
+	const [minAmount, setMinAmount] = useState('');
+	const [maxAmount, setMaxAmount] = useState('');
+	const [selectedFilter, setSelectedFilter] = useState('All');
 
   useEffect(() => {
     getIncomes();
@@ -286,8 +289,23 @@ function App() {
 					className="basic-multi-select"
 					classNamePrefix="select"
 				/>
+				<Select
+					options={[
+						{ value: 'All', label: 'All' },
+						{ value: 'Incomes', label: 'Incomes' },
+						{ value: 'Expenses', label: 'Expenses' }
+					]}
+					value={{ value: selectedFilter, label: selectedFilter }}
+					onChange={(selectedOption) => setSelectedFilter(selectedOption.value)}
+				/>
+				<div>
+					Min Amount:
+					<input type="number" value={minAmount} onChange={(e) => setMinAmount(e.target.value)} />
+					Max Amount:
+					<input type="number" value={maxAmount} onChange={(e) => setMaxAmount(e.target.value)} />
+				</div>
 			</div>
-			{transactionHistory(searchQuery, sortColumn, isDescending, startDate, endDate, selectedCategories).map((transaction) => (
+			{transactionHistory(searchQuery, sortColumn, isDescending, startDate, endDate, selectedCategories, minAmount, maxAmount, selectedFilter).map((transaction) => (
 				<div key={transaction._id}>
 					<p>Title: {transaction.title}</p>
 					<p>Amount: {transaction.amount}</p>

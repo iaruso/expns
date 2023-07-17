@@ -129,7 +129,8 @@ export const GlobalProvider = ({ children }) => {
 		return totalIncomes() - totalExpenses()
 	}
 
-	const transactionHistory = (searchQuery, orderBy, isDescending, startDate, endDate, selectedCategories) => {
+	/* LATER mix the selectedFilter with selectedCategories */
+	const transactionHistory = (searchQuery, orderBy, isDescending, startDate, endDate, selectedCategories, minAmount, maxAmount, selectedFilter) => {
 		const filteredBySearch = [...incomes, ...expenses].filter((transaction) =>
 			transaction.title.toLowerCase().replace(/\s+/g, ' ').includes(searchQuery.toLowerCase().replace(/\s+/g, ' '))
 		);
@@ -150,7 +151,25 @@ export const GlobalProvider = ({ children }) => {
 			? filteredByDate.filter((transaction) => selectedCategories.some(category => category.value === transaction.category))
 			: filteredByDate;
 
-		const sortedHistory = filteredByCategories.sort((a, b) => {
+		const filteredByAmount = filteredByCategories.filter((transaction) => {
+			const amount = parseFloat(transaction.amount);
+			const minAmountValue = minAmount ? parseFloat(minAmount) : Number.NEGATIVE_INFINITY;
+			const maxAmountValue = maxAmount ? parseFloat(maxAmount) : Number.POSITIVE_INFINITY;
+			return amount >= minAmountValue && amount <= maxAmountValue;
+		});
+
+		const filteredByType = selectedFilter === 'All'
+			? filteredByAmount
+			: filteredByAmount.filter((transaction) => {
+				if (selectedFilter === 'Incomes') {
+					return transaction.type === 'income';
+				} else if (selectedFilter === 'Expenses') {
+					return transaction.type === 'expense';
+				}
+				return true; // Filter by 'All' option
+			});
+
+		const sortedHistory = filteredByType.sort((a, b) => {
 			let comparison = 0;
 			switch (orderBy) {
 				case 'date':
