@@ -10,16 +10,17 @@ exports.getIncomes = async (req, res) => {
 }
 
 exports.addIncome = async (req, res) => { 
-	const {title, amount, date, category, description} = req.body;
+	const {title, amount, currency, date, category, description} = req.body;
 	const income = IncomeSchema({ 
 		title,
 		amount,
+		currency,
 		category,
 		description,
 		date
 	});
 	try {
-		if(!title || !amount || !date || !category || !description) {
+		if(!title || !amount || !currency || !date || !category || !description) {
 			return res.status(400).json({error: 'All fields are required'});
 		}
 		if(amount <= 0 || !amount === 'number' ) {
@@ -34,15 +35,15 @@ exports.addIncome = async (req, res) => {
 
 exports.updateIncome = async (req, res) => {
   const { id } = req.params;
-  const { title, amount, date, category, description } = req.body;
+  const { title, amount, currency, date, category, description } = req.body;
   try {
-    if (!title || !amount || !date || !category || !description) {
+    if (!title || !amount || !currency || !date || !category || !description) {
       return res.status(400).json({ error: 'All fields are required' });
     }
     if (amount <= 0 || typeof amount !== 'number') {
       return res.status(400).json({ error: 'Error defining amount' });
     }
-    const updatedIncome = { title, amount, date, category, description,};
+    const updatedIncome = { title, amount, currency, date, category, description,};
     const income = await IncomeSchema.findByIdAndUpdate(id, updatedIncome, { new: true });
     if (!income) {
       return res.status(404).json({ error: 'Income not found' });

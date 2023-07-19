@@ -13,6 +13,11 @@ const IncomeSchema = new mongoose.Schema({
 		maxLength: 16,
 		trim: true
 	},
+	currency: {
+		type: String,
+		required: true,
+		trim: true
+	},
 	type: {
 		type: String,
 		default: 'income',

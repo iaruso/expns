@@ -7,10 +7,11 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 function App() {
   const { incomes, getIncomes, addIncome, updateIncome, deleteIncome, totalIncomes, expenses, getExpenses, addExpense, updateExpense, deleteExpense, totalExpenses, totalBalance, transactionHistory } = useGlobalContext();
+	const [selectedCurrency, setSelectedCurrency] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
-  const [incomeData, setIncomeData] = useState({ title: '', amount: '', category: null, description: '', date: null });
-  const [expenseData, setExpenseData] = useState({ title: '', amount: '', category: null, description: '', date: null });
+  const [incomeData, setIncomeData] = useState({ title: '', amount: '', currency: '', category: null, description: '', date: null });
+  const [expenseData, setExpenseData] = useState({ title: '', amount: '', currency: '', category: null, description: '', date: null });
   const incomeCategories = [
 		{ value: 'salary', label: 'Salary' },
 		{ value: 'investments', label: 'Investments' },
@@ -28,6 +29,18 @@ function App() {
 		{ value: 'education', label: 'Education' },
 		{ value: 'travel', label: 'Travel' }
 	];
+
+	const currencyOptions = [
+		{ value: 'usd', label: 'USD' },
+		{ value: 'eur', label: 'EUR' },
+		{ value: 'gbp', label: 'GBP' }
+	];
+
+	const currencySymbols = {
+		usd: '$',
+		eur: '€',
+		gbp: '£'
+	};
 
 	const incomeCategoryOptions = [ ...incomeCategories, { value: 'other', label: 'Other' } ];
 	const expenseCategoryOptions = [ ...expenseCategories, { value: 'other', label: 'Other' } ];
@@ -71,19 +84,20 @@ function App() {
   const handleIncomeSubmit = (e) => {
     e.preventDefault();
     const formattedDate = selectedDate.toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' }).replace(/\//g, '-');
-    const updatedIncomeData = { ...incomeData, category: selectedCategory ? selectedCategory.value : 'Other', date: formattedDate };
+    const updatedIncomeData = { ...incomeData, currency: selectedCurrency.value, category: selectedCategory ? selectedCategory.value : 'Other', date: formattedDate };
     const jsonData = JSON.stringify(updatedIncomeData);
     addIncome(jsonData);
-    setIncomeData({ title: '', amount: '', category: null, description: '', date: null });
+		console.log(jsonData);
+    setIncomeData({ title: '', amount: '', currency: '', category: null, description: '', date: null });
   };
 
   const handleExpenseSubmit = (e) => {
     e.preventDefault();
     const formattedDate = selectedDate.toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' }).replace(/\//g, '-');
-    const updatedExpenseData = { ...expenseData, category: selectedCategory ? selectedCategory.value : '', date: formattedDate };
+    const updatedExpenseData = { ...expenseData, currency: selectedCurrency.value, category: selectedCategory ? selectedCategory.value : '', date: formattedDate };
     const jsonData = JSON.stringify(updatedExpenseData);
     addExpense(jsonData);
-    setExpenseData({ title: '', amount: '', category: null, description: '', date: null });
+    setExpenseData({ title: '', amount: '', currency: '', category: null, description: '', date: null });
   };
 
   const openEditIncomeDialog = (income) => {
@@ -97,6 +111,7 @@ function App() {
   };
 
   const handleEditIncomeChange = (e) => {
+		console.log(selectedIncome);
     setSelectedIncome({ ...selectedIncome, [e.target.name]: e.target.value });
   };
 
@@ -110,12 +125,12 @@ function App() {
 		const updatedIncomeData = {
 			title: selectedIncome.title,
 			amount: parseFloat(selectedIncome.amount),
-			category: selectedIncome.category.value,
+			currency: selectedIncome.currency,
+			category: selectedIncome.category,
 			description: selectedIncome.description,
 			date: formattedDate
 		};
 		const jsonData = JSON.stringify(updatedIncomeData);
-		console.log(jsonData);
 		updateIncome(selectedIncome._id, jsonData);
 		setIsEditIncomeDialogOpen(false);
 	};
@@ -126,7 +141,8 @@ function App() {
     const updatedExpenseData = {
       title: selectedExpense.title,
       amount: parseFloat(selectedExpense.amount),
-      category: selectedExpense.category.value,
+			currency: selectedExpense.currency,
+      category: selectedExpense.category,
       description: selectedExpense.description,
       date: formattedDate
     };
@@ -164,7 +180,11 @@ function App() {
 					incomes.map((income) => (
 						<div key={income._id}>
 							<p>Title: {income.title}</p>
-							<p>Amount: {income.amount}</p>
+							{income.currency == 'usd' ? (
+								<p>Amount: {currencySymbols[income.currency]}{income.amount}</p>
+							) : (
+								<p>Amount: {income.amount}{currencySymbols[income.currency]}</p>
+							)}
 							<p>Category: {getCategoryLabel(income.category)}</p>
 							<p>Description: {income.description}</p>
 							<p>Date: {new Date(income.date).toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' })}</p>
@@ -182,7 +202,11 @@ function App() {
 					expenses.map((expense) => (
 						<div key={expense._id}>
 							<p>Title: {expense.title}</p>
-							<p>Amount: {expense.amount}</p>
+							{expense.currency == 'usd' ? (
+								<p>Amount: {currencySymbols[expense.currency]}{expense.amount}</p>
+							) : (
+								<p>Amount: {expense.amount}{currencySymbols[expense.currency]}</p>
+							)}
 							<p>Category: {getCategoryLabel(expense.category)}</p>
 							<p>Description: {expense.description}</p>
 							<p>Date: {new Date(expense.date).toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' })}</p>
@@ -200,6 +224,7 @@ function App() {
         <form onSubmit={handleIncomeSubmit}>
           <input type="text" name="title" placeholder="Title" value={incomeData.title} onChange={handleIncomeChange} required/>
           <input type="number" name="amount" placeholder="Amount" value={incomeData.amount} onChange={handleIncomeChange} required/>
+					<Select options={currencyOptions} value={selectedCurrency} onChange={setSelectedCurrency} required/>
           <Select options={incomeCategoryOptions} value={selectedCategory} onChange={setSelectedCategory} placeholder="Select a category" required/>
           <input type="text" name="description" placeholder="Description" value={incomeData.description} onChange={handleIncomeChange} /> {/* '' is the default value for description */}
           <DatePicker selected={selectedDate} onChange={setSelectedDate} dateFormat="MM-dd-yyyy" placeholderText="Select a date" required/> {/* Set the current date by default */}
@@ -211,6 +236,7 @@ function App() {
         <form onSubmit={handleExpenseSubmit}>
           <input type="text" name="title" placeholder="Title" value={expenseData.title} onChange={handleExpenseChange} required/>
           <input type="number" name="amount" placeholder="Amount" value={expenseData.amount} onChange={handleExpenseChange} required/>
+					<Select options={currencyOptions} value={selectedCurrency} onChange={setSelectedCurrency} required/>
           <Select options={expenseCategoryOptions} value={selectedCategory} onChange={setSelectedCategory} placeholder="Select a category" required/>
           <input type="text" name="description" placeholder="Description" value={expenseData.description} onChange={handleExpenseChange} /> {/* '' is the default value for description */}
           <DatePicker selected={selectedDate} onChange={setSelectedDate} dateFormat="MM-dd-yyyy" placeholderText="Select a date" required/> {/* Set the current date by default */}
@@ -226,7 +252,8 @@ function App() {
           <form onSubmit={handleEditIncomeSubmit}>
             <input type="text" name="title" placeholder="Title" value={selectedIncome.title} onChange={handleEditIncomeChange} />
             <input type="number" name="amount" placeholder="Amount" value={selectedIncome.amount} onChange={handleEditIncomeChange} />
-            <Select options={categoryOptions} value={selectedIncome.category} onChange={(selectedOption) => handleEditIncomeChange({ target: { name: 'category', value: selectedOption } })} placeholder="Select a category" />
+						<Select options={currencyOptions} value={currencyOptions.find((option) => option.value === selectedIncome.currency)} onChange={(currency) => handleEditIncomeChange({ target: { name: 'currency', value: currency.value } })}/>
+            <Select options={categoryOptions} value={categoryOptions.find((option) => option.value === selectedIncome.category)} onChange={(category) => handleEditIncomeChange({ target: { name: 'category', value: category.value } })} placeholder="Select a category" />
             <input type="text" name="description" placeholder="Description" value={selectedIncome.description} onChange={handleEditIncomeChange} />
             <DatePicker selected={new Date(selectedIncome.date)} onChange={(date) => handleEditIncomeChange({ target: { name: 'date', value: date } })} dateFormat="MM-dd-yyyy" placeholderText="Select a date" />
             <button type="submit">Save</button>
@@ -240,7 +267,8 @@ function App() {
           <form onSubmit={handleEditExpenseSubmit}>
             <input type="text" name="title" placeholder="Title" value={selectedExpense.title} onChange={handleEditExpenseChange} />
             <input type="number" name="amount" placeholder="Amount" value={selectedExpense.amount} onChange={handleEditExpenseChange} />
-            <Select options={categoryOptions} value={selectedExpense.category} onChange={(selectedOption) => handleEditExpenseChange({ target: { name: 'category', value: selectedOption } })} placeholder="Select a category" />
+						<Select options={currencyOptions} value={currencyOptions.find((option) => option.value === selectedExpense.currency)} onChange={(currency) => handleEditExpenseChange({ target: { name: 'currency', value: currency } })}/>
+            <Select options={categoryOptions} value={categoryOptions.find((option) => option.value === selectedExpense.category)} onChange={(category) => handleEditExpenseChange({ target: { name: 'category', value: category } })} placeholder="Select a category" />
             <input type="text" name="description" placeholder="Description" value={selectedExpense.description} onChange={handleEditExpenseChange} />
             <DatePicker selected={new Date(selectedExpense.date)} onChange={(date) => handleEditExpenseChange({ target: { name: 'date', value: date } })} dateFormat="MM-dd-yyyy" placeholderText="Select a date" />
             <button type="submit">Save</button>
