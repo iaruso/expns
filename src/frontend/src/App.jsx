@@ -6,12 +6,13 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 function App() {
-  const { incomes, getIncomes, addIncome, updateIncome, deleteIncome, totalIncomes, expenses, getExpenses, addExpense, updateExpense, deleteExpense, totalExpenses, totalBalance, transactionHistory } = useGlobalContext();
+  const { incomes, getIncomes, addIncome, updateIncome, deleteIncome, totalIncomes, expenses, getExpenses, addExpense, updateExpense, deleteExpense, totalExpenses, totalBalance, transactionHistory, getRates, rates } = useGlobalContext();
 	const [selectedCurrency, setSelectedCurrency] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
   const [incomeData, setIncomeData] = useState({ title: '', amount: '', currency: '', category: null, description: '', date: null });
   const [expenseData, setExpenseData] = useState({ title: '', amount: '', currency: '', category: null, description: '', date: null });
+	const [currentCurrency, setCurrentCurrency] = useState('null');
   const incomeCategories = [
 		{ value: 'salary', label: 'Salary' },
 		{ value: 'investments', label: 'Investments' },
@@ -61,6 +62,8 @@ function App() {
 	const [selectedFilter, setSelectedFilter] = useState('All');
 
   useEffect(() => {
+		setCurrentCurrency('eur'); // Default currency, later make it based on user preference
+		getRates();
     getIncomes();
     getExpenses();
   }, []);
@@ -172,6 +175,18 @@ function App() {
 		return category ? category.label : 'Unknown';
 	};
 
+  const convertToCurrentCurrency = (amount, currency) => {
+		if ( currency !== currentCurrency ) {
+			const rate = rates.find((r) => r.from === currency && r.to === currentCurrency);
+			if (rate) {
+				const convertedAmount = amount / rate.rate;
+				return currentCurrency === 'usd' ? currencySymbols[currentCurrency] + Number(convertedAmount.toFixed(2)) : Number(convertedAmount.toFixed(2)) + currencySymbols[currentCurrency];
+			}
+			return 0;
+		}
+		return Number(amount.toFixed(2));
+  };
+
   return (
     <>
       <h1 className="text-3xl font-bold underline">Hello world!</h1>
@@ -180,11 +195,7 @@ function App() {
 					incomes.map((income) => (
 						<div key={income._id}>
 							<p>Title: {income.title}</p>
-							{income.currency == 'usd' ? (
-								<p>Amount: {currencySymbols[income.currency]}{income.amount}</p>
-							) : (
-								<p>Amount: {income.amount}{currencySymbols[income.currency]}</p>
-							)}
+							<p>Amount: {convertToCurrentCurrency(income.amount, income.currency)}</p>
 							<p>Category: {getCategoryLabel(income.category)}</p>
 							<p>Description: {income.description}</p>
 							<p>Date: {new Date(income.date).toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' })}</p>
@@ -202,11 +213,7 @@ function App() {
 					expenses.map((expense) => (
 						<div key={expense._id}>
 							<p>Title: {expense.title}</p>
-							{expense.currency == 'usd' ? (
-								<p>Amount: {currencySymbols[expense.currency]}{expense.amount}</p>
-							) : (
-								<p>Amount: {expense.amount}{currencySymbols[expense.currency]}</p>
-							)}
+							<p>Amount: {convertToCurrentCurrency(expense.amount, expense.currency)}</p>
 							<p>Category: {getCategoryLabel(expense.category)}</p>
 							<p>Description: {expense.description}</p>
 							<p>Date: {new Date(expense.date).toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' })}</p>
@@ -224,7 +231,7 @@ function App() {
         <form onSubmit={handleIncomeSubmit}>
           <input type="text" name="title" placeholder="Title" value={incomeData.title} onChange={handleIncomeChange} required/>
           <input type="number" name="amount" placeholder="Amount" value={incomeData.amount} onChange={handleIncomeChange} required/>
-					<Select options={currencyOptions} value={selectedCurrency} onChange={setSelectedCurrency} required/>
+					<Select options={currencyOptions} value={selectedCurrency} onChange={setSelectedCurrency} placeholder={currentCurrency.toUpperCase()} required/>
           <Select options={incomeCategoryOptions} value={selectedCategory} onChange={setSelectedCategory} placeholder="Select a category" required/>
           <input type="text" name="description" placeholder="Description" value={incomeData.description} onChange={handleIncomeChange} /> {/* '' is the default value for description */}
           <DatePicker selected={selectedDate} onChange={setSelectedDate} dateFormat="MM-dd-yyyy" placeholderText="Select a date" required/> {/* Set the current date by default */}
@@ -236,7 +243,8 @@ function App() {
         <form onSubmit={handleExpenseSubmit}>
           <input type="text" name="title" placeholder="Title" value={expenseData.title} onChange={handleExpenseChange} required/>
           <input type="number" name="amount" placeholder="Amount" value={expenseData.amount} onChange={handleExpenseChange} required/>
-					<Select options={currencyOptions} value={selectedCurrency} onChange={setSelectedCurrency} required/>
+					<Select options={currencyOptions} value={selectedCurrency} onChange={setSelectedCurrency}  placeholder={currentCurrency.toUpperCase()} required />
+
           <Select options={expenseCategoryOptions} value={selectedCategory} onChange={setSelectedCategory} placeholder="Select a category" required/>
           <input type="text" name="description" placeholder="Description" value={expenseData.description} onChange={handleExpenseChange} /> {/* '' is the default value for description */}
           <DatePicker selected={selectedDate} onChange={setSelectedDate} dateFormat="MM-dd-yyyy" placeholderText="Select a date" required/> {/* Set the current date by default */}
@@ -336,7 +344,7 @@ function App() {
 			{transactionHistory(searchQuery, sortColumn, isDescending, startDate, endDate, selectedCategories, minAmount, maxAmount, selectedFilter).map((transaction) => (
 				<div key={transaction._id}>
 					<p>Title: {transaction.title}</p>
-					<p>Amount: {transaction.amount}</p>
+					<p>Amount: {convertToCurrentCurrency(transaction.amount, transaction.currency)}</p>
 					<p>Category: {getCategoryLabel(transaction.category)}</p>
 					<p>Description: {transaction.description}</p>
 					<p>Date: {new Date(transaction.date).toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' })}</p>

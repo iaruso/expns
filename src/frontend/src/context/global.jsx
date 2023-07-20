@@ -8,7 +8,22 @@ const GlobalContext = React.createContext();
 export const GlobalProvider = ({ children }) => {
   const [incomes, setIncomes] = useState([]);
   const [expenses, setExpenses] = useState([]);
+	const [rates, setRates] = useState([]);
   const [error, setError] = useState(null); /* Set errors in backend later */
+	const [currentCurrency, setCurrentCurrency] = useState('eur');
+
+	const convertToCurrentCurrency = (amount, currency) => {
+		if (currency !== currentCurrency) {
+			const rate = rates.find((r) => r.from === currency && r.to === currentCurrency);
+			if (rate) {
+				const convertedAmount = amount / rate.rate;
+				return Number(convertedAmount.toFixed(2));
+			}
+			return 0;
+		}
+		return Number(amount.toFixed(2)); // Return the original amount
+	};
+
 
 	/* 📈 Income functions */ 
   const getIncomes = async () => {
@@ -61,11 +76,11 @@ export const GlobalProvider = ({ children }) => {
 
 	const totalIncomes = () => {
 		let total = 0;
-		incomes.forEach((income) =>{
-			total = total + income.amount
-		})
-		return total;
-	}
+		incomes.forEach((income) => {
+			total += convertToCurrentCurrency(income.amount, income.currency);
+		});
+		return Number(total.toFixed(2));
+	};
 
 	/* 📉 Expense functions */
 	const getExpenses = async () => {
@@ -118,11 +133,38 @@ export const GlobalProvider = ({ children }) => {
 
 	const totalExpenses = () => {
 		let total = 0;
-		expenses.forEach((expense) =>{
-			total = total + expense.amount
-		})
-		return total;
-	}
+		expenses.forEach((expense) => {
+			total += convertToCurrentCurrency(expense.amount, expense.currency);
+		});
+		return Number(total.toFixed(2));
+	};
+
+	/* 💱 Rates functions */
+	const getRates = async () => {
+		try {
+			const response = await axios.get(`${BASE_URL}/rates`);
+			const ratesData = response.data[0];
+
+			const { USD, GBP } = ratesData.rates;
+			const eurToUsd = 1 / USD;
+			const eurToGbp = 1 / GBP;
+			const usdToEur = USD;
+			const usdToGbp = GBP / USD;
+			const gbpToEur = GBP;
+			const gbpToUsd = 1 / usdToGbp;
+
+			setRates([
+				{ from: 'eur', to: 'usd', rate: eurToUsd },
+				{ from: 'eur', to: 'gbp', rate: eurToGbp },
+				{ from: 'usd', to: 'eur', rate: usdToEur },
+				{ from: 'usd', to: 'gbp', rate: usdToGbp },
+				{ from: 'gbp', to: 'eur', rate: gbpToEur },
+				{ from: 'gbp', to: 'USD', rate: gbpToUsd },
+			]);
+		} catch (error) {
+			console.log(error.message);
+		}
+	};
 
 	/* Other functions */
 	const totalBalance = () => {
@@ -188,10 +230,11 @@ export const GlobalProvider = ({ children }) => {
 	};
 
   return (
-    <GlobalContext.Provider value={{ 
+    <GlobalContext.Provider value = {{ 
 			getIncomes, addIncome, updateIncome, deleteIncome, totalIncomes, incomes, 
-			getExpenses, addExpense, updateExpense, deleteExpense, totalExpenses, expenses, 
-			totalBalance, transactionHistory
+			getExpenses, addExpense, updateExpense, deleteExpense, totalExpenses, expenses,
+			getRates, rates,
+			totalBalance, transactionHistory,
 		}}>
       {children}
     </GlobalContext.Provider>
