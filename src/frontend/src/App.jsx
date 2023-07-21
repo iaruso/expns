@@ -4,6 +4,7 @@ import { useGlobalContext } from './context/global';
 import Select from 'react-select';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import User from './components/auth/User';
 
 function App() {
   const { incomes, getIncomes, addIncome, updateIncome, deleteIncome, totalIncomes, expenses, getExpenses, addExpense, updateExpense, deleteExpense, totalExpenses, totalBalance, transactionHistory, getRates, rates } = useGlobalContext();
@@ -189,6 +190,7 @@ function App() {
 
   return (
     <>
+			<User />
       <h1 className="text-3xl font-bold underline">Hello world!</h1>
       <div>
 				{incomes.length > 0 ? (
