@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
 
-const BASE_URL = "http://localhost:3000/api";
+const BASE_URL = "https://expns-app-1de5602c06dc.herokuapp.com/api/";
 
 const GlobalContext = React.createContext();
 

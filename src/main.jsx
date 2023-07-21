@@ -6,6 +6,7 @@ import { GlobalProvider } from './context/global.jsx';
 import { Auth0Provider } from '@auth0/auth0-react';
 
 const rootElement = document.getElementById('root');
+const scopes = "logins_count";
 
 ReactDOM.createRoot(rootElement).render(
   <React.StrictMode>
@@ -13,6 +14,7 @@ ReactDOM.createRoot(rootElement).render(
 			domain='https://dev-ho5mv6mmysfgicph.eu.auth0.com'
 			clientId='Enfdv2pFYvOxPf0QKYwIT9UGiP1ftby6'
 			redirectUri={window.location.origin}
+			scopes={scopes}
 		>
 			<GlobalProvider>
 				<App />
