@@ -6,17 +6,16 @@ import LogoutButton from "./Logout";
 const User = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
 
-  if (isLoading) {
-    return <div>Loading ...</div>;
-  }
-
   useEffect(() => {
-    // Check if the user object exists and has the 'sub' property before accessing it
-    if (user && user.sub) {
+    if (!isLoading && isAuthenticated && user && user.sub) {
       const userId = user.sub.split('|')[1];
       console.log(user.sub);
     }
-  }, [user]); // Include 'user' in the dependency array to run the effect when 'user' changes
+  }, [isLoading, isAuthenticated, user]);
+
+  if (isLoading) {
+    return <div>Loading ...</div>;
+  }
 
   return (
     isAuthenticated ? (
