@@ -1,17 +1,19 @@
 const ExpenseSchema = require('../models/expense.js');
 
 exports.getExpenses = async (req, res) => {
-	try {
-		const expenses = await ExpenseSchema.find().sort({createdAt: -1});
-		res.status(200).json(expenses);
-	} catch (error) {
-		res.status(500).json({error: error.message});
-	}
+  try {
+    const userId = req.headers['user-id'];
+    const expenses = await ExpenseSchema.find({ userId }).sort({ createdAt: -1 });
+    res.status(200).json(expenses);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 }
 
 exports.addExpense = async (req, res) => { 
 	const {title, amount, currency, date, category, description} = req.body;
-	const expense = ExpenseSchema({ title, amount, currency, category, description, date });
+	const userId = req.headers['user-id'];
+	const expense = ExpenseSchema({ title, amount, currency, category, description, date, userId });
 	try {
 		if(!title || !amount || !currency || !date || !category || !description) {
 			return res.status(400).json({error: 'All fields are required'});
@@ -28,6 +30,7 @@ exports.addExpense = async (req, res) => {
 
 exports.updateExpense = async (req, res) => {
   const { id } = req.params;
+  const userId = req.headers['user-id'];
   const { title, amount, currency, date, category, description } = req.body;
   try {
     if (!title || !amount || !currency || !date || !category || !description) {
@@ -36,8 +39,9 @@ exports.updateExpense = async (req, res) => {
     if (amount <= 0 || typeof amount !== 'number') {
       return res.status(400).json({ error: 'Error defining amount' });
     }
-    const updatedExpense = { title, amount, currency, date, category, description,};
-    const expense = await ExpenseSchema.findByIdAndUpdate(id, updatedExpense, { new: true });
+    const updatedExpense = { title, amount, currency, date, category, description };
+    const expense = await ExpenseSchema.findOneAndUpdate({ _id: id, userId: userId }, updatedExpense, { new: true });
+
     if (!expense) {
       return res.status(404).json({ error: 'Expense not found' });
     }
@@ -49,12 +53,12 @@ exports.updateExpense = async (req, res) => {
 
 exports.deleteExpense = async (req, res) => {
   const { id } = req.params;
+  const userId = req.headers['user-id'];
   try {
-    const expense = await ExpenseSchema.findById(id);
+    const expense = await ExpenseSchema.findOneAndDelete({ _id: id, userId: userId });
     if (!expense) {
       return res.status(404).json({ error: 'Expense not found' });
     }
-    await ExpenseSchema.findByIdAndDelete(id);
     res.status(200).json({ message: 'Expense deleted successfully' });
   } catch (error) {
     res.status(500).json({ error: error.message });

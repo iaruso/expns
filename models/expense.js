@@ -7,6 +7,11 @@ const ExpenseSchema = new mongoose.Schema({
 		trim: true,
 		maxLength: 64
 	},
+	userId: {
+		type: String,
+		required: true,
+		trim: true
+	},
 	amount: {
 		type: Number,
 		required: true,
