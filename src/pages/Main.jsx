@@ -4,6 +4,7 @@ import Select from 'react-select';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import User from '../components/auth/User';
+import { Link } from 'react-router-dom';
 
 function Main() {
   const { incomes, getIncomes, addIncome, updateIncome, deleteIncome, totalIncomes, expenses, getExpenses, addExpense, updateExpense, deleteExpense, totalExpenses, totalBalance, transactionHistory, getRates, rates } = useGlobalContext();
@@ -190,6 +191,7 @@ function Main() {
   return (
     <>
 			<User />
+			<Link to="/auth">Testing auth page</Link>
       <h1 className="text-3xl font-bold underline">Hello world!</h1>
       <div>
 				{incomes.length > 0 ? (

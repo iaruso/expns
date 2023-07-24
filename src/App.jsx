@@ -1,20 +1,14 @@
-import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from 'react-router-dom';
+import { RouterProvider, createHashRouter } from 'react-router-dom';
 import Main from "./pages/Main";
 import Auth from "./pages/Auth";
 
-const router = createBrowserRouter(
-  createRoutesFromElements(
-		<>
-      <Route index element={<Main />} />
-      <Route path="/auth" element={<Auth />} />
-		</>
-  )
-)
+const router = createHashRouter([
+	{ path: '/', element: <Main/> },
+	{ path: '/auth', element: <Auth/> },
+]);
 
 export default function App() {
   return (
-		<>
-      <RouterProvider router={router}/>
-    </>
-  );
+		<RouterProvider router={router}/>
+	)
 }

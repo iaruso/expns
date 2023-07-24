@@ -1,6 +1,7 @@
 {
   "name": "frontend",
   "private": true,
+	"homepage": "https://iaruso.github.io/expns",
   "version": "0.0.0",
   "type": "module",
   "scripts": {

@@ -4,12 +4,15 @@ import viteCompression from 'vite-plugin-compression';
 
 export default defineConfig({
   base: './',
-	root: './',
   plugins: [
     react(),
     viteCompression()
   ],
+	root: 'src/',
+	publicDir: '../public/',
 	build: {
+    outDir: '../dist',
+    emptyOutDir: true,
     sourcemap: false
-  },
+  }
 });
