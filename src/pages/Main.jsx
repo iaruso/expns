@@ -3,14 +3,19 @@ import { useGlobalContext } from '../context/global.jsx';
 import Select from 'react-select';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import User from '../components/auth/User';
-import { Link } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
+import Topbar from '../components/navigation/Topbar';
+import Balance from '../components/main/Balance';
+import Transactions from '../components/main/Transactions';
+import LogoutButton from '../components/auth/Logout.jsx';
+import Statistics from '../components/main/Statistics';
 
 function Main() {
 	const { isAuthenticated } = useAuth0();
 	useEffect(() => {
-		!isAuthenticated && window.location.replace("/#");
+		if (!isAuthenticated) {
+			window.location.replace("/#");
+		}
 	}, [isAuthenticated]);
   const { incomes, getIncomes, addIncome, updateIncome, deleteIncome, totalIncomes, expenses, getExpenses, addExpense, updateExpense, deleteExpense, totalExpenses, totalBalance, transactionHistory, getRates, rates } = useGlobalContext();
 	const [selectedCurrency, setSelectedCurrency] = useState(null);
@@ -95,21 +100,23 @@ function Main() {
   const handleIncomeSubmit = (e) => {
     e.preventDefault();
     const formattedDate = selectedDate.toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' }).replace(/\//g, '-');
-    const updatedIncomeData = { ...incomeData, currency: selectedCurrency.value, category: selectedCategory ? selectedCategory.value : 'Other', date: formattedDate };
+		const amountWithTwoDecimals = parseFloat(incomeData.amount).toFixed(2);
+    const updatedIncomeData = { ...incomeData, currency: selectedCurrency.value, category: selectedCategory ? selectedCategory.value : 'Other', date: formattedDate, amount: amountWithTwoDecimals };
     const jsonData = JSON.stringify(updatedIncomeData);
     addIncome(jsonData);
-		console.log(jsonData);
     setIncomeData({ title: '', amount: '', currency: '', category: null, description: '', date: null });
   };
 
   const handleExpenseSubmit = (e) => {
-    e.preventDefault();
-    const formattedDate = selectedDate.toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' }).replace(/\//g, '-');
-    const updatedExpenseData = { ...expenseData, currency: selectedCurrency.value, category: selectedCategory ? selectedCategory.value : '', date: formattedDate };
-    const jsonData = JSON.stringify(updatedExpenseData);
-    addExpense(jsonData);
-    setExpenseData({ title: '', amount: '', currency: '', category: null, description: '', date: null });
-  };
+		e.preventDefault();
+		const formattedDate = selectedDate.toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' }).replace(/\//g, '-');
+		const amountWithTwoDecimals = parseFloat(expenseData.amount).toFixed(2);
+		const updatedExpenseData = { ...expenseData, currency: selectedCurrency.value, category: selectedCategory ? selectedCategory.value : '', date: formattedDate,	amount: amountWithTwoDecimals };
+		const jsonData = JSON.stringify(updatedExpenseData);
+		addExpense(jsonData);
+		setExpenseData({ title: '', amount: '', currency: '', category: null, description: '', date: null });
+	};
+
 
   const openEditIncomeDialog = (income) => {
     setSelectedIncome(income);
@@ -122,7 +129,7 @@ function Main() {
   };
 
   const handleEditIncomeChange = (e) => {
-		console.log(selectedIncome);
+		// console.log(selectedIncome);
     setSelectedIncome({ ...selectedIncome, [e.target.name]: e.target.value });
   };
 
@@ -196,11 +203,13 @@ function Main() {
   };
 
   return (
-    <>
-			<User />
-			<Link to="/auth">Testing auth page</Link>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-      <div>
+    <div className='w-[21.625rem] flex flex-col gap-2'>
+			<LogoutButton />
+			<Topbar value={false}/>
+			<Balance/>
+			<Transactions/>
+			<Statistics/>
+      {/* <div>
 				{incomes.length > 0 ? (
 					incomes.map((income) => (
 						<div key={income._id}>
@@ -235,12 +244,12 @@ function Main() {
 				) : (
 					<p>No expenses to display</p>
 				)}
-			</div>
-      <div>
+			</div> */}
+      {/* <div>
         Create income:
         <form onSubmit={handleIncomeSubmit}>
           <input type="text" name="title" placeholder="Title" value={incomeData.title} onChange={handleIncomeChange} required/>
-          <input type="number" name="amount" placeholder="Amount" value={incomeData.amount} onChange={handleIncomeChange} required/>
+          <input type="number" name="amount" placeholder="Amount" value={incomeData.amount} onChange={handleIncomeChange} pattern="^[0-9]*\.?[0-9]*$" step="0.01" required/>
 					<Select options={currencyOptions} value={selectedCurrency} onChange={setSelectedCurrency} placeholder={currentCurrency.toUpperCase()} required/>
           <Select options={incomeCategoryOptions} value={selectedCategory} onChange={setSelectedCategory} placeholder="Select a category" required/>
           <input type="text" name="description" placeholder="Description" value={incomeData.description} onChange={handleIncomeChange} />
@@ -252,18 +261,14 @@ function Main() {
         Create expense:
         <form onSubmit={handleExpenseSubmit}>
           <input type="text" name="title" placeholder="Title" value={expenseData.title} onChange={handleExpenseChange} required/>
-          <input type="number" name="amount" placeholder="Amount" value={expenseData.amount} onChange={handleExpenseChange} required/>
+          <input type="number" name="amount" placeholder="Amount" value={expenseData.amount} onChange={handleExpenseChange} pattern="^[0-9]*\.?[0-9]*$" step="0.01" required />
 					<Select options={currencyOptions} value={selectedCurrency} onChange={setSelectedCurrency}  placeholder={currentCurrency.toUpperCase()} required />
-
-          <Select options={expenseCategoryOptions} value={selectedCategory} onChange={setSelectedCategory} placeholder="Select a category" required/>
+          <Select options={expenseCategoryOptions} value={selectedCategory} onChange={setSelectedCategory} placeholder="Select a category" required />
           <input type="text" name="description" placeholder="Description" value={expenseData.description} onChange={handleExpenseChange} />
           <DatePicker selected={selectedDate} onChange={setSelectedDate} dateFormat="MM-dd-yyyy" placeholderText="Select a date" required />
           <button type="submit">Add Expense</button>
         </form>
-      </div>
-      <div>Income: {totalIncomes()}</div>
-      <div>Expenses: {totalExpenses()}</div>
-      <div>Difference: {totalBalance()}</div>
+      </div> */}
       {isEditIncomeDialogOpen && selectedIncome && (
         <div>
           <h3>Edit Income</h3>
@@ -363,7 +368,7 @@ function Main() {
 					<hr />
 				</div>
 			))}
-    </>
+    </div>
   );
 }
 

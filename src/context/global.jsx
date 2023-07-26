@@ -1,16 +1,28 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const BASE_URL = "https://expns-app-1de5602c06dc.herokuapp.com/api/";
 
 const GlobalContext = React.createContext();
 
 export const GlobalProvider = ({ children }) => {
+	const { user } = useAuth0();
   const [incomes, setIncomes] = useState([]);
   const [expenses, setExpenses] = useState([]);
 	const [rates, setRates] = useState([]);
   const [error, setError] = useState(null); /* Set errors in backend later */
 	const [currentCurrency, setCurrentCurrency] = useState('eur');
+	const [userId, setUserId] = useState(null);
+
+	useEffect(() => {
+		if (user) {
+			const userIdFiltered = user.sub.split('|')[1];
+      setUserId(userIdFiltered);
+		} else {
+			setUserId(null);
+		}
+	}, [user]);
 
 	const convertToCurrentCurrency = (amount, currency) => {
 		if (currency !== currentCurrency) {
@@ -24,13 +36,16 @@ export const GlobalProvider = ({ children }) => {
 		return Number(amount.toFixed(2)); // Return the original amount
 	};
 
-
 	/* 📈 Income functions */ 
   const getIncomes = async () => {
     try {
-      const response = await axios.get(`${BASE_URL}/get-incomes`);
+      const response = await axios.get(`${BASE_URL}/get-incomes`, {
+				headers: {
+					'user-id': userId
+				},
+			});
       setIncomes(response.data);
-      console.log(response.data);
+      console.log(response);
     } catch (error) {
       console.log(error.message);
     }
@@ -41,6 +56,7 @@ export const GlobalProvider = ({ children }) => {
 			const response = await axios.post(`${BASE_URL}/add-income`, income, {
 				headers: {
 					'Content-Type': 'application/json',
+					'user-id': userId
 				},
 			});
 			console.log(response.data);
@@ -55,6 +71,7 @@ export const GlobalProvider = ({ children }) => {
 			const response = await axios.put(`${BASE_URL}/update-income/${id}`, income, {
 				headers: {
 					'Content-Type': 'application/json',
+					'user-id': userId
 				},
 			});
 			console.log(response.data);
@@ -66,7 +83,11 @@ export const GlobalProvider = ({ children }) => {
 
 	const deleteIncome = async (id) => {
 		try {
-			const response = await axios.delete(`${BASE_URL}/delete-income/${id}`)
+			const response = await axios.delete(`${BASE_URL}/delete-income/${id}`, {
+				headers: {
+					'user-id': userId
+				},
+			})
 			console.log(response.data);
 			getIncomes()
 		} catch (error) {
@@ -85,7 +106,11 @@ export const GlobalProvider = ({ children }) => {
 	/* 📉 Expense functions */
 	const getExpenses = async () => {
     try {
-      const response = await axios.get(`${BASE_URL}/get-expenses`);
+      const response = await axios.get(`${BASE_URL}/get-expenses`, {
+				headers: {
+					'user-id': userId
+				},
+			});
       setExpenses(response.data);
       console.log(response.data);
     } catch (error) {
@@ -98,6 +123,7 @@ export const GlobalProvider = ({ children }) => {
 			const response = await axios.post(`${BASE_URL}/add-expense`, expense, {
 				headers: {
 					'Content-Type': 'application/json',
+					'user-id': userId
 				},
 			});
 			console.log(response.data);
@@ -112,6 +138,7 @@ export const GlobalProvider = ({ children }) => {
 			const response = await axios.put(`${BASE_URL}/update-expense/${id}`, expense, {
 				headers: {
 					'Content-Type': 'application/json',
+					'user-id': userId
 				},
 			});
 			console.log(response.data);
@@ -123,7 +150,11 @@ export const GlobalProvider = ({ children }) => {
 
 	const deleteExpense = async (id) => {
 		try {
-			const response = await axios.delete(`${BASE_URL}/delete-expense/${id}`)
+			const response = await axios.delete(`${BASE_URL}/delete-expense/${id}`, {
+				headers: {
+					'user-id': userId
+				},
+			})
 			console.log(response.data);
 			getExpenses()
 		} catch (error) {
@@ -171,6 +202,30 @@ export const GlobalProvider = ({ children }) => {
 		return totalIncomes() - totalExpenses()
 	}
 
+  const getTotalCategorizedIncomes = (category) => {
+    const filteredIncomes = incomes.filter((income) => income.category === category);
+    let total = 0;
+    filteredIncomes.forEach((income) => {
+      total += convertToCurrentCurrency(income.amount, income.currency);
+    });
+    return Number(total.toFixed(2));
+  };
+
+  const getTotalCategorizedExpenses = (category) => {
+    const filteredExpenses = expenses.filter((expense) => expense.category === category);
+    let total = 0;
+    filteredExpenses.forEach((expense) => {
+      total += convertToCurrentCurrency(expense.amount, expense.currency);
+    });
+    return Number(total.toFixed(2));
+  };
+
+	const latestTransactions = () => {
+		const allTransactions = [...incomes, ...expenses];
+		allTransactions.sort((a, b) => new Date(b.date) - new Date(a.date));
+		return allTransactions.slice(0, 3);
+	};
+
 	/* LATER mix the selectedFilter with selectedCategories */
 	const transactionHistory = (searchQuery, orderBy, isDescending, startDate, endDate, selectedCategories, minAmount, maxAmount, selectedFilter) => {
 		const filteredBySearch = [...incomes, ...expenses].filter((transaction) =>
@@ -208,7 +263,7 @@ export const GlobalProvider = ({ children }) => {
 				} else if (selectedFilter === 'Expenses') {
 					return transaction.type === 'expense';
 				}
-				return true; // Filter by 'All' option
+				return true;
 			});
 
 		const sortedHistory = filteredByType.sort((a, b) => {
@@ -234,7 +289,8 @@ export const GlobalProvider = ({ children }) => {
 			getIncomes, addIncome, updateIncome, deleteIncome, totalIncomes, incomes, 
 			getExpenses, addExpense, updateExpense, deleteExpense, totalExpenses, expenses,
 			getRates, rates,
-			totalBalance, transactionHistory,
+			totalBalance, getTotalCategorizedIncomes, getTotalCategorizedExpenses, latestTransactions,
+			transactionHistory
 		}}>
       {children}
     </GlobalContext.Provider>

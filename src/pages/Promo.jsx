@@ -10,7 +10,7 @@ export default function Promo() {
 		isAuthenticated && window.location.replace("/#/main");
 	}, [isAuthenticated]);
 	return (
-		<div className="flex flex-col w-[44rem]">
+		<>
 			<Topbar/>
 			<div className="h-full grid grid-cols-2 gap-4 w-full py-4">
 				<div className="flex flex-col">
@@ -23,6 +23,6 @@ export default function Promo() {
 				</div>
 			</div>
 			<Footer/>
-		</div>
+		</>
 	)
 }
