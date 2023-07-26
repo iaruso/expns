@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #2433c2;
+      }
+    </style>
+  </defs>
+  <g>
+    <circle class="cls-1" cx="32" cy="480" r="32"/>
+    <circle class="cls-1" cx="96" cy="416" r="32"/>
+    <rect class="cls-1" y="384" width="64" height="64" rx="24" ry="24"/>
+    <rect class="cls-1" x="64" y="448" width="64" height="64" rx="24" ry="24"/>
+  </g>
+  <g>
+    <circle class="cls-1" cx="160" cy="480" r="32"/>
+    <circle class="cls-1" cx="224" cy="416" r="32"/>
+    <rect class="cls-1" x="128" y="384" width="64" height="64" rx="24" ry="24"/>
+    <rect class="cls-1" x="192" y="448" width="64" height="64" rx="24" ry="24"/>
+  </g>
+  <g>
+    <circle class="cls-1" cx="288" cy="480" r="32"/>
+    <circle class="cls-1" cx="352" cy="416" r="32"/>
+    <rect class="cls-1" x="256" y="384" width="64" height="64" rx="24" ry="24"/>
+    <rect class="cls-1" x="320" y="448" width="64" height="64" rx="24" ry="24"/>
+  </g>
+  <g>
+    <circle class="cls-1" cx="416" cy="480" r="32"/>
+    <circle class="cls-1" cx="480" cy="416" r="32"/>
+    <rect class="cls-1" x="384" y="384" width="64" height="64" rx="24" ry="24"/>
+    <rect class="cls-1" x="448" y="448" width="64" height="64" rx="24" ry="24"/>
+  </g>
+  <g>
+    <circle class="cls-1" cx="32" cy="352" r="32"/>
+    <circle class="cls-1" cx="96" cy="288" r="32"/>
+    <rect class="cls-1" y="256" width="64" height="64" rx="24" ry="24"/>
+    <rect class="cls-1" x="64" y="320" width="64" height="64" rx="24" ry="24"/>
+  </g>
+  <g>
+    <circle class="cls-1" cx="160" cy="352" r="32"/>
+    <circle class="cls-1" cx="224" cy="288" r="32"/>
+    <rect class="cls-1" x="128" y="256" width="64" height="64" rx="24" ry="24"/>
+    <rect class="cls-1" x="192" y="320" width="64" height="64" rx="24" ry="24"/>
+  </g>
+  <g>
+    <circle class="cls-1" cx="288" cy="352" r="32"/>
+    <circle class="cls-1" cx="352" cy="288" r="32"/>
+    <rect class="cls-1" x="256" y="256" width="64" height="64" rx="24" ry="24"/>
+    <rect class="cls-1" x="320" y="320" width="64" height="64" rx="24" ry="24"/>
+  </g>
+  <g>
+    <circle class="cls-1" cx="416" cy="352" r="32"/>
+    <circle class="cls-1" cx="480" cy="288" r="32"/>
+    <rect class="cls-1" x="384" y="256" width="64" height="64" rx="24" ry="24"/>
+    <rect class="cls-1" x="448" y="320" width="64" height="64" rx="24" ry="24"/>
+  </g>
+  <g>
+    <circle class="cls-1" cx="32" cy="224" r="32"/>
+    <circle class="cls-1" cx="96" cy="160" r="32"/>
+    <rect class="cls-1" x="0" y="128" width="64" height="64" rx="24" ry="24"/>
+    <rect class="cls-1" x="64" y="192" width="64" height="64" rx="24" ry="24"/>
+  </g>
+  <g>
+    <circle class="cls-1" cx="160" cy="224" r="32"/>
+    <circle class="cls-1" cx="224" cy="160" r="32"/>
+    <rect class="cls-1" x="128" y="128" width="64" height="64" rx="24" ry="24"/>
+    <rect class="cls-1" x="192" y="192" width="64" height="64" rx="24" ry="24"/>
+  </g>
+  <g>
+    <circle class="cls-1" cx="288" cy="224" r="32"/>
+    <circle class="cls-1" cx="352" cy="160" r="32"/>
+    <rect class="cls-1" x="256" y="128" width="64" height="64" rx="24" ry="24"/>
+    <rect class="cls-1" x="320" y="192" width="64" height="64" rx="24" ry="24"/>
+  </g>
+  <g>
+    <circle class="cls-1" cx="416" cy="224" r="32"/>
+    <circle class="cls-1" cx="480" cy="160" r="32"/>
+    <rect class="cls-1" x="384" y="128" width="64" height="64" rx="24" ry="24"/>
+    <rect class="cls-1" x="448" y="192" width="64" height="64" rx="24" ry="24"/>
+  </g>
+  <g>
+    <circle class="cls-1" cx="32" cy="96" r="32"/>
+    <circle class="cls-1" cx="96" cy="32" r="32"/>
+    <rect class="cls-1" x="0" width="64" height="64" rx="24" ry="24"/>
+    <rect class="cls-1" x="64" y="64" width="64" height="64" rx="24" ry="24"/>
+  </g>
+  <g>
+    <circle class="cls-1" cx="160" cy="96" r="32"/>
+    <circle class="cls-1" cx="224" cy="32" r="32"/>
+    <rect class="cls-1" x="128" width="64" height="64" rx="24" ry="24"/>
+    <rect class="cls-1" x="192" y="64" width="64" height="64" rx="24" ry="24"/>
+  </g>
+  <g>
+    <circle class="cls-1" cx="288" cy="96" r="32"/>
+    <circle class="cls-1" cx="352" cy="32" r="32"/>
+    <rect class="cls-1" x="256" width="64" height="64" rx="24" ry="24"/>
+    <rect class="cls-1" x="320" y="64" width="64" height="64" rx="24" ry="24"/>
+  </g>
+  <g>
+    <circle class="cls-1" cx="416" cy="96" r="32"/>
+    <circle class="cls-1" cx="480" cy="32" r="32"/>
+    <rect class="cls-1" x="384" width="64" height="64" rx="24" ry="24"/>
+    <rect class="cls-1" x="448" y="64" width="64" height="64" rx="24" ry="24"/>
+  </g>
+</svg>

@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App.jsx';
+import './App.css';
 import './index.css';
+import './i18n/index.js'
 import { GlobalProvider } from './context/global.jsx';
 import { Auth0Provider } from '@auth0/auth0-react';
 
@@ -12,7 +14,7 @@ ReactDOM.createRoot(rootElement).render(
 		<Auth0Provider
 			domain='https://dev-ho5mv6mmysfgicph.eu.auth0.com'
 			clientId='Enfdv2pFYvOxPf0QKYwIT9UGiP1ftby6'
-			redirect_uri={window.location.origin}
+			redirectUri={window.location.origin}
 		>
 			<GlobalProvider>
 				<App />

@@ -5,8 +5,13 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import User from '../components/auth/User';
 import { Link } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
 
 function Main() {
+	const { isAuthenticated } = useAuth0();
+	useEffect(() => {
+		!isAuthenticated && window.location.replace("/#");
+	}, [isAuthenticated]);
   const { incomes, getIncomes, addIncome, updateIncome, deleteIncome, totalIncomes, expenses, getExpenses, addExpense, updateExpense, deleteExpense, totalExpenses, totalBalance, transactionHistory, getRates, rates } = useGlobalContext();
 	const [selectedCurrency, setSelectedCurrency] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -63,10 +68,12 @@ function Main() {
 	const [selectedFilter, setSelectedFilter] = useState('All');
 
   useEffect(() => {
-		setCurrentCurrency('eur'); // Default currency, later make it based on user preference localStorage
-		getRates();
-    getIncomes();
-    getExpenses();
+		if(isAuthenticated) {
+			setCurrentCurrency('eur'); // Default currency, later make it based on user preference localStorage
+			getRates();
+			getIncomes();
+			getExpenses();
+		}
   }, []);
 
   const handleDeleteIncome = (id) => {
