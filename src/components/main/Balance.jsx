@@ -29,7 +29,7 @@ const Balance = () => {
   return (
     <div className="w-full bg-main rounded-lg flex justify-between items-center h-10 px-2 py-4">
       <p className="text-white font-bold text-tiny"><Translator path="main.balance"/></p>
-      <p className="text-white font-bold text-tiny">{formatBalance(balance, currency)}</p>
+      <p className="text-white font-bold text-tiny tabular-nums">{formatBalance(balance, currency)}</p>
     </div>
   );
 };

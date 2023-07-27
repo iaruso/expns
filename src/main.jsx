@@ -15,6 +15,7 @@ ReactDOM.createRoot(rootElement).render(
 			domain='https://dev-ho5mv6mmysfgicph.eu.auth0.com'
 			clientId='Enfdv2pFYvOxPf0QKYwIT9UGiP1ftby6'
 			redirectUri={window.location.origin}
+			cacheLocation="localstorage"
 		>
 			<GlobalProvider>
 				<App />

@@ -14,7 +14,7 @@ const StatisticItem = ({ value, category, total = false }) => {
   return (
     <div className={`w-full flex justify-between items-center rounded h-6 px-2 text-min ${ total ? 'bg-main text-white' : 'bg-secondary text-main'}`}>
 			<p><Translator path={`categories.${category}`}/></p>
-			<p>{currency === 'usd' ? '$' + formatValue(value) : formatValue(value) + getCurrencySymbol(currency)}</p>
+			<p className="tabular-nums">{currency === 'usd' ? '$' + formatValue(value) : formatValue(value) + getCurrencySymbol(currency)}</p>
     </div>
   );
 };

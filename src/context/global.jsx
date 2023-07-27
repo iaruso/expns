@@ -226,13 +226,12 @@ export const GlobalProvider = ({ children }) => {
 		return allTransactions.slice(0, 3);
 	};
 
-	/* LATER mix the selectedFilter with selectedCategories */
-	const transactionHistory = (searchQuery, orderBy, isDescending, startDate, endDate, selectedCategories, minAmount, maxAmount, selectedFilter) => {
-		const filteredBySearch = [...incomes, ...expenses].filter((transaction) =>
+	const transactionHistory = (searchQuery, orderBy, isDescending, startDate, endDate, selectedCategory, minAmount, maxAmount, selectedFilter) => {
+    const filteredBySearch = [...incomes, ...expenses].filter((transaction) =>
 			transaction.title.toLowerCase().replace(/\s+/g, ' ').includes(searchQuery.toLowerCase().replace(/\s+/g, ' '))
-		);
+    );
 
-		const filteredByDate = filteredBySearch.filter((transaction) => {
+    const filteredByDate = filteredBySearch.filter((transaction) => {
 			const transactionDate = new Date(transaction.date);
 			if (startDate && endDate) {
 				return transactionDate >= startDate && transactionDate <= endDate;
@@ -242,20 +241,20 @@ export const GlobalProvider = ({ children }) => {
 				return transactionDate <= endDate;
 			}
 			return true;
-		});
+    });
 
-		const filteredByCategories = selectedCategories.length > 0
-			? filteredByDate.filter((transaction) => selectedCategories.some(category => category.value === transaction.category))
+    const filteredByCategory = selectedCategory
+			? filteredByDate.filter((transaction) => transaction.category === selectedCategory.value)
 			: filteredByDate;
 
-		const filteredByAmount = filteredByCategories.filter((transaction) => {
+    const filteredByAmount = filteredByCategory.filter((transaction) => {
 			const amount = parseFloat(transaction.amount);
 			const minAmountValue = minAmount ? parseFloat(minAmount) : Number.NEGATIVE_INFINITY;
 			const maxAmountValue = maxAmount ? parseFloat(maxAmount) : Number.POSITIVE_INFINITY;
 			return amount >= minAmountValue && amount <= maxAmountValue;
-		});
+    });
 
-		const filteredByType = selectedFilter === 'All'
+    const filteredByType = selectedFilter === 'All'
 			? filteredByAmount
 			: filteredByAmount.filter((transaction) => {
 				if (selectedFilter === 'Incomes') {
@@ -266,7 +265,7 @@ export const GlobalProvider = ({ children }) => {
 				return true;
 			});
 
-		const sortedHistory = filteredByType.sort((a, b) => {
+    const sortedHistory = filteredByType.sort((a, b) => {
 			let comparison = 0;
 			switch (orderBy) {
 				case 'date':
@@ -279,10 +278,11 @@ export const GlobalProvider = ({ children }) => {
 					break;
 			}
 			return isDescending ? -comparison : comparison;
-		});
+    });
 
-		return sortedHistory;
+    return sortedHistory;
 	};
+
 
   return (
     <GlobalContext.Provider value = {{ 

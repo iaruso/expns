@@ -28,7 +28,7 @@ const Statistics = () => {
     <div className="w-full flex flex-col gap-2">
 			<div className="w-full flex justify-between h-6">
 				<h2 className="text-main font-semibold text-sm h6 flex justify-center items-center pl-2">Monthly statistics</h2>
-				<a href="#" className="text-main font-semibold text-xs h6 flex justify-center items-center px-2 rounded hover:bg-secondaryHover">See all</a>
+				<a className="text-main font-semibold text-xs h6 flex justify-center items-center px-2 rounded hover:bg-secondaryHover">See all</a>
 			</div>
 			<div className="h-10 flex gap-2">
 				<a className={`h-10 cursor-pointer flex justify-center items-center font-semibold text-xs rounded-lg w-full ${activeButton === "incomes" ? "bg-main text-white" : "bg-secondary text-main"}`} onClick={() => handleButtonClick("incomes")}>Incomes</a>

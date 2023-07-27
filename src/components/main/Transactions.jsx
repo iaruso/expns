@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useGlobalContext } from "../../context/global";
 import Translator from "../i18n/Translator";
 import { formatValue } from "../../helpers/formatValue.js";
@@ -19,7 +20,7 @@ const Transactions = () => {
     <div className="w-full flex flex-col gap-2">
 			<div className="w-full flex justify-between h-6">
 				<h2 className="text-main font-semibold text-sm h6 flex justify-center items-center pl-2">Latest transactions</h2>
-				<a href="#" className="text-main font-semibold text-xs h6 flex justify-center items-center px-2 rounded hover:bg-secondaryHover">See all</a>
+				<Link className="text-main font-semibold text-xs h6 flex justify-center items-center px-2 rounded hover:bg-secondaryHover" to="/transactions">See all</Link>
 			</div>
 			<div className="flex flex-col gap-1">
 				{latestTransactionsValue.map((transaction, index) => (
