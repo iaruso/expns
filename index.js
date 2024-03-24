@@ -14,7 +14,7 @@ app.use(cors());
 readdirSync('./routes').map((r) => app.use('/api', require('./routes/' + r)));
 
 app.get('/', (req, res) => {
-  res.send('Hello World!');
+  res.send('API is running...');
 });
 
 const server = () => {
