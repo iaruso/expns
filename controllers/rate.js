@@ -16,9 +16,13 @@ async function fetchAndStoreExchangeRates() {
     const collection = db.collection(collectionName);
 
 		const otherCurrencies = baseCurrencies.filter((currency) => currency !== 'EUR');
-		const apiUrl = `http://api.exchangeratesapi.io/v1/latest?access_key=${accessKey}&symbols=${otherCurrencies.join()}&format=1`;
+		const apiUrl = `https://api.apilayer.com/exchangerates_data/latest?base=EUR&symbols=USD,GBP`;
 
-		const response = await axios.get(apiUrl);
+		const response = await axios.get(apiUrl, {
+      headers: {
+        'apikey': accessKey
+      }
+    });
 		console.log(response.data);
 		const { base, rates } = response.data;
 
@@ -50,7 +54,6 @@ async function getRates(req, res) {
 
     const rates = await collection.find().toArray();
     client.close();
-
     res.json(rates);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch exchange rates.' });
