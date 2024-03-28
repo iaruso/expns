@@ -1,0 +1,11 @@
+.main-intro {
+  height: calc(100vh - 3rem);
+}
+
+.main-intro-stats-1 {
+  width: calc(100% - 4rem);
+}
+
+.main-intro-stats-2 {
+  width: calc(100% + 4rem);
+}

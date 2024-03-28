@@ -1,11 +1,10 @@
-import './Navbar.css';
 import React, { useState, useEffect } from 'react';
 import Logo from '../../icons/Logo.jsx';
-import Translator from '../../i18n/Translator';
+import Translator from '../../i18n/Translator.jsx';
 
 const Navbar = () => {
 	return (
-		<nav className={`w-full flex justify-between h-12 px-16 py-2 border-[0.05rem] border-gallery`}>
+		<nav className='w-full flex justify-between h-12 px-16 py-2 border-b-[0.05rem] border-gallery sticky top-0 bg-white'>
 			<div className='flex items-center gap-4'>
 				<div className='flex items-center gap-1'>
 					<Logo className='w-3 h-3'/>

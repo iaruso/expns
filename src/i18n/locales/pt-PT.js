@@ -24,12 +24,20 @@ export default {
 				register: 'Experimentar gratuitamente',
 			}
     },
-		promo: {
-			main: 'Acompanhe suas despesas e receitas com facilidade.',
-			secondary: 'Fique de olho no seu dinheiro. Quanto entra e sai.'
-		},
 		main: {
-			balance: 'Saldo atual',
+			intro: {
+				title: 'Gerir as finanças nunca foi tão fácil',
+				subtitle: 'A nossa aplicação foi concebida para o controlo das despesas e dos rendimentos. Simplifique a sua supervisão financeira e mantenha-se no caminho certo com facilidade.',
+				cta: 'Comece agora',
+				users: {
+					stats: '+2M',
+					label: 'Utilizadores satisfeitos'
+				},
+				experience: {
+					stats: '+4',
+					label: 'Anos no mercado'
+				}
+			},
 		}
   }
 }

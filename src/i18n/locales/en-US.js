@@ -24,12 +24,20 @@ export default {
 				register: 'Try it for free',
 			}
     },
-		promo: {
-			main: 'Track your expenses and incomes with ease.',
-			secondary: 'Keep a close eye on your money. How much in and out.'
-		},
 		main: {
-			balance: 'Current balance',
+			intro: {
+				title: 'Managing finances has<br>never been easier',
+				subtitle: 'Our app is crafted for seamless tracking of expenses and incomes. Simplify your financial oversight and stay on track with ease.',
+				cta: 'Get started',
+				users: {
+					stats: '+2M',
+					label: 'Satisfied users'
+				},
+				experience: {
+					stats: '+4',
+					label: 'Years on the market'
+				}
+			},
 		}
   }
 }
