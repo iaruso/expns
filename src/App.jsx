@@ -1,27 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { RouterProvider, createHashRouter } from 'react-router-dom';
-import Promo from "./pages/Promo";
-import Main from "./pages/Main";
-import Statistics from "./pages/Statistics";
-import Transactions from "./pages/Transactions";
-import Topbar from "./components/navigation/Topbar";
+import Main from "./pages/main/Main.jsx";
 
 const router = createHashRouter([
-  { path: '/', element: <Promo/> },
-  { path: '/main', element: <Main/> },
-  { path: '/statistics', element: <Statistics/> },
-  { path: '/transactions', element: <Transactions/> },
+  { path: '/', element: <Main/> }
 ]);
 
 export default function App() {
   useEffect(() => {
     if (!localStorage.getItem('currency')) {
-      localStorage.setItem('currency', 'eur');
+      localStorage.setItem('currency', 'usd');
     }
   }, []);
   return (
     <>
-      <div className='flex flex-col w-[44rem] items-center'>
+      <div className='flex flex-col items-center'>
         <RouterProvider router={router}/>
       </div>
     </>

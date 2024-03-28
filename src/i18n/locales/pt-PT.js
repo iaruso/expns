@@ -15,9 +15,14 @@ export default {
 			education: 'Educação',
 			travel: 'Viagens'
 		},
-    topbar: {
-      login: 'Autenticar',
-			register: 'Começar de graça',
+    navbar: {
+			main: {
+				features: 'Funcionalidades',
+				pricing: 'Preços',
+				about: 'Sobre',
+				login: 'Autenticar',
+				register: 'Experimentar gratuitamente',
+			}
     },
 		promo: {
 			main: 'Acompanhe suas despesas e receitas com facilidade.',

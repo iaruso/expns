@@ -15,9 +15,14 @@ export default {
 			education: 'Education',
 			travel: 'Travel'
 		},
-    topbar: {
-      login: 'Log in',
-			register: 'Start for free'
+    navbar: {
+      main: {
+				features: 'Features',
+				pricing: 'Pricing',
+				about: 'About',
+				login: 'Log in',
+				register: 'Try it for free',
+			}
     },
 		promo: {
 			main: 'Track your expenses and incomes with ease.',
