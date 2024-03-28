@@ -44,7 +44,7 @@ async function fetchAndStoreExchangeRates() {
   }
 }
 
-cron.schedule('20 15 * * *', () => fetchAndStoreExchangeRates());
+cron.schedule('0 0 0 * * *', () => fetchAndStoreExchangeRates());
 
 async function getRates(req, res) {
   try {
