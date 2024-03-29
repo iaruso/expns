@@ -1,4 +1,4 @@
-.main-intro {
+.main-intro, .main-features {
   height: calc(100vh - 3rem);
 }
 
@@ -8,4 +8,42 @@
 
 .main-intro-stats-2 {
   width: calc(100% + 4rem);
+}
+
+.two-lines {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-clamp: 2;
+  white-space: pre-line;
+}
+
+.pricing-features-list > div > div {
+  flex: 1;
+  min-height: 3rem;
+  padding: 0.5rem 0;
+  border-right: 0.05rem solid #F0F0F0;
+}
+
+.pricing-features-list > div > div:not(:first-child) {
+  max-width: 10rem;
+}
+
+.about-highlights {
+  grid-template-areas:
+    'a1 a1 a2 a2 a3 a3'
+    'a4 a4 a4 a5 a5 a5';
+}
+
+.highlight-1 { grid-area: a1; }
+.highlight-2 { grid-area: a2; }
+.highlight-3 { grid-area: a3; }
+.highlight-4 { grid-area: a4; }
+.highlight-5 { grid-area: a5; }
+
+@media screen and (min-width: 1280px) {
+  .pricing-features-list > div > div:not(:first-child) {
+    max-width: 12rem;
+  }
 }
