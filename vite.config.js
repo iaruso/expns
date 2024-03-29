@@ -8,6 +8,9 @@ export default defineConfig({
     react(),
     viteCompression()
   ],
+  server: {
+    host: true,
+  },
 	root: 'src/',
 	publicDir: '../public/',
 	build: {

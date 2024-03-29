@@ -24,10 +24,32 @@ export default {
 				register: 'Experimentar gratuitamente',
 			}
     },
+		footer: {
+			disclaimer: 'Aviso legal - este website foi criado apenas para fins de demonstração, com funcionalidades limitadas. Não é um produto ou serviço totalmente funcional.',
+			features: {
+				title: 'Funcionalidades',
+				list: ['Rastreamento de transações', 'Gestão de orçamento', 'Relatórios', 'Categorização de transações', 'Moedas correntes', 'Segurança de dados']
+			},
+			resources: {
+				title: 'Recursos',
+				list: ['Comunidade', 'Guias do utilizador', 'Blog', 'Perguntas frequentes', 'Centro de suporte']
+			},
+			learn: {
+				title: 'Saiba mais',
+				list: ['Sobre nós', 'Carreiras', 'Termos de serviço', 'Política de privacidade', 'Contacte-nos']
+			},
+			start: {
+				title: 'Comece',
+				list: ['Criar uma nova conta', 'Iniciar sessão']
+			}
+	},
+	
 		main: {
 			intro: {
-				title: 'Gerir as finanças nunca foi tão fácil',
+				title: 'Gerir as finanças <br>nunca foi tão fácil',
+				title_mobile: 'Gerir as finanças nunca foi tão fácil',
 				subtitle: 'A nossa aplicação foi concebida para o controlo das despesas e dos rendimentos. Simplifique a sua supervisão financeira e mantenha-se no caminho certo com facilidade.',
+				join: 'Junte-se a +2M utilizadores',
 				cta: 'Comece agora',
 				users: {
 					stats: '+2M',
@@ -92,17 +114,17 @@ export default {
 						starter: {
 							title: 'Iniciante',
 							price: 'Grátis',
-							cta: 'Selecionar plano'
+							cta: 'Assinar'
 						},
 						pro: {
 							title: 'Pro',
 							price: '12€/mês',
-							cta: 'Selecionar plano'
+							cta: 'Assinar'
 						},
 						organization: {
 							title: 'Organização',
 							price: '40€/mês',
-							cta: 'Selecionar plano'
+							cta: 'Assinar'
 						}
 					},
 					list: {

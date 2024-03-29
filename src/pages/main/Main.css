@@ -1,15 +1,3 @@
-.main-intro, .main-features {
-  height: calc(100vh - 3rem);
-}
-
-.main-intro-stats-1 {
-  width: calc(100% - 4rem);
-}
-
-.main-intro-stats-2 {
-  width: calc(100% + 4rem);
-}
-
 .two-lines {
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -19,15 +7,15 @@
   white-space: pre-line;
 }
 
+.pricing-features-list > div:first-child > div { 
+  padding: 0.5rem;
+}
+
 .pricing-features-list > div > div {
   flex: 1;
   min-height: 3rem;
-  padding: 0.5rem 0;
+  padding: 0.5rem 0.5rem 0.5rem 0rem;
   border-right: 0.05rem solid #F0F0F0;
-}
-
-.pricing-features-list > div > div:not(:first-child) {
-  max-width: 10rem;
 }
 
 .about-highlights {
@@ -42,8 +30,29 @@
 .highlight-4 { grid-area: a4; }
 .highlight-5 { grid-area: a5; }
 
+@media screen and (min-width: 768px) {
+  .main-intro, .main-features {
+    height: calc(100dvh - 3rem);
+  }
+  .main-intro-stats-1 {
+    width: calc(100% - 4rem);
+  }
+  .main-intro-stats-2 {
+    width: calc(100% + 4rem);
+  }
+  .pricing-features-list > div > div:not(:first-child) {
+    max-width: 10rem;
+  }
+}
+
 @media screen and (min-width: 1280px) {
   .pricing-features-list > div > div:not(:first-child) {
     max-width: 12rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .pricing-features-list > div > div {
+    border-right-width: 0.1rem;
   }
 }

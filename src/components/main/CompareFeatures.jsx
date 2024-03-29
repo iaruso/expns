@@ -37,22 +37,22 @@ const FeatureRow = ({ featurePath, checks }) => {
 const CompareFeatures = () => {
   return (
     <div className='pricing-features-list flex flex-col relative'>
-      <div className='flex h-[8rem] bg-white sticky top-[3rem]'>
-        <div className='flex-1'></div>
-        <div className='gap-2 !py-4 !px-2 flex flex-col items-center justify-center'>
+      <div className='flex h-[8rem] mobile:h-[10rem] bg-white sticky top-[3rem]'>
+        <div></div>
+        <div className='gap-2 flex flex-col items-center justify-center'>
           <p className='text-base text-cod font-bold'><Translator path='main.pricing.features.plans.starter.title'/></p>
-          <p className='text-tiny text-cod font-semibold'><Translator path='main.pricing.features.plans.starter.price'/></p>
-          <a className='h-6 text-sm text-white font-semibold flex justify-center items-center rounded py-1 px-2 cursor-pointer bg-royal hover:bg-persian duration-200'><Translator path='main.pricing.features.plans.starter.cta'/></a>
+          <p className='text-tiny mobile:text-base text-cod font-semibold'><Translator path='main.pricing.features.plans.starter.price'/></p>
+          <a className='h-6 mobile:h-8 text-sm mobile:text-tiny text-white font-semibold flex justify-center items-center rounded py-1 px-2 cursor-pointer bg-royal hover:bg-persian duration-200'><Translator path='main.pricing.features.plans.starter.cta'/></a>
         </div>
-        <div className='gap-2 !py-4 !px-2 flex flex-col items-center justify-center'>
+        <div className='gap-2 flex flex-col items-center justify-center'>
           <p className='text-base text-cod font-bold'><Translator path='main.pricing.features.plans.pro.title'/></p>
-          <p className='text-tiny text-cod font-semibold'><Translator path='main.pricing.features.plans.pro.price'/></p>
-          <a className='h-6 text-sm text-white font-semibold flex justify-center items-center rounded py-1 px-2 cursor-pointer bg-cod hover:bg-black duration-200'><Translator path='main.pricing.features.plans.pro.cta'/></a>
+          <p className='text-tiny mobile:text-base text-cod font-semibold'><Translator path='main.pricing.features.plans.pro.price'/></p>
+          <a className='h-6 mobile:h-8 text-sm mobile:text-tiny text-white font-semibold flex justify-center items-center rounded py-1 px-2 cursor-pointer bg-cod hover:bg-black duration-200'><Translator path='main.pricing.features.plans.pro.cta'/></a>
         </div>
-        <div className='gap-2 !py-4 !px-2 flex flex-col items-center justify-center'>
+        <div className='gap-2 flex flex-col items-center justify-center'>
           <p className='text-base text-cod font-bold'><Translator path='main.pricing.features.plans.organization.title'/></p>
-          <p className='text-tiny text-cod font-semibold'><Translator path='main.pricing.features.plans.organization.price'/></p>
-          <a className='h-6 text-sm text-white font-semibold flex justify-center items-center rounded py-1 px-2 cursor-pointer bg-cod hover:bg-black duration-200'><Translator path='main.pricing.features.plans.organization.cta'/></a>
+          <p className='text-tiny mobile:text-base text-cod font-semibold'><Translator path='main.pricing.features.plans.organization.price'/></p>
+          <a className='h-6 mobile:h-8 text-sm mobile:text-tiny text-white font-semibold flex justify-center items-center rounded py-1 px-2 cursor-pointer bg-cod hover:bg-black duration-200'><Translator path='main.pricing.features.plans.organization.cta'/></a>
         </div>
       </div>
       <FeatureHeader titlePath='main.pricing.features.list.tracking.title'/>

@@ -24,10 +24,31 @@ export default {
 				register: 'Try it for free',
 			}
     },
+		footer: {
+			disclaimer: 'Disclaimer - this website was created for demonstration purposes only, showcasing limited functionalities. It is not a fully functional product or service.',
+			features: {
+				title: 'Features',
+				list: ['Transactions tracking', 'Budget management', 'Reporting', 'Transactions categorization', 'Currencies', 'Data security']
+			},
+			resources: {
+				title: 'Resources',
+				list: ['Community', 'User guides ', 'Blog', 'FAQs', 'Support center']
+			},
+			learn: {
+				title: 'Learn more',
+				list: ['About us', 'Careers', 'Terms of service', 'Privacy policy', 'Contact us']
+			},
+			start: {
+				title: 'Get started',
+				list: ['Create a new account', 'Log in']
+			}
+		},
 		main: {
 			intro: {
-				title: 'Managing finances has<br>never been easier',
+				title: 'Managing finances has <br>never been easier',
+				title_mobile: 'Managing finances has never been easier',
 				subtitle: 'Our app is crafted for seamless tracking of expenses and incomes. Simplify your financial oversight and stay on track with ease.',
+				join: 'Join +2M satisfied users',
 				cta: 'Get started',
 				users: {
 					stats: '+2M',
