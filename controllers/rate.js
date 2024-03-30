@@ -1,6 +1,5 @@
 const axios = require('axios');
 const { MongoClient } = require('mongodb');
-const cron = require('node-cron');
 
 const mongoURL = process.env.MONGO_URL;
 const dbName = 'test';
@@ -9,42 +8,40 @@ const collectionName = 'rates';
 const accessKey = process.env.ACCESS_KEY;
 const baseCurrencies = ['EUR', 'USD', 'GBP'];
 
-async function fetchAndStoreExchangeRates() {
+async function fetchAndStoreExchangeRates(req, res) {
   try {
     const client = await MongoClient.connect(mongoURL);
     const db = client.db(dbName);
     const collection = db.collection(collectionName);
 
-		const otherCurrencies = baseCurrencies.filter((currency) => currency !== 'EUR');
-		const apiUrl = `https://api.apilayer.com/exchangerates_data/latest?base=EUR&symbols=USD,GBP`;
+    const otherCurrencies = baseCurrencies.filter((currency) => currency !== 'EUR');
+    const apiUrl = `https://api.apilayer.com/exchangerates_data/latest?base=EUR&symbols=USD,GBP`;
 
-		const response = await axios.get(apiUrl, {
+    const response = await axios.get(apiUrl, {
       headers: {
         'apikey': accessKey
       }
     });
-		console.log(response.data);
-		const { base, rates } = response.data;
+    console.log(response.data);
+    const { base, rates } = response.data;
 
-		const filteredRates = {};
-		for (const currency of otherCurrencies) {
-			filteredRates[currency] = rates[currency];
-		}
+    const filteredRates = {};
+    for (const currency of otherCurrencies) {
+      filteredRates[currency] = rates[currency];
+    }
 
-		await collection.updateOne(
-			{ base },
-			{ $set: { rates: filteredRates } },
-			{ upsert: true }
-		);
+    await collection.updateOne(
+      { base },
+      { $set: { rates: filteredRates } },
+      { upsert: true }
+    );
 
     client.close();
-    console.log('Exchange rates updated successfully!');
+    res.status(200).json({ message: 'Exchange rates updated successfully!' });
   } catch (error) {
-    console.error('Error fetching and storing exchange rates:', error.message);
+    res.status(500).json({ error: 'Failed to fetch and store exchange rates.' });
   }
 }
-
-cron.schedule('0 0 0 * * *', () => fetchAndStoreExchangeRates());
 
 async function getRates(req, res) {
   try {
@@ -60,4 +57,4 @@ async function getRates(req, res) {
   }
 }
 
-module.exports = { getRates };
+module.exports = { getRates, fetchAndStoreExchangeRates };

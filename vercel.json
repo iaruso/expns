@@ -11,5 +11,11 @@
       "src": "/(.*)",
       "dest": "/index.js"
     }
+  ],
+  "crons": [
+    {
+      "path": "/api/update-rates",
+      "schedule": "0 0 0 * * *"
+    }
   ]
 }
