@@ -31,39 +31,39 @@ const Footer = () => {
 				<div className='flex flex-col w-32 gap-2'>
 					<p className='text-sm mobile:text-base text-cod font-bold'><Translator path={'footer.features.title'}/></p>
 					<ul className='text-xs mobile:text-tiny text-cod font-medium flex flex-col gap-1'>
-						<li><a className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.features.list.0'}/></a></li>
-						<li><a className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.features.list.1'}/></a></li>
-						<li><a className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.features.list.2'}/></a></li>
-						<li><a className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.features.list.3'}/></a></li>
-						<li><a className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.features.list.4'}/></a></li>
-						<li><a className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.features.list.5'}/></a></li>
+						<li className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.features.list.0'}/></li>
+						<li className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.features.list.1'}/></li>
+						<li className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.features.list.2'}/></li>
+						<li className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.features.list.3'}/></li>
+						<li className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.features.list.4'}/></li>
+						<li className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.features.list.5'}/></li>
 					</ul>
 				</div>
 				<div className='flex flex-col w-32 gap-2'>
 					<p className='text-sm mobile:text-base text-cod font-bold'><Translator path={'footer.resources.title'}/></p>
 					<ul className='text-xs mobile:text-tiny text-cod font-medium flex flex-col gap-1'>
-						<li><a className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.resources.list.0'}/></a></li>
-						<li><a className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.resources.list.1'}/></a></li>
-						<li><a className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.resources.list.2'}/></a></li>
-						<li><a className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.resources.list.3'}/></a></li>
-						<li><a className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.resources.list.4'}/></a></li>
+						<li className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.resources.list.0'}/></li>
+						<li className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.resources.list.1'}/></li>
+						<li className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.resources.list.2'}/></li>
+						<li className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.resources.list.3'}/></li>
+						<li className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.resources.list.4'}/></li>
 					</ul>
 				</div>
 				<div className='flex flex-col w-32 gap-2'>
 					<p className='text-sm mobile:text-base text-cod font-bold'><Translator path={'footer.learn.title'}/></p>
 					<ul className='text-xs mobile:text-tiny text-cod font-medium flex flex-col gap-1'>
-						<li><a className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.learn.list.0'}/></a></li>
-						<li><a className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.learn.list.1'}/></a></li>
-						<li><a className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.learn.list.2'}/></a></li>
-						<li><a className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.learn.list.3'}/></a></li>
-						<li><a className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.learn.list.4'}/></a></li>
+						<li className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.learn.list.0'}/></li>
+						<li className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.learn.list.1'}/></li>
+						<li className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.learn.list.2'}/></li>
+						<li className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.learn.list.3'}/></li>
+						<li className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.learn.list.4'}/></li>
 					</ul>
 				</div>
 				<div className='flex flex-col w-32 gap-2'>
 					<p className='text-sm mobile:text-base text-cod font-bold'><Translator path={'footer.start.title'}/></p>
 					<ul className='text-xs mobile:text-tiny text-cod font-medium flex flex-col gap-1'>
-						<li><a className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.start.list.0'}/></a></li>
-						<li><a className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.start.list.1'}/></a></li>
+					<li className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.start.list.0'}/></li>
+						<li className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.start.list.1'}/></li>
 					</ul>
 				</div>
 			</div>
@@ -78,10 +78,10 @@ const Footer = () => {
 				</div>
 				<p className='text-sm text-cod font-medium mobile:hidden'>©2020-2024 Expns, Inc.</p>
 				<div className='flex items-center gap-1 mobile:gap-2'>
-					<a href='#' className='h-8 w-8 mobile:w-10 mobile:h-10 flex items-center justify-center rounded mobile:border-[0.1rem] mobile:border-gallery hover:bg-alabaster duration-200'><Facebook className='h-4 w-4 mobile:w-5 mobile:h-5 fill-chalice'/></a>
-					<a href='#' className='h-8 w-8 mobile:w-10 mobile:h-10 flex items-center justify-center rounded mobile:border-[0.1rem] mobile:border-gallery hover:bg-alabaster duration-200'><Instagram className='h-4 w-4 mobile:w-5 mobile:h-5 fill-chalice'/></a>
-					<a href='#' className='h-8 w-8 mobile:w-10 mobile:h-10 flex items-center justify-center rounded mobile:border-[0.1rem] mobile:border-gallery hover:bg-alabaster duration-200'><Linkedin className='h-4 w-4 mobile:w-5 mobile:h-5 fill-chalice'/></a>
-					<a href='#' className='h-8 w-8 mobile:w-10 mobile:h-10 flex items-center justify-center rounded mobile:border-[0.1rem] mobile:border-gallery hover:bg-alabaster duration-200'><Youtube className='h-4 w-4 mobile:w-5 mobile:h-5 fill-chalice'/></a>
+					<a href='#' aria-label='Facebook' className='h-8 w-8 mobile:w-10 mobile:h-10 flex items-center justify-center rounded mobile:border-[0.1rem] mobile:border-gallery hover:bg-alabaster duration-200'><Facebook className='h-4 w-4 mobile:w-5 mobile:h-5 fill-chalice'/></a>
+					<a href='#' aria-label='Instagram' className='h-8 w-8 mobile:w-10 mobile:h-10 flex items-center justify-center rounded mobile:border-[0.1rem] mobile:border-gallery hover:bg-alabaster duration-200'><Instagram className='h-4 w-4 mobile:w-5 mobile:h-5 fill-chalice'/></a>
+					<a href='#' aria-label='LinkedIn' className='h-8 w-8 mobile:w-10 mobile:h-10 flex items-center justify-center rounded mobile:border-[0.1rem] mobile:border-gallery hover:bg-alabaster duration-200'><Linkedin className='h-4 w-4 mobile:w-5 mobile:h-5 fill-chalice'/></a>
+					<a href='#' aria-label='Youtube' className='h-8 w-8 mobile:w-10 mobile:h-10 flex items-center justify-center rounded mobile:border-[0.1rem] mobile:border-gallery hover:bg-alabaster duration-200'><Youtube className='h-4 w-4 mobile:w-5 mobile:h-5 fill-chalice'/></a>
 				</div>
 			</div>
 		</footer>
