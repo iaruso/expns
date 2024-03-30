@@ -1,10 +1,7 @@
 import React, { useEffect } from "react";
-import { RouterProvider, createHashRouter } from 'react-router-dom';
-import Main from "./pages/main/Main.jsx";
-
-const router = createHashRouter([
-  { path: '/', element: <Main/> }
-]);
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Main from "./pages/Main/Main.jsx"; // Import the Main component here
+import Auth from "./pages/Auth/Auth.jsx"; // Import the Auth component here
 
 export default function App() {
   useEffect(() => {
@@ -12,10 +9,16 @@ export default function App() {
       localStorage.setItem('currency', 'usd');
     }
   }, []);
+
   return (
     <>
       <div className='flex flex-col items-center w-full'>
-        <RouterProvider router={router}/>
+        <Router>
+          <Routes>
+            <Route path="/" element={<Main />} />
+            <Route path="/auth/*" element={<Auth />} />
+          </Routes>
+        </Router>
       </div>
     </>
   )

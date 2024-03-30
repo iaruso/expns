@@ -6,7 +6,6 @@ import Balance from '../components/main/Balance';
 import Transactions from '../components/main/Transactions';
 import LogoutButton from '../components/auth/Logout.jsx';
 import Statistics from '../components/main/Statistics';
-import { Link } from 'react-router-dom';
 
 function Main() {
 	const { getIncomes, getExpenses, getRates } = useGlobalContext();
