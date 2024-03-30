@@ -5,7 +5,7 @@ import LogoFooter from '../icons/LogoFooter';
 import Language from '../icons/Language';
 import Facebook from '../icons/Facebook';
 import Instagram from '../icons/Instagram';
-import Linkedin from '../icons/Linkedin';
+import LinkedIn from '../icons/LinkedIn';
 import Youtube from '../icons/Youtube';
 
 const Footer = () => {
@@ -80,7 +80,7 @@ const Footer = () => {
 				<div className='flex items-center gap-1 mobile:gap-2'>
 					<a href='#' aria-label='Facebook' className='h-8 w-8 mobile:w-10 mobile:h-10 flex items-center justify-center rounded mobile:border-[0.1rem] mobile:border-gallery hover:bg-alabaster duration-200'><Facebook className='h-4 w-4 mobile:w-5 mobile:h-5 fill-chalice'/></a>
 					<a href='#' aria-label='Instagram' className='h-8 w-8 mobile:w-10 mobile:h-10 flex items-center justify-center rounded mobile:border-[0.1rem] mobile:border-gallery hover:bg-alabaster duration-200'><Instagram className='h-4 w-4 mobile:w-5 mobile:h-5 fill-chalice'/></a>
-					<a href='#' aria-label='LinkedIn' className='h-8 w-8 mobile:w-10 mobile:h-10 flex items-center justify-center rounded mobile:border-[0.1rem] mobile:border-gallery hover:bg-alabaster duration-200'><Linkedin className='h-4 w-4 mobile:w-5 mobile:h-5 fill-chalice'/></a>
+					<a href='#' aria-label='LinkedIn' className='h-8 w-8 mobile:w-10 mobile:h-10 flex items-center justify-center rounded mobile:border-[0.1rem] mobile:border-gallery hover:bg-alabaster duration-200'><LinkedIn className='h-4 w-4 mobile:w-5 mobile:h-5 fill-chalice'/></a>
 					<a href='#' aria-label='Youtube' className='h-8 w-8 mobile:w-10 mobile:h-10 flex items-center justify-center rounded mobile:border-[0.1rem] mobile:border-gallery hover:bg-alabaster duration-200'><Youtube className='h-4 w-4 mobile:w-5 mobile:h-5 fill-chalice'/></a>
 				</div>
 			</div>
