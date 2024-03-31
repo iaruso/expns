@@ -209,5 +209,28 @@ export default {
 				clients: 'Our clients'
 			}
 		},
+		auth: {
+			email: 'Email',
+			password: 'Password',
+			login: {
+				remember: 'Remember me',
+				forgot: 'Forgot password?',
+				cta: 'Log in',
+				alt: 'Don\'t have an account?',
+				alt_opt: 'Create one'
+			},
+			register: {
+				terms: 'Confirm that you understand and accept the terms of service and privacy policy.',
+				cta: 'Register',
+				alt: 'Already have an account?',
+				alt_opt: 'Log in'
+			},
+			reset: {
+				message_before: 'An email will be sent for account recovery instructions.',
+				message_after: 'Please check your email for account recovery instructions.',
+				cta: 'Reset password',
+				alt_opt: 'Cancel'
+			}
+		}
   }
 }

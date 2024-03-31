@@ -209,6 +209,30 @@ export default {
 				},
 				clients: 'Os nossos clientes'
 			}
-		}
+		},
+		auth: {
+			email: 'Correio eletrónico',
+			password: 'Senha',
+			login: {
+					remember: 'Guardar sessão',
+					forgot: 'Senha esquecida?',
+					cta: 'Entrar',
+					alt: 'Não tem uma conta?',
+					alt_opt: 'Criar uma'
+			},
+			register: {
+					terms: 'Confirmo que compreendo e aceito os termos de serviço e política de privacidade.',
+					cta: 'Registar',
+					alt: 'Já tem uma conta?',
+					alt_opt: 'Entrar'
+			},
+			reset: {
+					message_before: 'Será enviado um email com instruções para recuperação da conta.',
+					message_after: 'Verifique o seu correio eletrónico e siga as instruções de recuperação de conta.',
+					cta: 'Redefinir senha',
+					alt_opt: 'Cancelar'
+			}
+	}
+	
   }
 }

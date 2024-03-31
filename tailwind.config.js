@@ -24,13 +24,13 @@ export default {
     extend: {
       colors: {
         white: '#FFFFFF', // Background, text
+        sand: '#FCFCFC', // Background for input focus
         alabaster: '#F8F8F8', // Background
         gallery: '#F0F0F0', // Borders
-        mercury: '#EAEAEA', // Minor details
-        alto: '#D6D6D6', // Placeholder
+        alto: '#D6D6D6', // Placeholder, border focus
         chalice: '#A8A8A8', // Icons
-        gray: '#7F7F7F', // Text buttons
-        shaft: '#3C3C3C', // Text secondary
+        gray: '#5A5A5A', // Text buttons
+        shaft: '#3C3C3C', // Text secondary and hover text
         cod: '#1A1A1A', // Text main
         black: '#000000', // Hover dark
         //
