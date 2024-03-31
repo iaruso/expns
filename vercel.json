@@ -1,7 +1,5 @@
 {
   "buildCommand": "vite build",
-  "rewrites": [
-    { "source": "/:path*", "destination": "/index.html" }
-  ],
+  "rewrites": [{ "source": "/(.*)", "destination": "/" }],
   "cleanUrls": true
 }
