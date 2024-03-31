@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Main from './pages/main/Main.jsx';
-import Auth from './pages/auth/Auth.jsx';
+import Login from './pages/auth/Login.jsx';
+import Register from './pages/auth/Register.jsx';
+import ResetPassword from './pages/auth/ResetPassword.jsx';
 
 export default function App() {
   useEffect(() => {
@@ -16,7 +18,9 @@ export default function App() {
         <Router>
           <Routes>
             <Route path='/' element={<Main />} />
-            <Route path='/auth/*' element={<Auth />} />
+            <Route path='/auth/login' element={<Login />} />
+            <Route path='/auth/register' element={<Register />} />
+            <Route path='/auth/reset-password' element={<ResetPassword />} />
           </Routes>
         </Router>
       </div>
