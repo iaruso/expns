@@ -12,16 +12,22 @@ export default function App() {
     }
   }, []);
 
+  const router = [
+    { path: '/', element: <Main/> },
+    { path: '/login', element: <Login/> },
+    { path: '/register', element: <Register/>},
+    { path: '/reset-password', element: <ResetPassword/> },
+    { path: '*', element: <Main/> },
+  ];
+
   return (
     <>
       <div className='flex flex-col items-center w-full'>
         <Router>
           <Routes>
-            <Route path='/' element={<Main />} />
-            <Route path='/auth/login' element={<Login />} />
-            <Route path='/auth/register' element={<Register />} />
-            <Route path='/auth/reset-password' element={<ResetPassword />} />
-            <Route path='*' element={<Main />} />
+            {router.map(({ path, element }) => (
+              <Route key={path} exact path={path} element={element} />
+            ))}
           </Routes>
         </Router>
       </div>
