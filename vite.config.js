@@ -9,6 +9,7 @@ export default defineConfig({
   plugins: [
     react(),
     compression(),
+    mkcert(),
     preload()
   ],
   server: {

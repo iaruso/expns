@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Main from "./pages/Main/Main.jsx"; // Import the Main component here
-import Auth from "./pages/Auth/Auth.jsx"; // Import the Auth component here
+import Main from './pages/main/Main.jsx';
+import Auth from './pages/auth/Auth.jsx';
 
 export default function App() {
   useEffect(() => {
@@ -15,8 +15,8 @@ export default function App() {
       <div className='flex flex-col items-center w-full'>
         <Router>
           <Routes>
-            <Route path="/" element={<Main />} />
-            <Route path="/auth/*" element={<Auth />} />
+            <Route path='/' element={<Main />} />
+            <Route path='/auth/*' element={<Auth />} />
           </Routes>
         </Router>
       </div>
