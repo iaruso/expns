@@ -36,11 +36,11 @@ const Login = () => {
               <input type='checkbox'/>
               <span className='checkmark'></span>
             </label>
-            <Link to='/auth/reset-password' className='text-xs mobile:text-base font-semibold text-gray hover:text-shaft'>{t('auth.login.forgot')}</Link>
+            <Link to='/reset-password' className='text-xs mobile:text-base font-semibold text-gray hover:text-shaft'>{t('auth.login.forgot')}</Link>
           </div>
           <button type='submit' className='h-8 mobile:h-12 rounded px-2 py-1 bg-royal hover:bg-persian duration-200 text-white text-sm mobile:text-[1.25rem] font-semibold'>{t('auth.login.cta')}</button>
         </form>
-        <p className='text-gray text-xs mobile:text-base font-semibold flex gap-1 w-full justify-center'>{t('auth.login.alt')}<Link to='/auth/register' className='text-cod hover:underline'>{t('auth.login.alt_opt')}</Link></p>
+        <p className='text-gray text-xs mobile:text-base font-semibold flex gap-1 w-full justify-center'>{t('auth.login.alt')}<Link to='/register' className='text-cod hover:underline'>{t('auth.login.alt_opt')}</Link></p>
       </div>
     </div>
     </HelmetProvider>

@@ -32,7 +32,7 @@ const ResetPassword = () => {
             <span className='text-xs mobile:text-base font-semibold text-gray'>{t('auth.reset.message_before')}</span>
             <button type='submit' className='h-8 mobile:h-12 rounded px-2 py-1 bg-royal hover:bg-persian duration-200 text-white text-sm mobile:text-[1.25rem] font-semibold'>{t('auth.reset.cta')}</button>
           </form>
-          <Link to='/auth/login' className='text-xs mobile:text-base font-semibold flex gap-1 w-full justify-center text-cod hover:underline'>{t('auth.reset.alt_opt')}</Link>
+          <Link to='/login' className='text-xs mobile:text-base font-semibold flex gap-1 w-full justify-center text-cod hover:underline'>{t('auth.reset.alt_opt')}</Link>
         </div>
       </div>
     </HelmetProvider>

@@ -40,7 +40,7 @@ const Register = () => {
             </div>
             <button type='submit' className='h-8 mobile:h-12 rounded px-2 py-1 bg-royal hover:bg-persian duration-200 text-white text-sm mobile:text-[1.25rem] font-semibold'>{t('auth.register.cta')}</button>
           </form>
-          <p className='text-gray text-xs mobile:text-base font-semibold flex gap-1 w-full justify-center'>{t('auth.register.alt')}<Link to='/auth/login' className='text-cod hover:underline'>{t('auth.register.alt_opt')}</Link></p>
+          <p className='text-gray text-xs mobile:text-base font-semibold flex gap-1 w-full justify-center'>{t('auth.register.alt')}<Link to='/login' className='text-cod hover:underline'>{t('auth.register.alt_opt')}</Link></p>
         </div>
       </div>
     </HelmetProvider>
