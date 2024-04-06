@@ -22,3 +22,18 @@ exports.verifyAccess = async (req, res) => {
     res.status(403).json({ error: true, message: 'Access Denied: Invalid token' });
   }
 };
+
+exports.refreshAccess = async (req, res) => {
+  const refreshToken = req.body.refreshToken;
+  if (!refreshToken) {
+    return res.status(400).json({ error: true, message: 'Refresh token is missing' });
+  }
+  try {
+    const tokenDetails = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_PRIVATE_KEY);
+    const accessToken = jwt.sign({ userId: tokenDetails.userId }, process.env.ACCESS_TOKEN_PRIVATE_KEY, { expiresIn: '1m' });
+    res.status(200).json({ accessToken });
+  } catch (err) {
+    console.error(err);
+    return res.status(403).json({ error: true, message: 'Invalid refresh token' });
+  }
+};
