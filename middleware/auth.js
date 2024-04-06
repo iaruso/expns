@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const axios = require('axios');
+const UserToken = require('../models/userToken.js');
 
 exports.auth = async (req, res, next) => {
 	const token = req.header("x-access-token");
@@ -16,15 +17,15 @@ exports.auth = async (req, res, next) => {
 			try {
 				const refreshToken = req.header("x-refresh-token");
 				if (!refreshToken) throw new Error("Refresh token is missing");
-
+				const userToken = await UserToken.findOne({ token: refreshToken });
+				if (!userToken) {
+					return res.status(403).json({ error: true, message: 'Invalid refresh token' });
+				}
 				const response = await axios.post('https://expns-api.vercel.app/api/access/refresh', { refreshToken });
 				const { accessToken } = response.data;
-
-				req.headers["x-access-token"] = accessToken;
-
+				res.set('x-access-token', accessToken);
 				const tokenDetails = jwt.verify(accessToken, process.env.ACCESS_TOKEN_PRIVATE_KEY);
 				req.user = tokenDetails;
-
 				next();
 			} catch (refreshError) {
 				console.error(refreshError);
