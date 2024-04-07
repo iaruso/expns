@@ -35,8 +35,8 @@ const Navbar = () => {
 				</div>
 			</div>
 			<div className='flex items-center gap-1 mobile:gap-2 h6 mobile:h-10'>
-				<Link to="/login" className='h-6 mobile:h-10 px-2 py-1 mobile:px-4 mobile:py-2 flex items-center justify-center rounded border-[0.05rem] mobile:border-[0.1rem] border-gallery hover:bg-alabaster text-cod text-xs mobile:text-base font-semibold duration-200'><Translator path='navbar.main.login'/></Link>
-				<Link to="/register" className='h-6 mobile:h-10 px-2 py-1 mobile:px-4 mobile:py-2 flex items-center justify-center rounded bg-royal hover:bg-persian text-white text-xs mobile:text-base font-semibold duration-200'><Translator path='navbar.main.register'/></Link>
+				<Link to='/login' className='h-6 mobile:h-10 px-2 py-1 mobile:px-4 mobile:py-2 flex items-center justify-center rounded border-[0.05rem] mobile:border-[0.1rem] border-gallery hover:bg-alabaster text-cod text-xs mobile:text-base font-semibold duration-200'><Translator path='navbar.main.login'/></Link>
+				<Link to='/register' className='h-6 mobile:h-10 px-2 py-1 mobile:px-4 mobile:py-2 flex items-center justify-center rounded bg-royal hover:bg-persian text-white text-xs mobile:text-base font-semibold duration-200'><Translator path='navbar.main.register'/></Link>
 			</div>
 		</nav>
 	)

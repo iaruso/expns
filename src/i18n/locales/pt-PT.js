@@ -223,6 +223,19 @@ export default {
 			register: {
 					terms: 'Confirmo que compreendo e aceito os termos de serviço e política de privacidade.',
 					cta: 'Registar',
+					reqs: {
+						title: 'A senha deve conter pelo menos 8 caracteres, um número, uma letra maiúscula, uma letra minúscula e um símbolo.',
+						warning: 'Por favor, preencha todos os campos.',
+						password_warning: 'A senha deve incluir pelo menos:',
+						number: 'um número.',
+						uppercase: 'uma letra maiúscula.',
+						lowercase: 'uma leta minúscula.',
+						symbol: 'um símbolo.',
+						length: 'oito caracteres.',
+						failed: 'Erro no servidor, tente novamente mais tarde.',
+						duplicated: 'O email já está em uso.',
+						succeeded: 'Conta criada com sucesso.'
+					},
 					alt: 'Já tem uma conta?',
 					alt_opt: 'Entrar'
 			},

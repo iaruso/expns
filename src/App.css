@@ -104,13 +104,16 @@ input {
 }
 
 @media screen and (max-width: 768px) {
+  html {
+    font-size: calc(10px + (16 - 10) * (100vw - 300px) / (1080 - 300));
+  }
 	.checkbox-container {
-		padding-left: 1.75rem;
-		min-height: 1.25rem;
+		padding-left: 2rem;
+		min-height: 1.5rem;
 	}
 	.checkbox-container .checkmark {
 		border-width: 0.1rem;
-		height: 1.25rem;
-  	width: 1.25rem;
+		height: 1.5rem;
+  	width: 1.5rem;
 	}
 }
