@@ -4,6 +4,8 @@ import Main from './pages/main/Main.jsx';
 import Login from './pages/auth/Login.jsx';
 import Register from './pages/auth/Register.jsx';
 import ResetPassword from './pages/auth/ResetPassword.jsx';
+import Application from './pages/application/Application.jsx';
+
 
 export default function App() {
   useEffect(() => {
@@ -17,7 +19,8 @@ export default function App() {
     { path: '/login', element: <Login/> },
     { path: '/register', element: <Register/>},
     { path: '/reset-password', element: <ResetPassword/> },
-    { path: '*', element: <Main/> },
+    { path: '/app/*', element: <Application/> },
+    { path: '*', element: <Main/> }
   ];
 
   return (

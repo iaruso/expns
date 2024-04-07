@@ -42,8 +42,7 @@ export default {
 				title: 'Comece',
 				list: ['Criar uma nova conta', 'Iniciar sessão']
 			}
-	},
-	
+		},
 		main: {
 			intro: {
 				title: 'Gerir as finanças <br>nunca foi tão fácil',
@@ -214,38 +213,43 @@ export default {
 			email: 'Correio eletrónico',
 			password: 'Senha',
 			login: {
-					remember: 'Guardar sessão',
-					forgot: 'Senha esquecida?',
-					cta: 'Entrar',
-					alt: 'Não tem uma conta?',
-					alt_opt: 'Criar uma'
+				remember: 'Guardar sessão',
+				forgot: 'Senha esquecida?',
+				cta: 'Entrar',
+				alt: 'Não tem uma conta?',
+				alt_opt: 'Criar uma',
+				reqs: {
+					warning: 'Por favor, preencha todos os campos.',
+					failed: 'Erro no servidor, tente novamente mais tarde.',
+					wrong: 'Dados incorretos.',
+					succeeded: 'Utilizador autenticado com sucesso.'
+				}
 			},
 			register: {
-					terms: 'Confirmo que compreendo e aceito os termos de serviço e política de privacidade.',
-					cta: 'Registar',
-					reqs: {
-						title: 'A senha deve conter pelo menos 8 caracteres, um número, uma letra maiúscula, uma letra minúscula e um símbolo.',
-						warning: 'Por favor, preencha todos os campos.',
-						password_warning: 'A senha deve incluir pelo menos:',
-						number: 'um número.',
-						uppercase: 'uma letra maiúscula.',
-						lowercase: 'uma leta minúscula.',
-						symbol: 'um símbolo.',
-						length: 'oito caracteres.',
-						failed: 'Erro no servidor, tente novamente mais tarde.',
-						duplicated: 'O email já está em uso.',
-						succeeded: 'Conta criada com sucesso.'
-					},
-					alt: 'Já tem uma conta?',
-					alt_opt: 'Entrar'
+				terms: 'Confirmo que compreendo e aceito os termos de serviço e política de privacidade.',
+				cta: 'Registar',
+				alt: 'Já tem uma conta?',
+				alt_opt: 'Entrar',
+				reqs: {
+					title: 'A senha deve conter pelo menos 8 caracteres, um número, uma letra maiúscula, uma letra minúscula e um símbolo.',
+					warning: 'Por favor, preencha todos os campos.',
+					password_warning: 'A senha deve incluir pelo menos:',
+					number: 'um número.',
+					uppercase: 'uma letra maiúscula.',
+					lowercase: 'uma leta minúscula.',
+					symbol: 'um símbolo.',
+					length: 'oito caracteres.',
+					failed: 'Erro no servidor, tente novamente mais tarde.',
+					duplicated: 'O email já está em uso.',
+					succeeded: 'Conta criada com sucesso.'
+				}
 			},
 			reset: {
-					message_before: 'Será enviado um email com instruções para recuperação da conta.',
-					message_after: 'Verifique o seu correio eletrónico e siga as instruções de recuperação de conta.',
-					cta: 'Redefinir senha',
-					alt_opt: 'Cancelar'
+				message_before: 'Será enviado um email com instruções para recuperação da conta.',
+				message_after: 'Verifique o seu correio eletrónico e siga as instruções de recuperação de conta.',
+				cta: 'Redefinir senha',
+				alt_opt: 'Cancelar'
 			}
-	}
-	
+		}
   }
 }

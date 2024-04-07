@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 import { HelmetProvider, Helmet } from 'react-helmet-async';
 import axios from 'axios';
 import { gsap } from 'gsap';
-
 import Logo from '../../components/icons/Logo';
 
 const Register = () => {
@@ -39,6 +38,14 @@ const Register = () => {
     )
   };
 
+  useEffect(() => {
+    const expiryTime = localStorage.getItem('expiryTime');
+    const currentTime = new Date().getTime();
+    if (currentTime < parseInt(expiryTime) && expiryTime) {
+      navigate('/app/');
+    }
+  }, []);
+
   const handleRegister = async (e) => {
     e.preventDefault();
 
@@ -53,7 +60,7 @@ const Register = () => {
     }
   
     try {
-      const response = await axios.post('http://expns-api.vercel.app/api/auth/register', {
+      const response = await axios.post('https://expns-api.vercel.app/api/auth/register', {
         email,
         password
       });

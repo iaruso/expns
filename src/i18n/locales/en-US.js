@@ -217,11 +217,19 @@ export default {
 				forgot: 'Forgot password?',
 				cta: 'Log in',
 				alt: 'Don\'t have an account?',
-				alt_opt: 'Create one'
+				alt_opt: 'Create one',
+				reqs: {
+					warning: 'Please fill in all fields.',
+					failed: 'Server error, please try again later.',
+					wrong: 'Invalid email or password',
+					succeeded: 'Authentication succeeded.'
+				}
 			},
 			register: {
 				terms: 'Confirm that you understand and accept the terms of service and privacy policy.',
 				cta: 'Register',
+				alt: 'Already have an account?',
+				alt_opt: 'Log in',
 				reqs: {
 					title: 'Password must contain at least 8 characters, a number, an uppercase letter, a lowercase letter, and a symbol.',
 					warning: 'Please fill in all fields.',
@@ -235,8 +243,6 @@ export default {
 					duplicated: 'Email already in use.',
 					succeeded: 'Account created successfully.'
 				},
-				alt: 'Already have an account?',
-				alt_opt: 'Log in'
 			},
 			reset: {
 				message_before: 'An email will be sent for account recovery instructions.',

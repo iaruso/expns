@@ -9,6 +9,14 @@ const ResetPassword = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
+  useEffect(() => {
+    const expiryTime = localStorage.getItem('expiryTime');
+    const currentTime = new Date().getTime();
+    if (currentTime < parseInt(expiryTime) && expiryTime) {
+      navigate('/app/');
+    }
+  }, []);
+
   const handleResetPassword = (e) => {
     e.preventDefault();
     console.log('Resetting password for:', email);
