@@ -3,6 +3,7 @@ import { Routes, Route, useNavigate } from 'react-router-dom';
 import Dashboard from './Dashboard';
 import Stats from './Stats';
 import Transactions from './Transactions';
+import Navbar from '../../components/navigation/app/Navbar';
 
 const Application = () => {
   const navigate = useNavigate();
@@ -18,7 +19,8 @@ const Application = () => {
   }, []);
 
   return (
-    <div>
+    <div className='w-full h-[100dvh] flex flex-col p-8 gap-4 items-center'>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="/stats" element={<Stats />} />

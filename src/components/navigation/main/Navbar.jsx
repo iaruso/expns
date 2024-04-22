@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import Logo from '../../icons/Logo.jsx';
 import Translator from '../../i18n/Translator.jsx';
 import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
 import { Link } from 'react-router-dom';
+import Logo from '../../icons/Logo.jsx';
 
 const Navbar = () => {
 	const [offset, setOffset] = useState(-2 * parseFloat(getComputedStyle(document.documentElement).fontSize));

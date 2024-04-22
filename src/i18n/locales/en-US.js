@@ -22,6 +22,15 @@ export default {
 				about: 'About',
 				login: 'Log in',
 				register: 'Try it for free',
+			},
+			app: {
+				dashboard: 'Dashboard',
+				stats: 'Stats',
+				transactions: 'Transactions',
+				options: {
+					settings: 'Settings',
+					logout: 'Logout'
+				}
 			}
     },
 		footer: {

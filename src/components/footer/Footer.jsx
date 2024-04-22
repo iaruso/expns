@@ -31,39 +31,39 @@ const Footer = () => {
 				<div className='flex flex-col w-32 gap-2'>
 					<p className='text-sm mobile:text-base text-cod font-bold'><Translator path={'footer.features.title'}/></p>
 					<ul className='text-xs mobile:text-tiny text-cod font-medium flex flex-col gap-1'>
-						<li className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.features.list.0'}/></li>
-						<li className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.features.list.1'}/></li>
-						<li className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.features.list.2'}/></li>
-						<li className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.features.list.3'}/></li>
-						<li className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.features.list.4'}/></li>
-						<li className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.features.list.5'}/></li>
+						<li className='hover:text-gray hover:duration-200 cursor-pointer'><Translator path={'footer.features.list.0'}/></li>
+						<li className='hover:text-gray hover:duration-200 cursor-pointer'><Translator path={'footer.features.list.1'}/></li>
+						<li className='hover:text-gray hover:duration-200 cursor-pointer'><Translator path={'footer.features.list.2'}/></li>
+						<li className='hover:text-gray hover:duration-200 cursor-pointer'><Translator path={'footer.features.list.3'}/></li>
+						<li className='hover:text-gray hover:duration-200 cursor-pointer'><Translator path={'footer.features.list.4'}/></li>
+						<li className='hover:text-gray hover:duration-200 cursor-pointer'><Translator path={'footer.features.list.5'}/></li>
 					</ul>
 				</div>
 				<div className='flex flex-col w-32 gap-2'>
 					<p className='text-sm mobile:text-base text-cod font-bold'><Translator path={'footer.resources.title'}/></p>
 					<ul className='text-xs mobile:text-tiny text-cod font-medium flex flex-col gap-1'>
-						<li className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.resources.list.0'}/></li>
-						<li className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.resources.list.1'}/></li>
-						<li className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.resources.list.2'}/></li>
-						<li className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.resources.list.3'}/></li>
-						<li className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.resources.list.4'}/></li>
+						<li className='hover:text-gray hover:duration-200 cursor-pointer'><Translator path={'footer.resources.list.0'}/></li>
+						<li className='hover:text-gray hover:duration-200 cursor-pointer'><Translator path={'footer.resources.list.1'}/></li>
+						<li className='hover:text-gray hover:duration-200 cursor-pointer'><Translator path={'footer.resources.list.2'}/></li>
+						<li className='hover:text-gray hover:duration-200 cursor-pointer'><Translator path={'footer.resources.list.3'}/></li>
+						<li className='hover:text-gray hover:duration-200 cursor-pointer'><Translator path={'footer.resources.list.4'}/></li>
 					</ul>
 				</div>
 				<div className='flex flex-col w-32 gap-2'>
 					<p className='text-sm mobile:text-base text-cod font-bold'><Translator path={'footer.learn.title'}/></p>
 					<ul className='text-xs mobile:text-tiny text-cod font-medium flex flex-col gap-1'>
-						<li className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.learn.list.0'}/></li>
-						<li className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.learn.list.1'}/></li>
-						<li className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.learn.list.2'}/></li>
-						<li className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.learn.list.3'}/></li>
-						<li className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.learn.list.4'}/></li>
+						<li className='hover:text-gray hover:duration-200 cursor-pointer'><Translator path={'footer.learn.list.0'}/></li>
+						<li className='hover:text-gray hover:duration-200 cursor-pointer'><Translator path={'footer.learn.list.1'}/></li>
+						<li className='hover:text-gray hover:duration-200 cursor-pointer'><Translator path={'footer.learn.list.2'}/></li>
+						<li className='hover:text-gray hover:duration-200 cursor-pointer'><Translator path={'footer.learn.list.3'}/></li>
+						<li className='hover:text-gray hover:duration-200 cursor-pointer'><Translator path={'footer.learn.list.4'}/></li>
 					</ul>
 				</div>
 				<div className='flex flex-col w-32 gap-2'>
 					<p className='text-sm mobile:text-base text-cod font-bold'><Translator path={'footer.start.title'}/></p>
 					<ul className='text-xs mobile:text-tiny text-cod font-medium flex flex-col gap-1'>
-					<li className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.start.list.0'}/></li>
-						<li className='hover:text-gray duration-200 cursor-pointer'><Translator path={'footer.start.list.1'}/></li>
+					<li className='hover:text-gray hover:duration-200 cursor-pointer'><Translator path={'footer.start.list.0'}/></li>
+						<li className='hover:text-gray hover:duration-200 cursor-pointer'><Translator path={'footer.start.list.1'}/></li>
 					</ul>
 				</div>
 			</div>

@@ -13,7 +13,7 @@ a {
 }
 
 html {
-	font-size: calc(16px + (24 - 16) * (100vw - 1080px) / (2160 - 1080));
+	font-size: calc(12px + (24 - 16) * (100vw - 1080px) / (2160 - 1080));
 }
 
 html, body, #root {

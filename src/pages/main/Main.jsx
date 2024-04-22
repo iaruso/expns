@@ -1,5 +1,6 @@
 import './Main.css';
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Translator from '../../components/i18n/Translator.jsx';
 import Navbar from '../../components/navigation/main/Navbar.jsx';
 import Footer from '../../components/footer/Footer.jsx';
@@ -12,10 +13,15 @@ import Highlights from '../../components/main/Highlights.jsx';
 import Clients from '../../components/main/Clients.jsx';
 
 export default function Main() {
-	/*const { isAuthenticated } = useAuth0();
+	const navigate = useNavigate();
 	useEffect(() => {
-		isAuthenticated && window.location.replace('/#/main');
-	}, [isAuthenticated]);*/
+    const expiryTime = localStorage.getItem('expiryTime');
+    const currentTime = new Date().getTime();
+    if (currentTime < parseInt(expiryTime) && expiryTime) {
+      navigate('/app/');
+    }
+  }, []);
+
 	return (
 		<>
 			<Navbar/>
@@ -43,7 +49,7 @@ export default function Main() {
 								<img src='./user_2.jpg' alt='User image example 2' className='h-[2.2rem] mobile:h-[2.7rem] rounded border-[0.1rem] mobile:border-[0.15rem] border-white absolute left-6 z-20'/>
 								<img src='./user_3.jpg' alt='User image example 3' className='h-[2.2rem] mobile:h-[2.7rem] rounded border-[0.1rem] mobile:border-[0.15rem] border-white absolute left-12 z-10'/>
 							</div>
-							<a href='#' className='h-8 mobile:h-10 px-4 py-2 flex items-center justify-center rounded bg-royal hover:bg-persian text-white text-sm mobile:text-base font-semibold duration-200'><Translator path='main.intro.cta'/></a>
+							<a href='#' className='h-8 mobile:h-10 px-4 py-2 flex items-center justify-center rounded bg-royal hover:bg-persian text-white text-sm mobile:text-base font-semibold hover:duration-200'><Translator path='main.intro.cta'/></a>
 						</div>
 					</div>
 				</div>
