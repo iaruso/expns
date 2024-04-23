@@ -31,15 +31,6 @@
 .highlight-5 { grid-area: a5; }
 
 @media screen and (min-width: 768px) {
-  .main-intro, .main-features {
-    height: calc(100dvh - 3rem);
-  }
-  .main-intro-stats-1 {
-    width: calc(100% - 4rem);
-  }
-  .main-intro-stats-2 {
-    width: calc(100% + 4rem);
-  }
   .pricing-features-list > div > div:not(:first-child) {
     max-width: 10rem;
   }

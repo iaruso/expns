@@ -22,7 +22,7 @@ const Footer = () => {
   };
 
 	return (
-		<footer className='w-full flex flex-col py-8 px-8 md:px-32 exl:px-64 border-t-[0.05rem] mobile:border-t-[0.1rem] border-gallery gap-8'>
+		<footer className='w-full flex flex-col py-8 px-8 md:px-32 xl:px-[16rem] exl:px-[24rem] border-t-[0.05rem] mobile:border-t-[0.1rem] border-gallery gap-8'>
 			<div className='flex gap-8 flex-wrap'>
 				<div className='flex flex-col mobile:flex-row flex-1 gap-4 mobile:items-center mobile:flex-none mobile:w-full'>
 					<LogoFooter className='w-8 h-8 mobile:w-24 mobile:h-24'/>
@@ -69,7 +69,7 @@ const Footer = () => {
 			</div>
 			<div className='flex items-center justify-between h-8 mobile:h-10'>
 				<div className='flex w-32 mobile:w-auto'>
-					<div className='flex items-center justify-center cursor-pointer px-2 py-1 mobile:px-4 mobile:py-2 gap-1 mobile:gap-2 mobile:h-10 rounded border-[0.05rem] mobile:border-[0.1rem] border-gallery hover:bg-alabaster duration-200' onClick={toggleLanguage}>
+					<div className='flex items-center justify-center cursor-pointer px-2 py-1 mobile:px-4 mobile:py-2 gap-1 mobile:gap-2 mobile:h-10 rounded border-[0.05rem] mobile:border-[0.1rem] border-gallery hover:bg-gallery duration-200' onClick={toggleLanguage}>
 						<Language className='h-4 w-4 mobile:w-5 mobile:h-5 fill-cod'/>
 						<span className='text-sm mobile:text-base text-cod font-semibold'>
 							{languageBool ? 'English' : 'Português'}
@@ -78,10 +78,10 @@ const Footer = () => {
 				</div>
 				<p className='text-sm text-cod font-medium mobile:hidden'>©2020-2024 Expns, Inc.</p>
 				<div className='flex items-center gap-1 mobile:gap-2'>
-					<a href='#' aria-label='Facebook' className='h-8 w-8 mobile:w-10 mobile:h-10 flex items-center justify-center rounded mobile:border-[0.1rem] mobile:border-gallery hover:bg-alabaster duration-200'><Facebook className='h-4 w-4 mobile:w-5 mobile:h-5 fill-chalice'/></a>
-					<a href='#' aria-label='Instagram' className='h-8 w-8 mobile:w-10 mobile:h-10 flex items-center justify-center rounded mobile:border-[0.1rem] mobile:border-gallery hover:bg-alabaster duration-200'><Instagram className='h-4 w-4 mobile:w-5 mobile:h-5 fill-chalice'/></a>
-					<a href='#' aria-label='LinkedIn' className='h-8 w-8 mobile:w-10 mobile:h-10 flex items-center justify-center rounded mobile:border-[0.1rem] mobile:border-gallery hover:bg-alabaster duration-200'><LinkedIn className='h-4 w-4 mobile:w-5 mobile:h-5 fill-chalice'/></a>
-					<a href='#' aria-label='Youtube' className='h-8 w-8 mobile:w-10 mobile:h-10 flex items-center justify-center rounded mobile:border-[0.1rem] mobile:border-gallery hover:bg-alabaster duration-200'><Youtube className='h-4 w-4 mobile:w-5 mobile:h-5 fill-chalice'/></a>
+					<a href='#' aria-label='Facebook' className='h-8 w-8 mobile:w-10 mobile:h-10 flex items-center justify-center rounded mobile:border-[0.1rem] mobile:border-gallery hover:bg-gallery duration-200'><Facebook className='h-4 w-4 mobile:w-5 mobile:h-5 fill-chalice'/></a>
+					<a href='#' aria-label='Instagram' className='h-8 w-8 mobile:w-10 mobile:h-10 flex items-center justify-center rounded mobile:border-[0.1rem] mobile:border-gallery hover:bg-gallery duration-200'><Instagram className='h-4 w-4 mobile:w-5 mobile:h-5 fill-chalice'/></a>
+					<a href='#' aria-label='LinkedIn' className='h-8 w-8 mobile:w-10 mobile:h-10 flex items-center justify-center rounded mobile:border-[0.1rem] mobile:border-gallery hover:bg-gallery duration-200'><LinkedIn className='h-4 w-4 mobile:w-5 mobile:h-5 fill-chalice'/></a>
+					<a href='#' aria-label='Youtube' className='h-8 w-8 mobile:w-10 mobile:h-10 flex items-center justify-center rounded mobile:border-[0.1rem] mobile:border-gallery hover:bg-gallery duration-200'><Youtube className='h-4 w-4 mobile:w-5 mobile:h-5 fill-chalice'/></a>
 				</div>
 			</div>
 		</footer>

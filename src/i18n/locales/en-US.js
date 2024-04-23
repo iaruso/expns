@@ -22,15 +22,14 @@ export default {
 				about: 'About',
 				login: 'Log in',
 				register: 'Try it for free',
+				register_mobile: 'Register'
 			},
 			app: {
 				dashboard: 'Dashboard',
 				stats: 'Stats',
 				transactions: 'Transactions',
-				options: {
-					settings: 'Settings',
-					logout: 'Logout'
-				}
+				add: 'Add transaction',
+				logout: 'Logout'
 			}
     },
 		footer: {

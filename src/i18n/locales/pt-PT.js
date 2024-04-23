@@ -22,15 +22,14 @@ export default {
 				about: 'Sobre',
 				login: 'Autenticar',
 				register: 'Experimentar gratuitamente',
+				register_mobile: 'Experimentar'
 			},
 			app: {
 				dashboard: 'Dashboard',
 				stats: 'Estatísticas',
 				transactions: 'Transações',
-				options: {
-					settings: 'Definições',
-					logout: 'Sair'
-				}
+				add: 'Criar transação',
+				logout: 'Sair'
 			}
     },
 		footer: {

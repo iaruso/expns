@@ -59,6 +59,7 @@ const Login = () => {
         localStorage.setItem('userId', userId);
         localStorage.setItem('accessToken', accessToken);
         localStorage.setItem('refreshToken', refreshToken);
+        localStorage.setItem('email', email);
       if (checked) {
         const expiryTime = new Date().getTime() + 60 * 60 * 1000;
         localStorage.setItem('expiryTime', expiryTime);

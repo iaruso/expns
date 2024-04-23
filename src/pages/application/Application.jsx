@@ -19,13 +19,15 @@ const Application = () => {
   }, []);
 
   return (
-    <div className='w-full h-[100dvh] flex flex-col p-8 gap-4 items-center'>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/stats" element={<Stats />} />
-        <Route path="/transactions" element={<Transactions />} />
-      </Routes>
+    <div className='w-full h-[100dvh] relative flex flex-col exl:px-[20rem] xl:px-[12rem] lg:px-[10rem] md:px-[4rem] py-8 mobile:p-0 gap-4 items-center'>
+      <Navbar/>
+      <div className=''>
+        <Routes>
+          <Route path="/" element={<Dashboard/>} />
+          <Route path="/stats" element={<Stats/>} />
+          <Route path="/transactions" element={<Transactions/>} />
+        </Routes>
+      </div>
     </div>
   );
 };
