@@ -13,7 +13,7 @@ a {
 }
 
 html {
-	font-size: calc(10px + (24 - 16) * (100vw - 1080px) / (2160 - 1080));
+	font-size: calc(16px + (20 - 16) * (100vw - 1080px) / (2160 - 1080));
 }
 
 html, body, #root {
@@ -103,6 +103,12 @@ input {
 	background-color: #7F7F7F;
 }
 
+@media screen and (min-width: 2160px) {
+  html {
+    font-size: calc(24px + (40 - 24) * (100vw - 2160px) / (3680 - 1080));
+  }
+  
+}
 @media screen and (min-width: 1025px) and (max-width: 1280px) {
   html {
     font-size: calc(12px + (16 - 12) * (100vw - 1080px) / (1280 - 1024));

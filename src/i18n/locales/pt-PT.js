@@ -258,6 +258,52 @@ export default {
 				cta: 'Redefinir senha',
 				alt_opt: 'Cancelar'
 			}
+		},
+		app: {
+			dashboard: {
+				balance: {
+					title: 'Saldo',
+					description: 'Representa o saldo atual, calculado com rendimento mais investimentos menos despesas.'
+				},
+				incomes: {
+					title: 'Rendimentos',
+					description: 'Representa o total de dinheiro ganho.'
+				},
+				expenses: {
+					title: 'Despesas',
+					description: 'Representa o total de dinheiro gasto.'
+				},
+				investments: {
+					title: 'Investimentos',
+					description: 'Representa o total de dinheiro investido.'
+				},
+				transactions: {
+					title: 'Transações',
+					see_all: 'Ver tudo',
+				},
+				categories: {
+					title: 'Vista categorizada',
+					incomes: 'Rendimentos',
+					expenses: 'Despesas',
+					investments: 'Investimentos',
+				},
+			},
+			stats: {
+				title: 'Transactions',
+				type: {
+					all: 'All',
+					incomes: 'Incomes',
+					expenses: 'Expenses',
+					investments: 'Investments'
+				},
+				time: {
+					day: '1D',
+					week: '1W',
+					month: '1M',
+					year: '1Y',
+					custom: 'Custom'
+				}
+			},
 		}
   }
 }

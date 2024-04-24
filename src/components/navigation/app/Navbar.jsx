@@ -22,7 +22,7 @@ const Navbar = () => {
         !dropdownRef.current.contains(event.target) &&
         !imageRef.current.contains(event.target)
       ) {
-        setOpenDropdown(false); // Close the dropdown if clicked outside and not on the image
+        setOpenDropdown(false);
       }
     }
   
@@ -34,7 +34,7 @@ const Navbar = () => {
   }, [dropdownRef, imageRef]);
 
   return (
-    <nav className='w-full flex items-center justify-between h-12 mobile:h-16 p-2 gap-2 md:border-[0.05rem] mobile:border-b-[0.1rem] md:rounded-lg border-gallery bg-white'>
+    <nav className='w-full flex items-center justify-between h-12 mobile:h-16 p-2 mobile:px-4 gap-2 md:border-[0.05rem] mobile:border-b-[0.1rem] md:rounded-lg border-gallery bg-white'>
       <div className='flex items-center justify-center gap-4 w-8 h-8 mobile:w-10 mobile:h-10'>
         <Logo className='w-5 h-5 mobile:h-6 mobile:w-6'/>
       </div>
@@ -48,7 +48,7 @@ const Navbar = () => {
           <Add className='w-5 h-5 mobile:h-6 mobile:w-6 fill-white'/>
         </button>
       </div>
-      <div className='flex items-center h-8 w-8 mobile:h-10 mobile:w-10 relative'>
+      <div className='flex items-center h-8 w-8 mobile:h-10 mobile:w-10 relative z-50'>
         <img src='../default_user.png' alt='user_image' className='h-8 w-8 mobile:h-10 mobile:w-10 absolute rounded border-[0.05rem] mobile:border-[0.1rem] border-royal cursor-pointer' ref={imageRef} onClick={(e) => {
           setOpenDropdown((prev) => !prev);
           e.stopPropagation();

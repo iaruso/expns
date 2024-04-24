@@ -258,6 +258,55 @@ export default {
 				cta: 'Reset password',
 				alt_opt: 'Cancel'
 			}
+		},
+		app: {
+			dashboard: {
+				balance: {
+					title: 'Balance',
+					description: 'Represents the current balance, calculated as income plus investments minus expenses.'
+				},
+				incomes: {
+					title: 'Incomes',
+					description: 'Represents the total amount of money received.'
+				},
+				expenses: {
+					title: 'Expenses',
+					description: 'Represents the total amount of money spent.'
+				},
+				investments: {
+					title: 'Investments',
+					description: 'Represents the total amount of money invested.'
+				},
+				transactions: {
+					title: 'Transactions',
+					see_all: 'See all',
+				},
+				categories: {
+					title: 'Category overview',
+					type: {
+						all: 'All',
+						incomes: 'Incomes',
+						expenses: 'Expenses',
+						investments: 'Investments'
+					}
+				}
+			},
+			stats: {
+				title: 'Transactions',
+				type: {
+					all: 'All',
+					incomes: 'Incomes',
+					expenses: 'Expenses',
+					investments: 'Investments'
+				},
+				time: {
+					day: '1D',
+					week: '1W',
+					month: '1M',
+					year: '1Y',
+					custom: 'Custom'
+				}
+			},
 		}
   }
 }

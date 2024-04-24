@@ -14,6 +14,7 @@ export default {
 			'big': ['2rem']
 		},
     screens: {
+      'sm-mobile': { 'max': '480px' }, // => @media (max-width: 480px) { ... }
       'mobile': { 'max': '768px' }, // => @media (max-width: 768px) { ... }
       'sm': '640px', // => @media (min-width: 640px) { ... }
       'md': '768px', // => @media (min-width: 768px) { ... }

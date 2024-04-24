@@ -1,0 +1,59 @@
+[data-title]:hover:after {
+  opacity: 1;
+  transition: all 0.2s ease-in-out;
+  visibility: visible;
+}
+[data-title]:after {
+  content: attr(data-title);
+  position: absolute;
+  height: max-content;
+  width: 20vw;
+  display: flex;
+  align-items: center;
+  bottom: 0rem;
+  left: 100%;
+  padding:0.5rem;
+  color: #3C3C3C;
+  font-size: 0.75rem;
+  font-family: 'Urbanist', sans-serif;
+  font-weight: 600;
+  white-space: wrap;
+  border-radius: 0.5rem;
+  opacity: 0;
+  z-index: 99999;
+  visibility: hidden;
+  background-color: #FFFFFF;
+  border: 0.05rem solid #F0F0F0;
+}
+[data-title] {
+  position: relative;
+}
+
+.transactions-item-list > div {
+  border-bottom: 0.05rem solid #F0F0F0;
+}
+
+/* Custom data-titles ... */
+.dashboard-card {
+  position: relative;
+}
+.dashboard-card[data-title]:after {
+  left: 0;
+  width: 100%;
+  top: calc(100% + 1rem); 
+}
+
+.balance-card[data-title]:after {
+  background-color: #3A4AD9;
+  border-color: #2433C2;
+  color: #FFFFFF;
+}
+
+@media screen and (max-width: 768px) {
+  [data-title]:after {
+    border-width: 0.1rem !important;
+  }
+  .transactions-item-list > div {
+    border-bottom-width: 0.1rem !important;
+  }
+}

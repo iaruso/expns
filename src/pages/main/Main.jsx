@@ -46,9 +46,9 @@ export default function Main() {
 						<div className='flex w-full items-center gap-4 mobile:gap-4 mobile:flex-row-reverse mobile:justify-end'>
 							<p className='hidden mobile:flex text-base text-cod font-semibold pl-2'><Translator path='main.intro.join'/></p>
 							<div className='relative flex w-[5.1rem] h-[2.2rem] mobile:h-[2.7rem] items-center'>
-								<img src='./user_1.jpg' alt='User image example 1' className='h-[2.2rem] mobile:h-[2.7rem] rounded border-[0.1rem] mobile:border-[0.15rem] border-white absolute left-0 z-30'/>
-								<img src='./user_2.jpg' alt='User image example 2' className='h-[2.2rem] mobile:h-[2.7rem] rounded border-[0.1rem] mobile:border-[0.15rem] border-white absolute left-6 z-20'/>
-								<img src='./user_3.jpg' alt='User image example 3' className='h-[2.2rem] mobile:h-[2.7rem] rounded border-[0.1rem] mobile:border-[0.15rem] border-white absolute left-12 z-10'/>
+								<img src='./user_1.jpg' alt='User image example 1' className='h-[2.2rem] mobile:h-[2.7rem] rounded border-[0.05rem] mobile:border-[0.15rem] border-white absolute left-0 z-30'/>
+								<img src='./user_2.jpg' alt='User image example 2' className='h-[2.2rem] mobile:h-[2.7rem] rounded border-[0.05rem] mobile:border-[0.15rem] border-white absolute left-6 z-20'/>
+								<img src='./user_3.jpg' alt='User image example 3' className='h-[2.2rem] mobile:h-[2.7rem] rounded border-[0.05rem] mobile:border-[0.15rem] border-white absolute left-12 z-10'/>
 							</div>
 							<Link to='/register' className='h-8 mobile:h-10 px-4 py-2 flex items-center justify-center rounded bg-royal hover:bg-persian text-white text-sm mobile:text-base font-semibold hover:duration-200'><Translator path='main.intro.cta'/></Link>
 						</div>
