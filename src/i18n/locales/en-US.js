@@ -1,19 +1,38 @@
 export default {
   translations: {
+		types: {
+			all: 'All',
+			incomes: 'Incomes',
+			expenses: 'Expenses',
+			investments: 'Investments'
+		},
 		categories: {
+			all: 'All',
 			total: 'Total',
-			salary: 'Salary',
-			investments: 'Investments',
-			gifts: 'Gifts',
-			housing: 'Housing',
-			transportation: 'Transportation',
-			food: 'Food',
-			health: 'Health',
-			entertainment: 'Entertainment',
-			utilities: 'Utilities',
-			debt: 'Debt',
-			education: 'Education',
-			travel: 'Travel'
+			incomes: {
+				salary: 'Salary',
+				gifts: 'Gifts',
+				sales: 'Sales',
+				rent: 'Rent'
+			},
+			expenses: {
+				housing: 'Housing',
+				transportation: 'Transportation',
+				food: 'Food',
+				health: 'Health',
+				entertainment: 'Entertainment',
+				utilities: 'Utilities',
+				debt: 'Debt',
+				education: 'Education',
+				travel: 'Travel'
+			},
+			investments: {
+				bonds: 'Bonds',
+				stocks: 'Stocks',
+				crypto: 'Crypto',
+				etf: 'ETF'
+			},
+			other: 'Other'
 		},
     navbar: {
       main: {
@@ -307,6 +326,29 @@ export default {
 					custom: 'Custom'
 				}
 			},
+			transactions: {
+				type: 'Type',
+				category: 'Category',
+				search: 'Search transactions by name ...',
+				sort: {
+					placeholder: 'Sort by',
+					sort_val: 'Value',
+					sort_val_asc: 'Sort by value (ascending)',
+					sort_val_desc: 'Sort by value (descending)',
+					sort_date: 'Date',
+					sort_date_asc: 'Sort by date (ascending)',
+					sort_date_desc: 'Sort by date (descending)',
+					sort_name: 'Name',
+					sort_name_asc: 'Sort by name (ascending)',
+					sort_name_desc: 'Sort by name (descending)'
+				},
+				filter: {
+					value: 'Value of transaction',
+					date: 'Date of transaction',
+					min: 'Min',
+					max: 'Max'
+				}			
+			}
 		}
   }
 }

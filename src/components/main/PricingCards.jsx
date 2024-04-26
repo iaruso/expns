@@ -11,7 +11,7 @@ const PricingPlanCard = ({ titlePath, subtitlePath, featuresPath, ctaPath, ctaBg
           <li key={index}><Translator path={featurePath}/></li>	
         ))}
       </ul>
-      <button className={`w-full h-8 mobile:h-10 text-sm mobile:text-base text-white font-semibold flex justify-center items-center rounded py-1 px-2 cursor-pointer bg-${ctaBgColor} hover:bg-${ctaBgHover} hover:duration-200`} rel='nofollow'><Translator path={ctaPath}/></button>
+      <button className={`w-full h-8 mobile:h-10 text-sm mobile:text-base text-white font-semibold flex justify-center items-center rounded py-1 px-2 cursor-pointer bg-${ctaBgColor} hover:bg-${ctaBgHover} hover:duration-[0.4s] ease-in-out`} rel='nofollow'><Translator path={ctaPath}/></button>
     </div>
   );
 }

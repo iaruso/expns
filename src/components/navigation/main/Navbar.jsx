@@ -29,15 +29,15 @@ const Navbar = () => {
 					<span className='text-sm mobile:text-[1.25rem] font-extrabold text-persian'>Expns</span>
 				</ScrollLink>
 				<div className='hidden items-center gap-1 h6 md:flex'>
-					<ScrollLink href='#features-section' to='features-section' spy={true} smooth={true} duration={400} offset={-2 * parseFloat(getComputedStyle(document.documentElement).fontSize)} className='h-6 px-2 py-1 flex items-center justify-center rounded hover:bg-gallery text-cod text-xs font-semibold duration-200 cursor-pointer'><Translator path='navbar.main.features'/></ScrollLink>
-					<ScrollLink href='#pricing-section' to='pricing-section' spy={true} smooth={true} duration={400} offset={-2 * parseFloat(getComputedStyle(document.documentElement).fontSize)} className='h-6 px-2 py-1 flex items-center justify-center rounded hover:bg-gallery text-cod text-xs font-semibold duration-200 cursor-pointer'><Translator path='navbar.main.pricing'/></ScrollLink>
-					<ScrollLink href='#about-section' to='about-section' spy={true} smooth={true} duration={400} offset={-2 * parseFloat(getComputedStyle(document.documentElement).fontSize)} className='h-6 px-2 py-1 flex items-center justify-center rounded hover:bg-gallery text-cod text-xs font-semibold duration-200 cursor-pointer'><Translator path='navbar.main.about'/></ScrollLink>
+					<ScrollLink href='#features-section' to='features-section' spy={true} smooth={true} duration={400} offset={-2 * parseFloat(getComputedStyle(document.documentElement).fontSize)} className='h-6 px-2 py-1 flex items-center justify-center rounded hover:bg-gallery text-cod text-xs font-semibold duration-[0.4s] ease-in-out cursor-pointer'><Translator path='navbar.main.features'/></ScrollLink>
+					<ScrollLink href='#pricing-section' to='pricing-section' spy={true} smooth={true} duration={400} offset={-2 * parseFloat(getComputedStyle(document.documentElement).fontSize)} className='h-6 px-2 py-1 flex items-center justify-center rounded hover:bg-gallery text-cod text-xs font-semibold duration-[0.4s] ease-in-out cursor-pointer'><Translator path='navbar.main.pricing'/></ScrollLink>
+					<ScrollLink href='#about-section' to='about-section' spy={true} smooth={true} duration={400} offset={-2 * parseFloat(getComputedStyle(document.documentElement).fontSize)} className='h-6 px-2 py-1 flex items-center justify-center rounded hover:bg-gallery text-cod text-xs font-semibold duration-[0.4s] ease-in-out cursor-pointer'><Translator path='navbar.main.about'/></ScrollLink>
 				</div>
 			</div>
 			<div className='flex items-center gap-1 mobile:gap-2 h6 mobile:h-10'>
-				<Link to='/login' className='h-6 mobile:h-10 px-2 py-1 mobile:px-4 mobile:py-2 flex items-center justify-center rounded border-[0.05rem] mobile:border-[0.1rem] border-gallery hover:bg-gallery text-cod text-xs mobile:text-base font-semibold duration-200'><Translator path='navbar.main.login'/></Link>
-				<Link to='/register' className='mobile:hidden md:flex h-6 px-2 py-1 flex items-center justify-center rounded bg-royal hover:bg-persian text-white text-xs font-semibold duration-200'><Translator path='navbar.main.register'/></Link>
-				<Link to='/register' className='mobile:flex md:hidden h-10 px-4 py-2 items-center justify-center rounded bg-royal hover:bg-persian text-white text-base font-semibold duration-200'><Translator path='navbar.main.register_mobile'/></Link>
+				<Link to='/login' className='h-6 mobile:h-10 px-2 py-1 mobile:px-4 mobile:py-2 flex items-center justify-center rounded border-[0.05rem] mobile:border-[0.1rem] border-gallery hover:bg-gallery text-cod text-xs mobile:text-base font-semibold duration-[0.4s] ease-in-out'><Translator path='navbar.main.login'/></Link>
+				<Link to='/register' className='mobile:hidden md:flex h-6 px-2 py-1 flex items-center justify-center rounded bg-royal hover:bg-persian text-white text-xs font-semibold duration-[0.4s] ease-in-out'><Translator path='navbar.main.register'/></Link>
+				<Link to='/register' className='mobile:flex md:hidden h-10 px-4 py-2 items-center justify-center rounded bg-royal hover:bg-persian text-white text-base font-semibold duration-[0.4s] ease-in-out'><Translator path='navbar.main.register_mobile'/></Link>
 			</div>
 		</nav>
 	)

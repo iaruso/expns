@@ -1,19 +1,38 @@
 export default {
   translations: {
+		types: {
+			all: 'Todos',
+			incomes: 'Rendimentos',
+			expenses: 'Despesas',
+			investments: 'Investimentos'
+		},
 		categories: {
+			all: 'Todos',
 			total: 'Total',
-			salary: 'Salário',
-			investments: 'Investimentos',
-			gifts: 'Presentes',
-			housing: 'Habitação',
-			transportation: 'Transportes',
-			food: 'Alimentação',
-			health: 'Saúde',
-			entertainment: 'Entretenimento',
-			utilities: 'Utilidades',
-			debt: 'Dívidas',
-			education: 'Educação',
-			travel: 'Viagens'
+			incomes: {
+				salary: 'Salário',
+				gifts: 'Presentes',
+				sales: 'Vendas',
+				rent: 'Renda',
+			},
+			expenses: {
+				housing: 'Habitação',
+				transportation: 'Transporte',
+				food: 'Alimentação',
+				health: 'Saúde',
+				entertainment: 'Entretenimento',
+				utilities: 'Utilidades',
+				debt: 'Dívidas',
+				education: 'Educação',
+				travel: 'Viagens',
+			},
+			investments: {
+				bonds: 'Obrigações',
+				stocks: 'Ações',
+				crypto: 'Criptomoedas',
+				etf: 'ETFs',
+			},
+			other: 'Outros'
 		},
     navbar: {
 			main: {
@@ -304,6 +323,29 @@ export default {
 					custom: 'Custom'
 				}
 			},
+			transactions: {
+				type: 'Tipo',
+				category: 'Categoria',
+				search: 'Pesquisar transacções por nome ...',
+				sort: {
+					placeholder: 'Ordenar por',
+					sort_val: 'Valor',
+					sort_val_asc: 'Ordenar por valor (ascendente)',
+					sort_val_desc: 'Ordenar por valor (decrescente)',
+					sort_date: 'Data',
+					sort_date_asc: 'Ordenar por data (crescente)',
+					sort_date_desc: 'Ordenar por data (decrescente)',
+					sort_name: 'Nome',
+					sort_name_asc: 'Ordenar por nome (crescente)',
+					sort_name_desc: 'Ordenar por nome (decrescente)'
+				},
+				filter: {
+					value: 'Valor da transação',
+					date: 'Data da transação',
+					min: 'Min',
+					max: 'Max'
+				}			
+			}
 		}
   }
 }

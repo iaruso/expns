@@ -42,17 +42,17 @@ const CompareFeatures = () => {
         <div className='gap-2 flex flex-col items-center justify-center'>
           <p className='text-base text-cod font-bold'><Translator path='main.pricing.features.plans.starter.title'/></p>
           <p className='text-tiny mobile:text-base text-cod font-semibold'><Translator path='main.pricing.features.plans.starter.price'/></p>
-          <button className='h-6 mobile:h-8 text-sm mobile:text-tiny text-white font-semibold flex justify-center items-center rounded py-1 px-2 cursor-pointer bg-royal hover:bg-persian hover:duration-200'><Translator path='main.pricing.features.plans.starter.cta'/></button>
+          <button className='h-6 mobile:h-8 text-sm mobile:text-tiny text-white font-semibold flex justify-center items-center rounded py-1 px-2 cursor-pointer bg-royal hover:bg-persian hover:duration-[0.4s] ease-in-out'><Translator path='main.pricing.features.plans.starter.cta'/></button>
         </div>
         <div className='gap-2 flex flex-col items-center justify-center'>
           <p className='text-base text-cod font-bold'><Translator path='main.pricing.features.plans.pro.title'/></p>
           <p className='text-tiny mobile:text-base text-cod font-semibold'><Translator path='main.pricing.features.plans.pro.price'/></p>
-          <button className='h-6 mobile:h-8 text-sm mobile:text-tiny text-white font-semibold flex justify-center items-center rounded py-1 px-2 cursor-pointer bg-cod hover:bg-black hover:duration-200'><Translator path='main.pricing.features.plans.pro.cta'/></button>
+          <button className='h-6 mobile:h-8 text-sm mobile:text-tiny text-white font-semibold flex justify-center items-center rounded py-1 px-2 cursor-pointer bg-cod hover:bg-black hover:duration-[0.4s] ease-in-out'><Translator path='main.pricing.features.plans.pro.cta'/></button>
         </div>
         <div className='gap-2 flex flex-col items-center justify-center'>
           <p className='text-base text-cod font-bold'><Translator path='main.pricing.features.plans.organization.title'/></p>
           <p className='text-tiny mobile:text-base text-cod font-semibold'><Translator path='main.pricing.features.plans.organization.price'/></p>
-          <button className='h-6 mobile:h-8 text-sm mobile:text-tiny text-white font-semibold flex justify-center items-center rounded py-1 px-2 cursor-pointer bg-cod hover:bg-black hover:duration-200'><Translator path='main.pricing.features.plans.organization.cta'/></button>
+          <button className='h-6 mobile:h-8 text-sm mobile:text-tiny text-white font-semibold flex justify-center items-center rounded py-1 px-2 cursor-pointer bg-cod hover:bg-black hover:duration-[0.4s] ease-in-out'><Translator path='main.pricing.features.plans.organization.cta'/></button>
         </div>
       </div>
       <FeatureHeader titlePath='main.pricing.features.list.tracking.title'/>

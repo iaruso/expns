@@ -1,0 +1,36 @@
+{
+  "types": {
+    "all": "types.all",
+    "incomes": "types.incomes",
+    "expenses": "types.expenses",
+    "investments": "types.investments"
+  },
+  "categories": {
+    "all": "categories.all",
+    "total": "categories.total",
+    "incomes": {
+      "salary": "categories.incomes.salary",
+      "gifts": "categories.incomes.gifts",
+      "sales": "categories.incomes.sales",
+      "rent": "categories.incomes.rent"
+    },
+    "expenses": {
+      "housing": "categories.expenses.housing",
+      "transportation": "categories.expenses.transportation",
+      "food": "categories.expenses.food",
+      "health": "categories.expenses.health",
+      "entertainment": "categories.expenses.entertainment",
+      "utilities": "categories.expenses.utilities",
+      "debt": "categories.expenses.debt",
+      "education": "categories.expenses.education",
+      "travel": "categories.expenses.travel"
+    },
+    "investments": {
+      "bonds": "categories.investments.bonds",
+      "stocks": "categories.investments.stocks",
+      "crypto": "categories.investments.crypto",
+      "etf": "categories.investments.etf"
+    },
+    "other": "categories.other"
+  }
+}

@@ -41,21 +41,21 @@ const Dashboard = () => {
         <div className='flex items-center justify-between h-6'>
           <h2 className='font-bold text-cod text-tiny'>{t('app.dashboard.transactions.title')}</h2>
           <div className='flex items-center h-6 gap-1'>
-            <Link to='/app/transactions' className='h-6 flex px-2 py-1 text-sm font-semibold text-gray items-center justify-center rounded border-[0.05rem] mobile:border-[0.1rem] border-gallery bg-white hover:bg-gallery hover:duration-200'>
+            <Link to='/app/transactions' className='h-6 flex px-2 py-1 text-sm font-semibold text-gray items-center justify-center rounded border-[0.05rem] mobile:border-[0.1rem] border-gallery bg-white hover:bg-gallery hover:duration-[0.4s] ease-in-out'>
               {t('app.dashboard.transactions.see_all')}
             </Link>
           </div>
         </div>
         <div className='transactions-item-list flex flex-col flex-1 overflow-y-auto bg-white border-[0.05rem] mobile:border-[0.1rem] border-gallery rounded'>
           {/* As template for now, save here transaction id too */}
-          <div className='h-8 w-full flex items-center gap-1 py-1 px-2 hover:bg-alabaster hover:duration-200 cursor-pointer'>
+          <div className='h-8 w-full flex items-center gap-1 py-1 px-2 hover:bg-alabaster hover:duration-[0.4s] ease-in-out cursor-pointer'>
             <Food className='w-4 h-4 fill-chalice'/>
             <span className='text-sm text-cod font-medium flex-1'>PizzaHut</span>
             <span className='text-sm text-gray font-medium'>(24-04-2024)</span>
             <span className='text-sm text-cod font-medium w-16 text-end tabular-nums'>$ 29,99</span>
             <Expense className='w-4 h-4 fill-chalice mt-[1px]'/>
           </div>
-          <div className='h-8 w-full flex items-center gap-1 py-1 px-2 hover:bg-alabaster hover:duration-200 cursor-pointer'>
+          <div className='h-8 w-full flex items-center gap-1 py-1 px-2 hover:bg-alabaster hover:duration-[0.4s] ease-in-out cursor-pointer'>
             <Food className='w-4 h-4 fill-chalice'/>
             <span className='text-sm text-cod font-medium flex-1'>PizzaHut</span>
             <span className='text-sm text-gray font-medium'>(24-04-2024)</span>
@@ -68,16 +68,16 @@ const Dashboard = () => {
         <div className='flex items-center justify-between h-6'>
           <h2 className='font-bold text-cod text-tiny'>{t('app.categories.title')}</h2>
           <div className='flex items-center h-6 gap-1'>
-            <button className='h-6 flex px-2 py-1 text-sm font-semibold text-gray items-center justify-center rounded border-[0.05rem] mobile:border-[0.1rem] border-gallery bg-white hover:bg-gallery hover:duration-200'>
+            <button className='h-6 flex px-2 py-1 text-sm font-semibold text-gray items-center justify-center rounded border-[0.05rem] mobile:border-[0.1rem] border-gallery bg-white hover:bg-gallery hover:duration-[0.4s] ease-in-out'>
               {t('app.dashboard.categories.type.all')}
             </button>
-            <button className='h-6 flex px-2 py-1 text-sm font-semibold text-gray items-center justify-center rounded border-[0.05rem] mobile:border-[0.1rem] border-gallery bg-white hover:bg-gallery hover:duration-200'>
+            <button className='h-6 flex px-2 py-1 text-sm font-semibold text-gray items-center justify-center rounded border-[0.05rem] mobile:border-[0.1rem] border-gallery bg-white hover:bg-gallery hover:duration-[0.4s] ease-in-out'>
               {t('app.dashboard.categories.type.incomes')}
             </button>
-            <button className='h-6 flex px-2 py-1 text-sm font-semibold text-gray items-center justify-center rounded border-[0.05rem] mobile:border-[0.1rem] border-gallery bg-white hover:bg-gallery hover:duration-200'>
+            <button className='h-6 flex px-2 py-1 text-sm font-semibold text-gray items-center justify-center rounded border-[0.05rem] mobile:border-[0.1rem] border-gallery bg-white hover:bg-gallery hover:duration-[0.4s] ease-in-out'>
               {t('app.dashboard.categories.type.expenses')}
             </button>
-            <button className='h-6 flex px-2 py-1 text-sm font-semibold text-gray items-center justify-center rounded border-[0.05rem] mobile:border-[0.1rem] border-gallery bg-white hover:bg-gallery hover:duration-200'>
+            <button className='h-6 flex px-2 py-1 text-sm font-semibold text-gray items-center justify-center rounded border-[0.05rem] mobile:border-[0.1rem] border-gallery bg-white hover:bg-gallery hover:duration-[0.4s] ease-in-out'>
               {t('app.dashboard.categories.type.investments')}
             </button>
           </div>

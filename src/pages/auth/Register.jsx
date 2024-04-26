@@ -144,12 +144,12 @@ const Register = () => {
           </Link>
           <form onSubmit={handleRegister} className='flex flex-col gap-2 mobile:gap-4'>
             <input type='email' placeholder={t('auth.email')} value={email} onChange={(e) => setEmail(e.target.value)} required autoComplete='off'
-            className='h-8 mobile:h-12 rounded px-2 py-1 placeholder:text-alto text-xs mobile:text-base font-semibold text-cod border-[0.05rem] mobile:border-[0.1rem] border-gallery focus-within:bg-sand focus-within:border-alto hover:duration-200'/>
+            className='h-8 mobile:h-12 rounded px-2 py-1 placeholder:text-alto text-xs mobile:text-base font-semibold text-cod border-[0.05rem] mobile:border-[0.1rem] border-gallery focus-within:bg-sand focus-within:border-alto hover:duration-[0.4s] ease-in-out'/>
             <input type='password' placeholder={t('auth.password')} value={password} onChange={handlePasswordChange} title={t('auth.register.reqs.title')} required autoComplete='off'
-            className='h-8 mobile:h-12 rounded px-2 py-1 placeholder:text-alto text-xs mobile:text-base font-semibold text-cod border-[0.05rem] mobile:border-[0.1rem] border-gallery focus-within:bg-sand focus-within:border-alto hover:duration-200'/>
+            className='h-8 mobile:h-12 rounded px-2 py-1 placeholder:text-alto text-xs mobile:text-base font-semibold text-cod border-[0.05rem] mobile:border-[0.1rem] border-gallery focus-within:bg-sand focus-within:border-alto hover:duration-[0.4s] ease-in-out'/>
             <div id='pwrd-security' className='flex h-1 gap-1'>
               {[1, 2, 3, 4].map((index) => (
-                <span key={index} className={`w-1/4 rounded-sm duration-200 ${index > passwordLevel ? 'bg-gallery' : 'bg-royal'}`}></span>
+                <span key={index} className={`w-1/4 rounded-sm duration-[0.4s] ease-in-out ${index > passwordLevel ? 'bg-gallery' : 'bg-royal'}`}></span>
               ))}
             </div>
             <div className='flex gap-2 justify-between items-center mobile:gap-4'>
@@ -158,7 +158,7 @@ const Register = () => {
                 <span className='checkmark'></span>
               </label>
             </div>
-            <button type='button' onClick={handleRegister} className='h-8 mobile:h-12 rounded px-2 py-1 bg-royal hover:bg-persian hover:duration-200 text-white text-sm mobile:text-[1.25rem] font-semibold'>
+            <button type='button' onClick={handleRegister} className='h-8 mobile:h-12 rounded px-2 py-1 bg-royal hover:bg-persian hover:duration-[0.4s] ease-in-out text-white text-sm mobile:text-[1.25rem] font-semibold'>
               {t('auth.register.cta')}
             </button>
           </form>
@@ -166,13 +166,13 @@ const Register = () => {
           {warning ?
             <>
             { !email || !password || !checked || !emailRegex.test(email) ?
-              <div className='warning-card fixed bottom-4 min-h-8 bg-white w-56 rounded border-gallery border-[0.05rem] mobile:border-[0.1rem] p-4 gap-2 hover:duration-200 cursor-pointer hover:bg-sand opacity-0' onClick={() => setWarning(false)}>
+              <div className='warning-card fixed bottom-4 min-h-8 bg-white w-56 rounded border-gallery border-[0.05rem] mobile:border-[0.1rem] p-4 gap-2 hover:duration-[0.4s] ease-in-out cursor-pointer hover:bg-sand opacity-0' onClick={() => setWarning(false)}>
                 <p className='text-gray text-xs mobile:text-base font-semibold'>{t('auth.register.reqs.warning')}</p>
               </div>
             :
             <>
               { !hasNumber || !hasSymbol || !hasUppercase || !hasLowercase || !hasLength ?
-                <div className='warning-card fixed bottom-4 min-h-8 bg-white w-56 rounded border-gallery border-[0.05rem] mobile:border-[0.1rem] p-4 gap-2 hover:duration-200 cursor-pointer hover:bg-sand opacity-0' onClick={() => setWarning(false)}>
+                <div className='warning-card fixed bottom-4 min-h-8 bg-white w-56 rounded border-gallery border-[0.05rem] mobile:border-[0.1rem] p-4 gap-2 hover:duration-[0.4s] ease-in-out cursor-pointer hover:bg-sand opacity-0' onClick={() => setWarning(false)}>
                   <p className='text-gray text-xs mobile:text-base font-semibold'>{t('auth.register.reqs.password_warning')}</p>
                   <ul className='list-[initial] py-2 px-4 mobile:px-8 '>
                     { !hasNumber ? <li className='text-gray text-xs mobile:text-base font-semibold'>{t('auth.register.reqs.number')}</li> : null }
@@ -184,7 +184,7 @@ const Register = () => {
                 </div>
                 : null}
               { hasFailed || duplicatedEmail || hasSucceeded ?
-                <div className='warning-card fixed bottom-4 min-h-8 bg-white w-56 rounded border-gallery border-[0.05rem] mobile:border-[0.1rem] p-4 gap-2 duration-200 cursor-pointer hover:bg-sand opacity-0' onClick={() => setWarning(false)}>
+                <div className='warning-card fixed bottom-4 min-h-8 bg-white w-56 rounded border-gallery border-[0.05rem] mobile:border-[0.1rem] p-4 gap-2 duration-[0.4s] ease-in-out cursor-pointer hover:bg-sand opacity-0' onClick={() => setWarning(false)}>
                   { hasFailed ? <p className='text-gray text-xs mobile:text-base font-semibold'>{t('auth.register.reqs.failed')}</p> : null }
                   { duplicatedEmail ? <p className='text-gray text-xs mobile:text-base font-semibold'>{t('auth.register.reqs.duplicated')}</p> : null }
                   { hasSucceeded ? <p className='text-gray text-xs mobile:text-base font-semibold'>{t('auth.register.reqs.succeeded')}</p> : null }
