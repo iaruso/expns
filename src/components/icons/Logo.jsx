@@ -2,7 +2,7 @@ import React from 'react';
 
 const Logo = ({ className }) => {
   return (
-    <svg className={className} viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'>
+    <svg className={className} viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg' width='24' height='24'>
       <g clipPath='url(#clip0_236_945)'>
         <path d='M3 12C4.65685 12 6 10.6569 6 9C6 7.34315 4.65685 6 3 6C1.34315 6 0 7.34315 0 9C0 10.6569 1.34315 12 3 12Z' fill='#5163EB'/>
         <path d='M9 6C10.6569 6 12 4.65685 12 3C12 1.34315 10.6569 0 9 0C7.34315 0 6 1.34315 6 3C6 4.65685 7.34315 6 9 6Z' fill='#3A4AD9'/>

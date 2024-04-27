@@ -26,8 +26,8 @@ export default {
       colors: {
         white: '#FFFFFF', // Background, text
         sand: '#FCFCFC', // Background for input focus
-        alabaster: '#F8F8F8', // Background
-        gallery: '#F0F0F0', // Borders, bacgkround hover
+        alabaster: '#F8F8F8', // Background and hover
+        gallery: '#F0F0F0', // Borders
         alto: '#D6D6D6', // Placeholder, border focus
         chalice: '#A8A8A8', // Icons
         gray: '#5A5A5A', // Text buttons

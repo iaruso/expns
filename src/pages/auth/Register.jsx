@@ -149,7 +149,7 @@ const Register = () => {
             className='h-8 mobile:h-12 rounded px-2 py-1 placeholder:text-alto text-xs mobile:text-base font-semibold text-cod border-[0.05rem] mobile:border-[0.1rem] border-gallery focus-within:bg-sand focus-within:border-alto hover:duration-[0.4s] ease-in-out'/>
             <div id='pwrd-security' className='flex h-1 gap-1'>
               {[1, 2, 3, 4].map((index) => (
-                <span key={index} className={`w-1/4 rounded-sm duration-[0.4s] ease-in-out ${index > passwordLevel ? 'bg-gallery' : 'bg-royal'}`}></span>
+                <span key={index} className={`w-1/4 rounded-sm duration-[0.4s] ease-in-out ${index > passwordLevel ? 'bg-alabaster' : 'bg-royal'}`}></span>
               ))}
             </div>
             <div className='flex gap-2 justify-between items-center mobile:gap-4'>

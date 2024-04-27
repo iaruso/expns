@@ -48,13 +48,13 @@ const Dropdown = forwardRef(({setOpenDropdown}, ref) => {
       <ul className='flex flex-col w-auto gap-2'>
         <li className='rounded w-full h-8 mobile:h-10 flex items-center bg-sand'>
           <button 
-            className={`rounded w-12 ${languageBool ? 'text-cod hover:bg-gallery hover:duration-[0.4s] ease-in-out' : 'text-white bg-royal pointer-events-none'} h-8 mobile:h-10 text-xs font-semibold mobile:text-sm flex items-center justify-center`} 
+            className={`rounded w-12 ${languageBool ? 'text-cod hover:bg-alabaster hover:duration-[0.4s] ease-in-out' : 'text-white bg-royal pointer-events-none'} h-8 mobile:h-10 text-xs font-semibold mobile:text-sm flex items-center justify-center`} 
             onClick={toggleLanguage}
           >
             PT
           </button>
           <button 
-            className={`rounded w-12 ${languageBool ? 'text-white bg-royal pointer-events-none' : 'text-cod hover:bg-gallery hover:duration-[0.4s] ease-in-out'} h-8 mobile:h-10 text-xs font-semibold mobile:text-sm flex items-center justify-center`} 
+            className={`rounded w-12 ${languageBool ? 'text-white bg-royal pointer-events-none' : 'text-cod hover:bg-alabaster hover:duration-[0.4s] ease-in-out'} h-8 mobile:h-10 text-xs font-semibold mobile:text-sm flex items-center justify-center`} 
             onClick={toggleLanguage}
           >
             EN
@@ -62,19 +62,19 @@ const Dropdown = forwardRef(({setOpenDropdown}, ref) => {
         </li>
         <li className='rounded w-full h-8 mobile:h-10 flex items-center bg-sand'>
           <button 
-            className={`rounded w-8 ${currency === 'usd' ? 'text-white bg-royal pointer-events-none' : 'text-cod hover:bg-gallery hover:duration-[0.4s] ease-in-out'} h-8 mobile:h-10 text-xs font-semibold mobile:text-sm flex items-center justify-center`} 
+            className={`rounded w-8 ${currency === 'usd' ? 'text-white bg-royal pointer-events-none' : 'text-cod hover:bg-alabaster hover:duration-[0.4s] ease-in-out'} h-8 mobile:h-10 text-xs font-semibold mobile:text-sm flex items-center justify-center`} 
             onClick={() => toggleCurrency('usd')}
           >
             USD
           </button>
           <button 
-            className={`rounded w-8 ${currency === 'eur' ? 'text-white bg-royal pointer-events-none' : 'text-cod hover:bg-gallery hover:duration-[0.4s] ease-in-out'} h-8 mobile:h-10 text-xs font-semibold mobile:text-sm flex items-center justify-center`} 
+            className={`rounded w-8 ${currency === 'eur' ? 'text-white bg-royal pointer-events-none' : 'text-cod hover:bg-alabaster hover:duration-[0.4s] ease-in-out'} h-8 mobile:h-10 text-xs font-semibold mobile:text-sm flex items-center justify-center`} 
             onClick={() => toggleCurrency('eur')}
           >
             EUR
           </button>
           <button 
-            className={`rounded w-8 ${currency === 'gbp' ? 'text-white bg-royal pointer-events-none' : 'text-cod hover:bg-gallery hover:duration-[0.4s] ease-in-out'} h-8 mobile:h-10 text-xs font-semibold mobile:text-sm flex items-center justify-center`} 
+            className={`rounded w-8 ${currency === 'gbp' ? 'text-white bg-royal pointer-events-none' : 'text-cod hover:bg-alabaster hover:duration-[0.4s] ease-in-out'} h-8 mobile:h-10 text-xs font-semibold mobile:text-sm flex items-center justify-center`} 
             onClick={() => toggleCurrency('gbp')}
           >
             GBP

@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { compression } from 'vite-plugin-compression2';
-import mkcert from 'vite-plugin-mkcert'
 import preload from 'vite-plugin-preload';
 
 export default defineConfig({
@@ -9,7 +8,6 @@ export default defineConfig({
   plugins: [
     react(),
     compression(),
-    mkcert(),
     preload()
   ],
   server: {

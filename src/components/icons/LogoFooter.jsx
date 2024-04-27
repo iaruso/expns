@@ -2,7 +2,7 @@ import React from 'react';
 
 const LogoFooter = ({ className }) => {
   return (
-    <svg className={className} viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg className={className} viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" width='24' height='24'>
       <g clipPath="url(#clip0_236_1334)">
         <path d="M8 32C12.4183 32 16 28.4183 16 24C16 19.5817 12.4183 16 8 16C3.58172 16 0 19.5817 0 24C0 28.4183 3.58172 32 8 32Z" fill="#F8F8F8"/>
         <path d="M24 16C28.4183 16 32 12.4183 32 8C32 3.58172 28.4183 0 24 0C19.5817 0 16 3.58172 16 8C16 12.4183 19.5817 16 24 16Z" fill="#F8F8F8"/>

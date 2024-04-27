@@ -79,7 +79,7 @@ export default {
 				cta: 'Comece agora',
 				users: {
 					stats: '+2M',
-					label: 'Utilizadores satisfeitos'
+					label: 'Utilizadores'
 				},
 				experience: {
 					stats: '+4',

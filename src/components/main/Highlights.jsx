@@ -1,11 +1,12 @@
 import React from 'react';
-import Translator from '../../components/i18n/Translator.jsx';
+import { useTranslation } from 'react-i18next';
 
 const HighlightCard = ({ highlightId, titlePath, subtitlePath }) => {
+  const { t } = useTranslation();
   return (
     <div className={`highlight-${highlightId} h-24 flex flex-col justify-center items-center rounded-lg border-[0.05rem] mobile:border-[0.1rem] border-gallery p-4`}>
-      <p className='text-[1.25rem] text-cod font-semibold'><Translator path={titlePath}/></p>
-      <p className='text-tiny text-shaft font-semibold text-center'><Translator path={subtitlePath}/></p>
+      <p className='text-[1.25rem] text-cod font-semibold'>{t(titlePath)}</p>
+      <p className='text-tiny text-shaft font-semibold text-center'>{t(subtitlePath)}</p>
     </div>
   );
 }
