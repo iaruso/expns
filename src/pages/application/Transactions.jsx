@@ -9,8 +9,6 @@ import Expense from '../../components/icons/Expense';
 import Ascending from '../../components/icons/Ascending';
 import Descending from '../../components/icons/Descending';
 
-import Form from '../../components/transactions/Form';
-
 const Transactions = () => {
   const { t } = useTranslation();
 
@@ -126,7 +124,6 @@ const Transactions = () => {
           </div>
         </div>
       </div>
-      <Form/>
     </>
   );
 };

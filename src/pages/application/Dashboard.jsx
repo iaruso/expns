@@ -41,7 +41,7 @@ const Dashboard = () => {
         <div className='flex items-center justify-between h-6'>
           <h2 className='font-bold text-cod text-tiny'>{t('app.dashboard.transactions.title')}</h2>
           <div className='flex items-center h-6 gap-1'>
-            <Link to='/app/transactions' className='h-6 flex px-2 py-1 text-sm font-semibold text-gray items-center justify-center rounded border-[0.05rem] mobile:border-[0.1rem] border-gallery bg-white hover:bg-alabaster hover:duration-[0.4s] ease-in-out'>
+            <Link to='/app/transactions' className='h-6 flex px-2 py-1 text-xs font-semibold text-gray items-center justify-center rounded border-[0.05rem] mobile:border-[0.1rem] border-gallery bg-white hover:bg-alabaster hover:duration-[0.4s] ease-in-out'>
               {t('app.dashboard.transactions.see_all')}
             </Link>
           </div>
@@ -68,16 +68,16 @@ const Dashboard = () => {
         <div className='flex items-center justify-between h-6'>
           <h2 className='font-bold text-cod text-tiny'>{t('app.dashboard.categories.title')}</h2>
           <div className='flex items-center h-6 gap-1'>
-            <button className='h-6 flex px-2 py-1 text-sm font-semibold text-gray items-center justify-center rounded border-[0.05rem] mobile:border-[0.1rem] border-gallery bg-white hover:bg-alabaster hover:duration-[0.4s] ease-in-out'>
+            <button className='h-6 flex px-2 py-1 text-xs font-semibold text-gray items-center justify-center rounded border-[0.05rem] mobile:border-[0.1rem] border-gallery bg-white hover:bg-alabaster hover:duration-[0.4s] ease-in-out'>
               {t('app.dashboard.categories.type.all')}
             </button>
-            <button className='h-6 flex px-2 py-1 text-sm font-semibold text-gray items-center justify-center rounded border-[0.05rem] mobile:border-[0.1rem] border-gallery bg-white hover:bg-alabaster hover:duration-[0.4s] ease-in-out'>
+            <button className='h-6 flex px-2 py-1 text-xs font-semibold text-gray items-center justify-center rounded border-[0.05rem] mobile:border-[0.1rem] border-gallery bg-white hover:bg-alabaster hover:duration-[0.4s] ease-in-out'>
               {t('app.dashboard.categories.type.incomes')}
             </button>
-            <button className='h-6 flex px-2 py-1 text-sm font-semibold text-gray items-center justify-center rounded border-[0.05rem] mobile:border-[0.1rem] border-gallery bg-white hover:bg-alabaster hover:duration-[0.4s] ease-in-out'>
+            <button className='h-6 flex px-2 py-1 text-xs font-semibold text-gray items-center justify-center rounded border-[0.05rem] mobile:border-[0.1rem] border-gallery bg-white hover:bg-alabaster hover:duration-[0.4s] ease-in-out'>
               {t('app.dashboard.categories.type.expenses')}
             </button>
-            <button className='h-6 flex px-2 py-1 text-sm font-semibold text-gray items-center justify-center rounded border-[0.05rem] mobile:border-[0.1rem] border-gallery bg-white hover:bg-alabaster hover:duration-[0.4s] ease-in-out'>
+            <button className='h-6 flex px-2 py-1 text-xs font-semibold text-gray items-center justify-center rounded border-[0.05rem] mobile:border-[0.1rem] border-gallery bg-white hover:bg-alabaster hover:duration-[0.4s] ease-in-out'>
               {t('app.dashboard.categories.type.investments')}
             </button>
           </div>

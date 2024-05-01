@@ -345,6 +345,14 @@ export default {
 					min: 'Min',
 					max: 'Max'
 				}			
+			},
+			form: {
+				name: 'Nome da transação',
+				date: 'Data',
+				amount: 'Valor',
+				description: 'Descrição (opcional)',
+				create: 'Criar',
+				save: 'Guardar'
 			}
 		}
   }

@@ -33,6 +33,14 @@
   border-bottom: 0.05rem solid #F0F0F0;
 }
 
+.settings-button svg {
+  transition: transform 0.4s ease-in-out;
+}
+
+.settings-button.active svg {
+  transform: rotate(60deg);
+}
+
 /* Custom data-titles ... */
 .dashboard-card {
   position: relative;
@@ -58,6 +66,15 @@
   }
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
 
 /* Path: src/pages/application/Application.js */
 .react-dropdown-select-clear, .react-dropdown-select .no-data {
@@ -66,15 +83,19 @@
   user-select: none;
 }
 
+.form-selectors > div {
+  width: 6.75rem;
+}
+
 .react-dropdown-select {
   min-height: 2rem !important;
   height: 2rem !important;
   border: 0.05rem solid #F0F0F0 !important;
   border-radius: 0.25rem !important;
-  padding: 0.25rem 0.5rem;
-  outline: none;
+  padding: 0.25rem 0.5rem !important;
+  outline: none !important;
   box-shadow: none !important;
-  cursor: text;
+  cursor: pointer !important;
 }
 
 .react-dropdown-select:hover, .react-dropdown-select:focus, .react-dropdown-select:focus-within {
@@ -97,10 +118,12 @@
   height: 2rem;
   display: flex;
   align-items: center;
-  padding: 0 0.25rem;
+  padding: 0rem;
   border-radius: 0.25rem;
   font-weight: 600;
   width: max-content;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .react-dropdown-select-dropdown {
@@ -111,7 +134,7 @@
   max-height: 10rem !important;
   width: fit-content !important;
   min-width: calc(100% + 0.1rem) !important;
-  top: 2rem !important;
+  top: 1.9rem !important;
 }
 
 .react-dropdown-select-item {
@@ -154,7 +177,7 @@
 }
 
 .react-dropdown-select-input {
-  margin-left: 0.25rem;
+  margin-left: 0rem !important;
   font-size: 0.75rem !important;
   font-weight: 600;
   color: #D6D6D6;
@@ -187,4 +210,139 @@
   font-size: 0.75rem;
   font-weight: 600;
   color: var(--placeholder-color);
+}
+
+@media screen and (max-width: 768px) {
+  .react-dropdown-select, .react-dropdown-select-dropdown {
+    border-width: 0.1rem !important;
+  }
+}
+
+/* Date picker */
+.react-date-picker__wrapper {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+}
+
+.react-calendar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.react-date-picker__inputGroup {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.react-date-picker__clear-button, .react-date-picker__calendar-button {
+  display: none;
+}
+
+.react-date-picker__inputGroup__input {
+  background-color: none;
+  background: none;
+}
+
+.react-date-picker__calendar {
+  padding: 0.5rem;
+  min-height: 2rem !important;
+  transition: background-color 0.2s ease-in-out;
+  font-size: 0.75rem;
+  font-weight: 500;
+  font-weight: 600;
+  width: fit-content;
+  border: 0.05rem solid #F0F0F0 !important;
+  background-color: #FFFFFF !important;
+  border-radius: 0.25rem !important;
+  left: -0.05rem !important;
+  display: flex;
+  align-items: center;
+}
+
+.react-calendar__navigation {
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.react-calendar__navigation__arrow {
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 0.25rem;
+  transition: background-color 0.4s ease-in-out;
+}
+
+.react-calendar__navigation__arrow:hover {
+  background-color: #F8F8F8;
+}
+
+.react-calendar__navigation__label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1rem;
+  pointer-events: none;
+}
+
+.react-calendar__navigation__label__labelText {
+  display: flex;
+  width: max-content;
+}
+
+.react-calendar__month-view__weekdays__weekday {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+}
+
+.react-calendar__month-view__weekdays__weekday abbr {
+  overflow: hidden;
+  text-overflow: ellipsis "";
+  white-space: nowrap;
+  max-width: 3.5ch;
+  text-decoration: none;
+}
+
+.react-calendar__month-view__weekdays {
+  height: 2rem;
+}
+
+.react-calendar__tile {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 0.25rem;
+  transition: background-color 0.4s ease-in-out;
+}
+
+.react-calendar__tile:hover {
+  background-color: #F8F8F8;
+}
+
+.react-date-picker__calendar--closed {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .react-date-picker__calendar {
+    border-width: 0.1rem !important;
+    left: -0.1rem !important;
+  }
+  
 }
