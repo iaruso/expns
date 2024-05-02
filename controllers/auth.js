@@ -61,7 +61,7 @@ exports.login = async (req, res) => {
 			error: false,
 			accessToken,
 			refreshToken,
-			userId: user._id,
+			userId: user.id,
 			message: 'Logged in sucessfully',
 		});
 	} catch (err) {
