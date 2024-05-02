@@ -212,6 +212,10 @@ input[type=number] {
   color: var(--placeholder-color);
 }
 
+.react-dropdown-select-clear {
+  display: none !important;
+}
+
 @media screen and (max-width: 768px) {
   .react-dropdown-select, .react-dropdown-select-dropdown {
     border-width: 0.1rem !important;
@@ -337,6 +341,23 @@ input[type=number] {
 
 .react-date-picker__calendar--closed {
   display: none;
+}
+
+.react-date-picker__inputGroup__day {
+  min-width: 0.875rem;
+}
+
+.react-date-picker__inputGroup__month {
+  min-width: 0.625rem;
+}
+
+.react-date-picker__inputGroup__year {
+  min-width: 1.75rem;
+}
+
+.react-date-picker__inputGroup__day, .react-date-picker__inputGroup__month, .react-date-picker__inputGroup__year {
+  text-align: center;
+  font-variant-numeric: tabular-nums;
 }
 
 @media screen and (max-width: 768px) {
