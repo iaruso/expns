@@ -8,7 +8,7 @@ const TransactionSchema = new mongoose.Schema({
   },
   type: {
     type: String,
-    enum: ['expense', 'income', 'investment'],
+    enum: ['expenses', 'incomes', 'investments'],
     required: true
   },
   title: {
@@ -35,7 +35,7 @@ const TransactionSchema = new mongoose.Schema({
   },
   description: {
     type: String,
-    required: true,
+    required: false,
     maxLength: 256,
     trim: true
   },
