@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import { TransactionsContext, CurrencyContext } from './Application.jsx';
+import { convertCurrency } from '../../helpers/convertCurrency';
+import { currencySymbol } from '../../helpers/currencySymbol';
+import { currencyFormat } from '../../helpers/currencyFormat.js';
 import Income from '../../components/icons/Income';
 import Expense from '../../components/icons/Expense';
 import Investment from '../../components/icons/Investment';
@@ -8,31 +12,62 @@ import Food from '../../components/icons/Food';
 
 const Dashboard = () => {
   const { t } = useTranslation();
+  const userTransactions = useContext(TransactionsContext);
+  const currencyRates = useContext(CurrencyContext);
+  const localCurrency = localStorage.getItem('currency') || 'usd';
+
+  const calculateTotalByType = (type) => {
+    return userTransactions.reduce((total, transaction) => {
+      if (transaction.type === type) {
+        if (transaction.currency === localCurrency) {
+          return total + transaction.amount;
+        } else {
+          const convertedAmount = convertCurrency(transaction.amount, transaction.currency, localCurrency, currencyRates);
+          return total + convertedAmount;
+        }
+      }
+      return total;
+    }, 0);
+  };
+
+  const totalIncomes = calculateTotalByType('incomes');
+  const totalExpenses = calculateTotalByType('expenses');
+  const totalInvestments = calculateTotalByType('investments');
+  const balance = totalIncomes + totalInvestments - totalExpenses;
+
+  const currencyLabel = (formattedValue, currency) => {
+    if (currency === 'usd') {
+      return `${currencySymbol(currency)} ${formattedValue}`;
+    } else {
+      return `${formattedValue} ${currencySymbol(currency)}`;
+    }
+  };
+
   return (
     <>
       <div className='flex gap-4 items-center w-full sm-mobile:!grid-cols-1 mobile:grid mobile:grid-cols-2'>
         <div data-title={t('app.dashboard.balance.description')} className='dashboard-card balance-card w-full flex flex-col flex-1 gap-2 p-4 rounded-lg bg-royal border-[0.05rem] mobile:border-[0.1rem] border-persian cursor-default'>
           <h2 className='text-white text-tiny font-semibold'>{t('app.dashboard.balance.title')}</h2>
-          <span className='text-white text-base font-bold tabular-nums'>$ 1.999,99</span>
+          <span className='text-white text-base font-bold tabular-nums'>{currencyLabel(currencyFormat(balance, localCurrency), localCurrency)}</span>
         </div>
         <div data-title={t('app.dashboard.incomes.description')} className='dashboard-card w-full flex flex-1 gap-2 p-4 rounded-lg items-center justify-between bg-white border-[0.05rem] mobile:border-[0.1rem] border-gallery cursor-default'>
           <div className='flex flex-col gap-2'>
             <h2 className='text-cod text-tiny font-semibold'>{t('app.dashboard.incomes.title')}</h2>
-            <span className='text-cod text-base font-bold tabular-nums'>$ 1.999,99</span>
+            <span className='text-cod text-base font-bold tabular-nums'>{currencyLabel(currencyFormat(totalIncomes, localCurrency), localCurrency)}</span>
           </div>
           <Income className='w-8 h-8 fill-cod'/>
         </div>
         <div data-title={t('app.dashboard.expenses.description')} className='dashboard-card w-full flex flex-1 gap-2 p-4 rounded-lg items-center justify-between bg-white border-[0.05rem] mobile:border-[0.1rem] border-gallery cursor-default'>
           <div className='flex flex-col gap-2'>
             <h2 className='text-cod text-tiny font-semibold'>{t('app.dashboard.expenses.title')}</h2>
-            <span className='text-cod text-base font-bold tabular-nums'>$ 1.999,99</span>
+            <span className='text-cod text-base font-bold tabular-nums'>{currencyLabel(currencyFormat(totalExpenses, localCurrency), localCurrency)}</span>
           </div>
           <Expense className='w-8 h-8 fill-cod'/>
         </div>
         <div data-title={t('app.dashboard.investments.description')} className='dashboard-card w-full flex flex-1 gap-2 p-4 rounded-lg items-center justify-between bg-white border-[0.05rem] mobile:border-[0.1rem] border-gallery cursor-default'>
           <div className='flex flex-col gap-2'>
             <h2 className='text-cod text-tiny font-semibold'>{t('app.dashboard.investments.title')}</h2>
-            <span className='text-cod text-base font-bold tabular-nums'>$ 1.999,99</span>
+            <span className='text-cod text-base font-bold tabular-nums'>{currencyLabel(currencyFormat(totalInvestments, localCurrency), localCurrency)}</span>
           </div>
           <Investment className='w-8 h-8 fill-cod'/>
         </div>

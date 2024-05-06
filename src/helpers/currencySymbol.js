@@ -1,4 +1,4 @@
-export function getCurrencySymbol(currencyCode) {
+export const currencySymbol = (currencyCode) => {
   switch (currencyCode) {
     case 'eur':
       return '€';
