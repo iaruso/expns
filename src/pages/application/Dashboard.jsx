@@ -1,20 +1,37 @@
-import React, { useContext } from 'react';
+import categoriesData from '../../../public/categories.json';
+import React, { useContext, useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { TransactionsContext, CurrencyContext } from './Application.jsx';
+import CategoryCard from '../../components/dashsboard/CategoryCard.jsx';
 import { convertCurrency } from '../../helpers/convertCurrency';
 import { currencySymbol } from '../../helpers/currencySymbol';
 import { currencyFormat } from '../../helpers/currencyFormat.js';
-import Income from '../../components/icons/Income';
-import Expense from '../../components/icons/Expense';
-import Investment from '../../components/icons/Investment';
-import Food from '../../components/icons/Food';
+import TransactionItem from '../../components/transactions/TransactionItem.jsx';
+import Icon from '../../components/app/Icon.jsx';
+
+const Button = ({ label, onClick, selected }) => {
+  return (
+    <button
+      className={`h-6 flex px-2 py-1 text-xs font-semibold text-gray items-center justify-center rounded border-[0.05rem] mobile:border-[0.1rem] border-gallery hover:bg-alabaster hover:duration-[0.4s] ease-in-out ${selected ? 'bg-alabaster' : 'bg-white'}`}
+      onClick={onClick}
+    >
+      {label}
+    </button>
+  );
+};
 
 const Dashboard = () => {
   const { t } = useTranslation();
   const userTransactions = useContext(TransactionsContext);
   const currencyRates = useContext(CurrencyContext);
   const localCurrency = localStorage.getItem('currency') || 'usd';
+
+  const sortedTransactions = userTransactions
+    .sort((a, b) => new Date(b.date) - new Date(a.date))
+    .slice(0, 20);
+
+  console.log(sortedTransactions);
 
   const calculateTotalByType = (type) => {
     return userTransactions.reduce((total, transaction) => {
@@ -30,10 +47,10 @@ const Dashboard = () => {
     }, 0);
   };
 
-  const totalIncomes = calculateTotalByType('incomes');
-  const totalExpenses = calculateTotalByType('expenses');
-  const totalInvestments = calculateTotalByType('investments');
-  const balance = totalIncomes + totalInvestments - totalExpenses;
+  const totalIncomes = useMemo(() => calculateTotalByType('incomes'), [userTransactions, localCurrency, currencyRates]);
+  const totalExpenses = useMemo(() => calculateTotalByType('expenses'), [userTransactions, localCurrency, currencyRates]);
+  const totalInvestments = useMemo(() => calculateTotalByType('investments'), [userTransactions, localCurrency, currencyRates]);
+  const balance = useMemo(() => totalIncomes + totalInvestments - totalExpenses, [totalIncomes, totalInvestments, totalExpenses]);
 
   const currencyLabel = (formattedValue, currency) => {
     if (currency === 'usd') {
@@ -43,34 +60,85 @@ const Dashboard = () => {
     }
   };
 
+  const categoryTypes = [
+    { key: 'all', label: t('app.dashboard.categories.type.all') },
+    { key: 'incomes', label: t('app.dashboard.categories.type.incomes') },
+    { key: 'expenses', label: t('app.dashboard.categories.type.expenses') },
+    { key: 'investments', label: t('app.dashboard.categories.type.investments') }
+  ];
+
+  const [selectedType, setSelectedType] = useState('all');
+
+  const handleTypeSelection = (type) => {
+    setSelectedType(type);
+  };
+
+  const renderCategories = () => {
+    let selectedCategories = {};
+    userTransactions.forEach((transaction) => {
+      const { category, amount } = transaction;
+      const parsedAmount = parseFloat(amount);
+      if (!isNaN(parsedAmount)) {
+        selectedCategories[category] = (selectedCategories[category] || 0) + parsedAmount;
+      }
+    });
+
+    if (selectedType === 'all') {
+      for (const type of categoryTypes) {
+        if (type.key !== 'all') {
+          const categoriesOfType = categoriesData.categories[type.key];
+          selectedCategories = { ...selectedCategories, ...categoriesOfType };
+        }
+      }
+    } else {
+      const categoriesOfType = categoriesData.categories[selectedType];
+      selectedCategories = { ...categoriesOfType };
+    }
+  
+    return Object.entries(selectedCategories).map(([category, value]) => {
+      let totalValue = 0;
+      userTransactions.forEach(transaction => {
+        if (transaction.category === category) {
+          totalValue += parseFloat(convertCurrency(transaction.amount, transaction.currency, localCurrency, currencyRates));
+        }
+      });
+      const finalTotal = totalValue;
+      let categoryType = '';
+      for (const type of categoryTypes) {
+        if (categoriesData.categories[type.key]?.[category]) {
+          categoryType = type.key;
+          break;
+        }
+      }
+      return (
+        <CategoryCard 
+          key={category} 
+          categoryName={t(`categories.${categoryType}.${category}`)}
+          total={currencyLabel(currencyFormat(finalTotal, localCurrency), localCurrency)}
+          value={totalValue} 
+          icon={<Icon name={category.charAt(0).toUpperCase() + category.slice(1)} className={'min-w-8 min-h-8 fill-white'}/>} 
+        />
+      );
+    });
+  }
+
   return (
     <>
       <div className='flex gap-4 items-center w-full sm-mobile:!grid-cols-1 mobile:grid mobile:grid-cols-2'>
-        <div data-title={t('app.dashboard.balance.description')} className='dashboard-card balance-card w-full flex flex-col flex-1 gap-2 p-4 rounded-lg bg-royal border-[0.05rem] mobile:border-[0.1rem] border-persian cursor-default'>
-          <h2 className='text-white text-tiny font-semibold'>{t('app.dashboard.balance.title')}</h2>
-          <span className='text-white text-base font-bold tabular-nums'>{currencyLabel(currencyFormat(balance, localCurrency), localCurrency)}</span>
-        </div>
-        <div data-title={t('app.dashboard.incomes.description')} className='dashboard-card w-full flex flex-1 gap-2 p-4 rounded-lg items-center justify-between bg-white border-[0.05rem] mobile:border-[0.1rem] border-gallery cursor-default'>
-          <div className='flex flex-col gap-2'>
-            <h2 className='text-cod text-tiny font-semibold'>{t('app.dashboard.incomes.title')}</h2>
-            <span className='text-cod text-base font-bold tabular-nums'>{currencyLabel(currencyFormat(totalIncomes, localCurrency), localCurrency)}</span>
+        {[
+          { title: 'balance', value: balance, showIcon: false},
+          { title: 'incomes', value: totalIncomes, showIcon: true },
+          { title: 'expenses', value: totalExpenses, showIcon: true },
+          { title: 'investments', value: totalInvestments, showIcon: true }
+        ].map(({ title, value, showIcon }) => (
+          <div key={title} data-title={t(`app.dashboard.${title}.description`)} className={`dashboard-card w-full flex flex-1 gap-2 p-4 rounded-lg items-center justify-between bg-${title !== 'balance' ? 'white' : 'royal balance-card'} border-[0.05rem] mobile:border-[0.1rem] border-${title !== 'balance' ? 'gallery' : 'persian'} cursor-default`}>
+            <div className='flex flex-col gap-2'>
+              <h2 className={`text-${title !== 'balance' ? 'cod' : 'white'} text-tiny font-semibold`}>{t(`app.dashboard.${title}.title`)}</h2>
+              <span className={`text-${title !== 'balance' ? 'cod' : 'white'} text-base font-bold tabular-nums`}>{currencyLabel(currencyFormat(value, localCurrency), localCurrency)}</span>
+            </div>
+            {showIcon && <Icon name={title.charAt(0).toUpperCase() + title.slice(1)} className='w-8 h-8 fill-cod'/>}
           </div>
-          <Income className='w-8 h-8 fill-cod'/>
-        </div>
-        <div data-title={t('app.dashboard.expenses.description')} className='dashboard-card w-full flex flex-1 gap-2 p-4 rounded-lg items-center justify-between bg-white border-[0.05rem] mobile:border-[0.1rem] border-gallery cursor-default'>
-          <div className='flex flex-col gap-2'>
-            <h2 className='text-cod text-tiny font-semibold'>{t('app.dashboard.expenses.title')}</h2>
-            <span className='text-cod text-base font-bold tabular-nums'>{currencyLabel(currencyFormat(totalExpenses, localCurrency), localCurrency)}</span>
-          </div>
-          <Expense className='w-8 h-8 fill-cod'/>
-        </div>
-        <div data-title={t('app.dashboard.investments.description')} className='dashboard-card w-full flex flex-1 gap-2 p-4 rounded-lg items-center justify-between bg-white border-[0.05rem] mobile:border-[0.1rem] border-gallery cursor-default'>
-          <div className='flex flex-col gap-2'>
-            <h2 className='text-cod text-tiny font-semibold'>{t('app.dashboard.investments.title')}</h2>
-            <span className='text-cod text-base font-bold tabular-nums'>{currencyLabel(currencyFormat(totalInvestments, localCurrency), localCurrency)}</span>
-          </div>
-          <Investment className='w-8 h-8 fill-cod'/>
-        </div>
+        ))}
       </div>
       <div className='flex flex-col flex-1 gap-2 p-4 rounded-lg bg-white border-[0.05rem] mobile:border-[0.1rem] border-gallery'>
         <div className='flex items-center justify-between h-6'>
@@ -82,50 +150,38 @@ const Dashboard = () => {
           </div>
         </div>
         <div className='transactions-item-list flex flex-col flex-1 overflow-y-auto bg-white border-[0.05rem] mobile:border-[0.1rem] border-gallery rounded'>
-          {/* As template for now, save here transaction id too */}
-          <div className='h-8 w-full flex items-center gap-1 py-1 px-2 hover:bg-alabaster hover:duration-[0.4s] ease-in-out cursor-pointer'>
-            <Food className='w-4 h-4 fill-chalice'/>
-            <span className='text-sm text-cod font-medium flex-1'>PizzaHut</span>
-            <span className='text-sm text-gray font-medium'>(24-04-2024)</span>
-            <span className='text-sm text-cod font-medium w-16 text-end tabular-nums'>$ 29,99</span>
-            <Expense className='w-4 h-4 fill-chalice mt-[1px]'/>
-          </div>
-          <div className='h-8 w-full flex items-center gap-1 py-1 px-2 hover:bg-alabaster hover:duration-[0.4s] ease-in-out cursor-pointer'>
-            <Food className='w-4 h-4 fill-chalice'/>
-            <span className='text-sm text-cod font-medium flex-1'>PizzaHut</span>
-            <span className='text-sm text-gray font-medium'>(24-04-2024)</span>
-            <span className='text-sm text-cod font-medium w-16 text-end tabular-nums'>$ 1.007,99</span>
-            <Expense className='w-4 h-4 fill-chalice mt-[1px]'/>
-          </div>
+          {sortedTransactions.map(({ _id, title, date, amount, category, type, currency }) => (
+            <TransactionItem
+              key={_id}
+              id={_id}
+              name={title}
+              date={date}
+              value={amount}
+              category={category}
+              type={type}
+              currency={currency}
+              localCurrency={localCurrency}
+              currencyRates={currencyRates}
+            />
+          ))}
         </div>
       </div>
       <div className='flex flex-col gap-2 p-4 rounded-lg bg-white border-[0.05rem] mobile:border-[0.1rem] border-gallery'>
         <div className='flex items-center justify-between h-6'>
           <h2 className='font-bold text-cod text-tiny'>{t('app.dashboard.categories.title')}</h2>
           <div className='flex items-center h-6 gap-1'>
-            <button className='h-6 flex px-2 py-1 text-xs font-semibold text-gray items-center justify-center rounded border-[0.05rem] mobile:border-[0.1rem] border-gallery bg-white hover:bg-alabaster hover:duration-[0.4s] ease-in-out'>
-              {t('app.dashboard.categories.type.all')}
-            </button>
-            <button className='h-6 flex px-2 py-1 text-xs font-semibold text-gray items-center justify-center rounded border-[0.05rem] mobile:border-[0.1rem] border-gallery bg-white hover:bg-alabaster hover:duration-[0.4s] ease-in-out'>
-              {t('app.dashboard.categories.type.incomes')}
-            </button>
-            <button className='h-6 flex px-2 py-1 text-xs font-semibold text-gray items-center justify-center rounded border-[0.05rem] mobile:border-[0.1rem] border-gallery bg-white hover:bg-alabaster hover:duration-[0.4s] ease-in-out'>
-              {t('app.dashboard.categories.type.expenses')}
-            </button>
-            <button className='h-6 flex px-2 py-1 text-xs font-semibold text-gray items-center justify-center rounded border-[0.05rem] mobile:border-[0.1rem] border-gallery bg-white hover:bg-alabaster hover:duration-[0.4s] ease-in-out'>
-              {t('app.dashboard.categories.type.investments')}
-            </button>
+            {categoryTypes.map(({ key, label }) => (
+              <Button
+                key={key}
+                label={label}
+                onClick={() => handleTypeSelection(key)}
+                selected={selectedType === key}
+              />
+            ))}
           </div>
         </div>
         <div className='flex gap-2 items-center overflow-y-auto'>
-          {/* As template for now */}
-          <div className='h-32 w-32 rounded bg-royal flex flex-col justify-between p-4'>
-            <Food className='w-8 h-8 fill-white'/>
-            <div className='flex flex-col gap-2'>
-              <h3 className='text-white text-tiny font-semibold'>Food</h3>
-              <span className='text-white text-base font-bold tabular-nums'>$ 1.999,99</span>
-            </div>
-          </div>
+          {renderCategories()}
         </div>
       </div>
     </>

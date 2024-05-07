@@ -1,0 +1,29 @@
+{
+  "categories": {
+    "all": "all",
+    "incomes": {
+      "salary": "salary",
+      "gifts": "gifts",
+      "sales": "sales",
+      "rent": "rent"
+    },
+    "expenses": {
+      "housing": "housing",
+      "transportation": "transportation",
+      "food": "food",
+      "health": "health",
+      "entertainment": "entertainment",
+      "utilities": "utilities",
+      "debt": "debt",
+      "education": "education",
+      "travel": "travel"
+    },
+    "investments": {
+      "bonds": "bonds",
+      "stocks": "stocks",
+      "crypto": "crypto",
+      "etf": "etf"
+    },
+    "other": "other"
+  }
+}

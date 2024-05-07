@@ -19,7 +19,6 @@ const ResetPassword = () => {
 
   const handleResetPassword = (e) => {
     e.preventDefault();
-    console.log('Resetting password for:', email);
     navigate('/');
   };
 

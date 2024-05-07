@@ -34,7 +34,6 @@ export default {
         shaft: '#3C3C3C', // Text secondary and hover text
         cod: '#1A1A1A', // Text main
         black: '#000000', // Hover dark
-        //
         persian: '#2433C2', // Main color, mostly for hovers
         royal: '#3A4AD9', // Main lighter color (used more), buttons
         have: '#5163EB', // Just in case (lighter)

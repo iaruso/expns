@@ -5,7 +5,7 @@ import jsonData from '../../../public/data.json';
 import Filter from '../../components/icons/Filter';
 import Reset from '../../components/icons/Reset';
 import Food from '../../components/icons/Food';
-import Expense from '../../components/icons/Expense';
+import Expense from '../../components/icons/Expenses';
 import Ascending from '../../components/icons/Ascending';
 import Descending from '../../components/icons/Descending';
 
