@@ -43,7 +43,7 @@ exports.addTransaction = async (req, res) => {
     if (!Transaction.schema.path('type').enumValues.includes(type)) {
       return res.status(400).json({ error: 'Invalid category' });
     }
-    if (!title || !amount || !currency || !date || !description || !category) {
+    if (!title || !amount || !currency || !date  || !category) {
       return res.status(400).json({ error: 'All fields are required' });
     }
     if (amount <= 0 || typeof amount !== 'number') {
