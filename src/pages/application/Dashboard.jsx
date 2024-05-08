@@ -31,8 +31,6 @@ const Dashboard = () => {
     .sort((a, b) => new Date(b.date) - new Date(a.date))
     .slice(0, 20);
 
-  console.log(sortedTransactions);
-
   const calculateTotalByType = (type) => {
     return userTransactions.reduce((total, transaction) => {
       if (transaction.type === type) {

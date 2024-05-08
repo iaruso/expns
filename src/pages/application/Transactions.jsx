@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import Select from 'react-dropdown-select';
 import jsonData from '../../../public/data.json';
+import { TransactionsContext, CurrencyContext } from './Application.jsx';
+import TransactionItem from '../../components/transactions/TransactionItem.jsx';
 import Filter from '../../components/icons/Filter';
 import Reset from '../../components/icons/Reset';
-import Food from '../../components/icons/Food';
-import Expense from '../../components/icons/Expenses';
 import Ascending from '../../components/icons/Ascending';
 import Descending from '../../components/icons/Descending';
 
@@ -14,7 +14,61 @@ const Transactions = () => {
 
   const [selectedType, setSelectedType] = useState('all');
   const [selectedCategory, setSelectedCategory] = useState('');
+  const [searchText, setSearchText] = useState('');
   const [selectedSort, setSelectedSort] = useState('');
+  const [filteredTransactions, setFilteredTransactions] = useState([]);
+
+  const userTransactions = useContext(TransactionsContext);
+  const currencyRates = useContext(CurrencyContext);
+
+  const localCurrency = localStorage.getItem('currency') || 'usd';
+
+  useEffect(() => {
+    filterTransactions();
+  }, [selectedType, selectedCategory, userTransactions, selectedSort, searchText]);
+
+  const filterTransactions = () => {
+    const filtered = userTransactions.filter(transaction => {
+      const typeFilter = selectedType === 'all' || selectedType === '' || transaction.type === selectedType;
+      const categoryFilter = selectedCategory === 'all' || selectedCategory === '' || transaction.category === selectedCategory;
+      const searchTextFilter = transaction.title.toLowerCase().includes(searchText.toLowerCase());
+      console.log("Transaction:", transaction);
+      console.log("Type Filter:", typeFilter);
+      console.log("Category Filter:", categoryFilter);
+      console.log("Search Text Filter:", searchTextFilter);
+      return typeFilter && categoryFilter && searchTextFilter;
+    });
+  
+    // Apply sorting if selected
+    if (selectedSort === 'sort_val_asc') {
+      filtered.sort((a, b) => a.amount - b.amount);
+    } else if (selectedSort === 'sort_val_desc') {
+      filtered.sort((a, b) => b.amount - a.amount);
+    } else if (selectedSort === 'sort_date_asc') {
+      filtered.sort((a, b) => new Date(a.date) - new Date(b.date));
+    } else if (selectedSort === 'sort_date_desc') {
+      filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
+    } else if (selectedSort === 'sort_name_asc') {
+      filtered.sort((a, b) => a.title.localeCompare(b.title));
+    } else if (selectedSort === 'sort_name_desc') {
+      filtered.sort((a, b) => b.title.localeCompare(a.title));
+    }
+    console.log("Filtered Transactions:", filtered);
+    setFilteredTransactions(filtered);
+  };
+  
+  const resetFilters = () => {
+    setSelectedType('');
+    setSelectedCategory('');
+    setSelectedSort('');
+    setSearchText('');
+    const clearButtons = document.querySelectorAll('.type-select .react-dropdown-select-clear');
+    clearButtons.forEach(button => button.click());
+    const categoryClearButtons = document.querySelectorAll('.category-select .react-dropdown-select-clear');
+    categoryClearButtons.forEach(button => button.click());
+    const sortClearButtons = document.querySelectorAll('.sort-select .react-dropdown-select-clear');
+    sortClearButtons.forEach(button => button.click());
+  };
 
   const allCategories = Object.keys(jsonData.categories).reduce((acc, type) => {
     if (type !== 'total' && type !== 'other' && type !== 'all') {
@@ -30,14 +84,33 @@ const Transactions = () => {
       ? Object.keys(jsonData.categories[selectedType]).map(category => ({ type: selectedType, category }))
       : allCategories;
 
-  const handleTypeChange = (selectedOptions) => {
-    setSelectedType(selectedOptions[0]?.value || 'all');
-    setSelectedCategory('');
-  };
-
-  useEffect(() => {
-    console.log(filteredCategories);
-  }, [selectedType, selectedCategory]);
+      const handleTypeChange = (selectedOptions) => {
+        const newType = selectedOptions[0]?.value || 'all';
+        setSelectedType(newType);
+        
+        // Clear the selected category if it belongs to a different type than the new type
+        if (selectedCategory && newType !== 'all') {
+          // Get the type of the selected category from jsonData
+          let categoryType = 'all'; // Default to 'all' if not found
+          Object.keys(jsonData.categories).forEach(type => {
+            if (jsonData.categories[type][selectedCategory]) {
+              categoryType = type;
+            }
+          });
+          
+          // Check if the type of the selected category matches the new type
+          if (categoryType !== newType) {
+            setSelectedCategory('');
+            const categoryClearButtons = document.querySelectorAll('.category-select .react-dropdown-select-clear');
+    categoryClearButtons.forEach(button => button.click());
+            console.log('Cleared selected category');
+          }
+        }
+      };
+      
+      
+      
+      
 
   const options = [
     {
@@ -71,6 +144,7 @@ const Transactions = () => {
       <div className='flex flex-col h-full gap-2 p-4 rounded-lg bg-white border-[0.05rem] mobile:border-[0.1rem] border-gallery'>
         <div className='flex items-center h-8 gap-1'>
           <Select
+            className='type-select'
             options={[
               { value: 'all', label: t('types.all') },
               { value: 'incomes', label: t('types.incomes') },
@@ -81,8 +155,11 @@ const Transactions = () => {
             placeholder={t('app.transactions.type')}
             value={selectedType}
             searchable={false}
+            clearable
+            closeOnSelect
           />
           <Select
+            className='category-select'
             options={[
               { value: 'all', label: t('categories.all') },
               ...filteredCategories.map(category => ({
@@ -97,31 +174,50 @@ const Transactions = () => {
             onChange={(selectedOptions) => setSelectedCategory(selectedOptions[0]?.value || '')}
             placeholder={t('app.transactions.category')}
             searchable={false}
+            clearable
+            closeOnSelect
           />
-          <input type='text' placeholder={t('app.transactions.search')} className='h-8 flex-1 px-2 py-1 text-sm font-semibold text-cod border-[0.05rem] mobile:border-[0.1rem] border-gallery rounded bg-white placeholder:text-alto hover:bg-alabaster hover:duration-[0.4s] ease-in-out'/>
+          <input type='text' placeholder={t('app.transactions.search')} className='h-8 flex-1 px-2 py-1 text-sm font-semibold text-cod border-[0.05rem] mobile:border-[0.1rem] border-gallery rounded bg-white placeholder:text-alto hover:bg-alabaster hover:duration-[0.4s] ease-in-out'
+            value={searchText}
+            onChange={e => setSearchText(e.target.value)}
+          />
           <Select
+            className='sort-select'
             options={options}
             onChange={(selectedOptions) => setSelectedSort(selectedOptions[0]?.value || '')}
             placeholder={t('app.transactions.sort.placeholder')}
             value={options.find(option => option.value === selectedSort)}
             searchable={false}
+            clearable
+            closeOnSelect
           />
           <button className='h-8 w-8 flex items-center justify-center rounded border-[0.05rem] mobile:border-[0.1rem] border-gallery bg-white hover:bg-alabaster hover:duration-[0.4s] ease-in-out'>
             <Filter className='w-4 h-4 fill-chalice'/>
           </button>
-          <button className='h-8 w-8 flex items-center justify-center rounded border-[0.05rem] mobile:border-[0.1rem] border-gallery bg-white hover:bg-alabaster hover:duration-[0.4s] ease-in-out'>
+          <button className='h-8 w-8 flex items-center justify-center rounded border-[0.05rem] mobile:border-[0.1rem] border-gallery bg-white hover:bg-alabaster hover:duration-[0.4s] ease-in-out'
+            onClick={() => {
+              resetFilters()
+            }}
+          >
             <Reset className='w-4 h-4 fill-chalice'/>
           </button>
+
         </div>
         <div className='transactions-item-list flex flex-col flex-1 h-0 overflow-y-auto bg-white border-[0.05rem] mobile:border-[0.1rem] border-gallery rounded'>
-          {/* As template for now, save here transaction id too */}
-          <div className='h-8 w-full flex items-center gap-1 py-1 px-4 hover:bg-alabaster hover:duration-[0.4s] ease-in-out cursor-pointer'>
-            <Food className='w-4 h-4 fill-chalice'/>
-            <span className='text-sm text-cod font-medium flex-1'>PizzaHut</span>
-            <span className='text-sm text-gray font-medium'>(24-04-2024)</span>
-            <span className='text-sm text-cod font-medium w-16 text-end tabular-nums'>$ 29,99</span>
-            <Expense className='w-4 h-4 fill-chalice mt-[1px]'/>
-          </div>
+          {filteredTransactions.map(({ _id, title, date, amount, category, type, currency }) => (
+            <TransactionItem
+              key={_id}
+              id={_id}
+              name={title}
+              date={date}
+              value={amount}
+              category={category}
+              type={type}
+              currency={currency}
+              localCurrency={localCurrency}
+              currencyRates={currencyRates}
+            />
+          ))}
         </div>
       </div>
     </>
