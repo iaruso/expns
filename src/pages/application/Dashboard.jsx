@@ -129,7 +129,8 @@ const Dashboard = () => {
           { title: 'expenses', value: totalExpenses, showIcon: true },
           { title: 'investments', value: totalInvestments, showIcon: true }
         ].map(({ title, value, showIcon }) => (
-          <div key={title} data-title={t(`app.dashboard.${title}.description`)} className={`dashboard-card w-full flex flex-1 gap-2 p-4 rounded-lg items-center justify-between bg-${title !== 'balance' ? 'white' : 'royal balance-card'} border-[0.05rem] mobile:border-[0.1rem] border-${title !== 'balance' ? 'gallery' : 'persian'} cursor-default`}>
+          <div key={title} data-title={t(`app.dashboard.${title}.description`)} className={`dashboard-card w-full flex flex-1 gap-2 p-4 rounded-lg items-center justify-between bg-${title !== 'balance' ? 'white' : 'royal balance-card'} border-[0.05rem] mobile:border-[0.1rem] border-${title !== 'balance' ? 'gallery' : 'persian'}
+          cursor-default`}>
             <div className='flex flex-col gap-2'>
               <h2 className={`text-${title !== 'balance' ? 'cod' : 'white'} text-tiny font-semibold`}>{t(`app.dashboard.${title}.title`)}</h2>
               <span className={`text-${title !== 'balance' ? 'cod' : 'white'} text-base font-bold tabular-nums`}>{currencyLabel(currencyFormat(value, localCurrency), localCurrency)}</span>

@@ -4,10 +4,7 @@ import Select from 'react-dropdown-select';
 import jsonData from '../../../public/data.json';
 import { TransactionsContext, CurrencyContext } from './Application.jsx';
 import TransactionItem from '../../components/transactions/TransactionItem.jsx';
-import Filter from '../../components/icons/Filter';
-import Reset from '../../components/icons/Reset';
-import Ascending from '../../components/icons/Ascending';
-import Descending from '../../components/icons/Descending';
+import Icon from '../../components/app/Icon.jsx';
 
 const Transactions = () => {
   const { t } = useTranslation();
@@ -39,7 +36,6 @@ const Transactions = () => {
       return typeFilter && categoryFilter && searchTextFilter;
     });
   
-    // Apply sorting if selected
     if (selectedSort === 'sort_val_asc') {
       filtered.sort((a, b) => a.amount - b.amount);
     } else if (selectedSort === 'sort_val_desc') {
@@ -84,58 +80,48 @@ const Transactions = () => {
       ? Object.keys(jsonData.categories[selectedType]).map(category => ({ type: selectedType, category }))
       : allCategories;
 
-      const handleTypeChange = (selectedOptions) => {
-        const newType = selectedOptions[0]?.value || 'all';
-        setSelectedType(newType);
-        
-        // Clear the selected category if it belongs to a different type than the new type
-        if (selectedCategory && newType !== 'all') {
-          // Get the type of the selected category from jsonData
-          let categoryType = 'all'; // Default to 'all' if not found
-          Object.keys(jsonData.categories).forEach(type => {
-            if (jsonData.categories[type][selectedCategory]) {
-              categoryType = type;
-            }
-          });
-          
-          // Check if the type of the selected category matches the new type
-          if (categoryType !== newType) {
-            setSelectedCategory('');
-            const categoryClearButtons = document.querySelectorAll('.category-select .react-dropdown-select-clear');
-    categoryClearButtons.forEach(button => button.click());
-            console.log('Cleared selected category');
-          }
+  const handleTypeChange = (selectedOptions) => {
+    const newType = selectedOptions[0]?.value || 'all';
+    setSelectedType(newType);
+    if (selectedCategory && newType !== 'all') {
+      let categoryType = 'all';
+      Object.keys(jsonData.categories).forEach(type => {
+        if (jsonData.categories[type][selectedCategory]) {
+          categoryType = type;
         }
-      };
+      });
+      if (categoryType !== newType) {
+        setSelectedCategory('');
+        const categoryClearButtons = document.querySelectorAll('.category-select .react-dropdown-select-clear');
+        categoryClearButtons.forEach(button => button.click());
+      }
+    }
+  };
       
-      
-      
-      
-
   const options = [
     {
       value: 'sort_val_asc',
-      label: (<span title={t('app.transactions.sort.sort_val_asc')}>{t('app.transactions.sort.sort_val')} <Ascending/></span>)
+      label: (<span title={t('app.transactions.sort.sort_val_asc')}>{t('app.transactions.sort.sort_val')} <Icon name='Ascending'/></span>)
     },
     {
       value: 'sort_val_desc',
-      label: (<span title={t('app.transactions.sort.sort_val_desc')}>{t('app.transactions.sort.sort_val')} <Descending/></span>)
+      label: (<span title={t('app.transactions.sort.sort_val_desc')}>{t('app.transactions.sort.sort_val')} <Icon name='Descending'/></span>)
     },
     {
       value: 'sort_date_asc',
-      label: (<span title={t('app.transactions.sort.sort_date_asc')}>{t('app.transactions.sort.sort_date')} <Ascending/></span>)
+      label: (<span title={t('app.transactions.sort.sort_date_asc')}>{t('app.transactions.sort.sort_date')} <Icon name='Ascending'/></span>)
     },
     {
       value: 'sort_date_desc',
-      label: (<span title={t('app.transactions.sort.sort_date_desc')}>{t('app.transactions.sort.sort_date')} <Descending/></span>)
+      label: (<span title={t('app.transactions.sort.sort_date_desc')}>{t('app.transactions.sort.sort_date')} <Icon name='Descending'/></span>)
     },
     {
       value: 'sort_name_asc',
-      label: (<span title={t('app.transactions.sort.sort_name_asc')}>{t('app.transactions.sort.sort_name')} <Ascending/></span>)
+      label: (<span title={t('app.transactions.sort.sort_name_asc')}>{t('app.transactions.sort.sort_name')} <Icon name='Ascending'/></span>)
     },
     {
       value: 'sort_name_desc',
-      label: (<span title={t('app.transactions.sort.sort_name_desc')}>{t('app.transactions.sort.sort_name')} <Descending/></span>)
+      label: (<span title={t('app.transactions.sort.sort_name_desc')}>{t('app.transactions.sort.sort_name')} <Icon name='Descending'/></span>)
     }
   ];
 
@@ -191,15 +177,12 @@ const Transactions = () => {
             clearable
             closeOnSelect
           />
-          <button className='h-8 w-8 flex items-center justify-center rounded border-[0.05rem] mobile:border-[0.1rem] border-gallery bg-white hover:bg-alabaster hover:duration-[0.4s] ease-in-out'>
-            <Filter className='w-4 h-4 fill-chalice'/>
-          </button>
           <button className='h-8 w-8 flex items-center justify-center rounded border-[0.05rem] mobile:border-[0.1rem] border-gallery bg-white hover:bg-alabaster hover:duration-[0.4s] ease-in-out'
             onClick={() => {
               resetFilters()
             }}
           >
-            <Reset className='w-4 h-4 fill-chalice'/>
+            <Icon name='Reset' className='w-4 h-4 fill-chalice'/>
           </button>
 
         </div>
