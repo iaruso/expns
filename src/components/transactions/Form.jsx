@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
+import { TransactionsContext } from '../../pages/application/Application';
 import axios from 'axios';
 import Select from 'react-dropdown-select';
 import DatePicker from 'react-date-picker';
@@ -10,32 +11,54 @@ import Euro from '../icons/Euro';
 import Dollar from '../icons/Dollar';
 import Pound from '../icons/Pound';
 
-const Form = ({ setShowForm, edit = false }) => {
+const Form = ({ setShowForm, edit = false, initialData }) => {
   const { t, i18n } = useTranslation();
+  const userTransactions = useContext(TransactionsContext);
   const [transactionDate, setTransactionDate] = useState(new Date());
   const [locale, setLocale] = useState(i18n.language);
   const currency = localStorage.getItem('currency') || 'usd';
   const transactionName = useRef(null);
   const transactionDescription = useRef(null);
-  const [formEdit, setFormEdit] = useState(edit);
-
   const [transactionAmount, setTransactionAmount] = useState('');
+  const [selectedType, setSelectedType] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState([]);
+
+  const typesOptions = [
+    { value: 'incomes', label: t('types.incomes') },
+    { value: 'expenses', label: t('types.expenses') },
+    { value: 'investments', label: t('types.investments') }
+  ];
+
+  useEffect(() => {
+    if (edit && initialData) {
+      const transactionToUpdate = userTransactions.find(transaction => transaction._id === initialData.id);
+      if (transactionToUpdate) {
+        setTransactionDate(new Date(transactionToUpdate.date));
+        setTransactionAmount(transactionToUpdate.amount.toString());
+        //setSelectedType(transactionToUpdate.type);
+        //setSelectedCategory(transactionToUpdate.category);
+        transactionName.current.value = transactionToUpdate.title;
+        transactionDescription.current.value = transactionToUpdate.description;
+      }
+    }
+  }, [edit, initialData]);
 
   const handleChange = (e) => {
     const input = e.target.value;
-    // Regex to allow numbers and up to two decimal places
     const re = /^\d{0,10}(\.\d{0,2})?$/;
     if (re.test(input) || input === '') {
       setTransactionAmount(input);
     }
   };
 
-  const handleCloseForm = () => {
+  const handleCloseForm = (e) => {
+    e.preventDefault();
     setShowForm(false);
   };
 
-  const [selectedType, setSelectedType] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState([]);
+  useEffect(() => {
+    console.log('Selected Type:', selectedType);
+  }, [selectedType]);
 
   const allCategories = Object.keys(jsonData.categories).reduce((acc, type) => {
     if (type !== 'total' && type !== 'other' && type !== 'all') {
@@ -49,16 +72,16 @@ const Form = ({ setShowForm, edit = false }) => {
     ? Object.keys(jsonData.categories[selectedType] || {}).map(category => ({ type: selectedType, category }))
     : allCategories;
 
-	const handleTypeChange = (val) => {
+  const handleTypeChange = (val) => {
     setSelectedType(val[0]?.value);
-	};
+  };
 
-	useEffect(() => {
+  useEffect(() => {
     const clearButton = document.querySelector('.category-select .react-dropdown-select-clear');
     if (clearButton) {
       clearButton.click();
     }
-	}, [selectedType]);
+  }, [selectedType]);
 
   const handleCategoryChange = (val) => {
     setSelectedCategory(val[0]?.value);
@@ -94,8 +117,8 @@ const Form = ({ setShowForm, edit = false }) => {
     };
   
     try {
-      if (formEdit) {
-        const response = await axios.put(`https://expns-api.vercel.app/api/update-transaction/${transactionData.id}`, requestData, { headers });
+      if (edit) {
+        const response = await axios.put(`https://expns-api.vercel.app/api/update-transaction/${initialData.id}`, requestData, { headers });
       } else {
         const response = await axios.post('https://expns-api.vercel.app/api/add-transaction', requestData, { headers });
       }
@@ -116,7 +139,7 @@ const Form = ({ setShowForm, edit = false }) => {
     };
   
     try {
-      const response = await axios.delete(`https://expns-api.vercel.app/api/delete-transaction/${transactionData.id}`, { headers });
+      const response = await axios.delete(`https://expns-api.vercel.app/api/delete-transaction/${initialData.id}`, { headers });
       handleCloseForm();
     } catch (error) {
       console.error('Error:', error);
@@ -131,8 +154,8 @@ const Form = ({ setShowForm, edit = false }) => {
             <button className='w-8 h-8 rounded flex items-center justify-center bg-white border-[0.05rem] mobile:border-[0.1rem] border-gallery hover:bg-alabaster hover:duration-[0.4s]' onClick={handleCloseForm}>
               <Return className='w-4 h-4 fill-chalice'/>
             </button>
-            <input type='text' ref={transactionName} required placeholder={t('app.form.name')} className={`h-8 w-0 flex-1 px-2 py-1 text-sm font-semibold text-cod border-[0.05rem] mobile:border-[0.1rem] ${!formEdit ? 'border-gallery' : 'border-white focus:border-gallery hover:border-gallery'} rounded bg-white placeholder:text-alto hover:bg-alabaster hover:duration-[0.4s] ease-in-out`}/>
-            { formEdit &&
+            <input type='text' ref={transactionName} required placeholder={t('app.form.name')} className={`h-8 w-0 flex-1 px-2 py-1 text-sm font-semibold text-cod border-[0.05rem] mobile:border-[0.1rem] ${!edit ? 'border-gallery' : 'border-white focus:border-gallery hover:border-gallery'} rounded bg-white placeholder:text-alto hover:bg-alabaster hover:duration-[0.4s] ease-in-out`}/>
+            { edit &&
               <button className='w-8 h-8 rounded flex items-center justify-center bg-[#E95656] hover:bg-[#D93F3F] hover:duration-[0.4s]' onClick={handleDelete}>
                 <Delete className='w-4 h-4 fill-white'/>
               </button>
@@ -140,12 +163,8 @@ const Form = ({ setShowForm, edit = false }) => {
           </div>
           <div className='form-selectors h-8 gap-2 flex items-center w-full'>
             <Select
-							className='type-select'
-              options={[
-                { value: 'incomes', label: t('types.incomes') },
-                { value: 'expenses', label: t('types.expenses') },
-                { value: 'investments', label: t('types.investments') }
-              ]}
+              className='type-select'
+              options={typesOptions}
               onChange={handleTypeChange}
               placeholder={t('app.transactions.type')}
               values={selectedType}
@@ -153,8 +172,8 @@ const Form = ({ setShowForm, edit = false }) => {
               required
             />
             <Select
-							className='category-select'
-							disabled={selectedType.length === 0}
+              className='category-select'
+              disabled={selectedType.length === 0}
               options={[
                 ...filteredCategories.map(category => ({
                   value: category.category,
@@ -165,7 +184,7 @@ const Form = ({ setShowForm, edit = false }) => {
               values={selectedCategory}
               onChange={handleCategoryChange}
               placeholder={t('app.transactions.category')}
-							clearable
+              clearable
               searchable={false}
               required
             />
