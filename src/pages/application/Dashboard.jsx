@@ -1,5 +1,5 @@
 import categoriesData from '../../../public/categories.json';
-import React, { useContext, useState, useMemo } from 'react';
+import React, { useContext, useState, useMemo, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { TransactionsContext, CurrencyContext } from './Application.jsx';
@@ -9,6 +9,7 @@ import { currencySymbol } from '../../helpers/currencySymbol';
 import { currencyFormat } from '../../helpers/currencyFormat.js';
 import TransactionItem from '../../components/transactions/TransactionItem.jsx';
 import Icon from '../../components/app/Icon.jsx';
+import Form from '../../components/transactions/Form.jsx';
 
 const Button = ({ label, onClick, selected }) => {
   return (
@@ -26,6 +27,8 @@ const Dashboard = () => {
   const userTransactions = useContext(TransactionsContext);
   const currencyRates = useContext(CurrencyContext);
   const localCurrency = localStorage.getItem('currency') || 'usd';
+  const [editForm, setEditForm] = useState(false);
+  const [editFormData, setEditFormData] = useState(null);
 
   const sortedTransactions = userTransactions
     .sort((a, b) => new Date(b.date) - new Date(a.date))
@@ -120,6 +123,10 @@ const Dashboard = () => {
     });
   }
 
+  useEffect(() => {
+    editFormData && setEditForm(!!Object.keys(editFormData).length);
+  }, [editFormData]);
+
   return (
     <>
       <div className='flex gap-4 items-center w-full sm-mobile:!grid-cols-1 mobile:grid mobile:grid-cols-2'>
@@ -161,6 +168,7 @@ const Dashboard = () => {
               currency={currency}
               localCurrency={localCurrency}
               currencyRates={currencyRates}
+              setEditFormData={setEditFormData}
             />
           ))}
         </div>
@@ -183,6 +191,9 @@ const Dashboard = () => {
           {renderCategories()}
         </div>
       </div>
+      {editForm && editFormData &&
+        <Form setShowForm={setEditForm} initialData={editFormData} edit={true}/>
+      }
     </>
   );
 };

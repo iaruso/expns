@@ -31,6 +31,8 @@
       "crypto": "categories.investments.crypto",
       "etf": "categories.investments.etf"
     },
-    "other": "categories.other"
+    "other": {
+      "other": "categories.other"
+    }
   }
 }

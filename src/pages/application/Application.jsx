@@ -7,6 +7,7 @@ import Transactions from './Transactions';
 import Navbar from '../../components/navigation/app/Navbar';
 import axios from 'axios';
 
+const FetchContext = createContext();
 const TransactionsContext = createContext();
 const CurrencyContext = createContext();
 
@@ -14,7 +15,7 @@ const Application = () => {
   const navigate = useNavigate();
   const [userTransactions, setUserTransactions] = useState([]);
   const [currencyRates, setCurrencyRates] = useState({});
-  const [initialFetchComplete, setInitialFetchComplete] = useState(false);
+  const [triggerFetch, setTriggerFetch] = useState(true);
 
   useEffect(() => {
     const expiryTime = localStorage.getItem('expiryTime');
@@ -27,6 +28,9 @@ const Application = () => {
     }
 
     const fetchUserData = async () => {
+      if (!triggerFetch) {
+        return;
+      }
       try {
         const userId = localStorage.getItem('userId');
         const accessToken = localStorage.getItem('accessToken');
@@ -50,39 +54,40 @@ const Application = () => {
         } else if (transactionsResponse.status === 200) {
           const transactions = transactionsResponse.data;
           setUserTransactions(transactions);
+          setTriggerFetch(false);
         } else {
           // Notify user of error
         }
         
         const rates = currencyRatesResponse.data[0]?.rates || {};
         setCurrencyRates(rates);
-        
-        setInitialFetchComplete(true);
       } catch (error) {
         console.error("Error fetching data:", error);
         // Notify user of error
       }
     };
 
-    if (!initialFetchComplete) fetchUserData();
-  }, [initialFetchComplete]);
+    fetchUserData();
+  }, [triggerFetch]);
 
   return (
-    <TransactionsContext.Provider value={userTransactions}>
-      <CurrencyContext.Provider value={currencyRates}>
-        <div className='w-full h-[100dvh] relative flex flex-col exl:px-[20rem] xl:px-[12rem] lg:px-[10rem] md:px-[4rem] py-8 mobile:p-0 gap-4 items-center'>
-          <Navbar/>
-          <div className='w-full h-0 flex-1 overflow-hidden flex flex-col gap-4 mobile:px-4'>
-            <Routes>
-              <Route path="/" element={<Dashboard/>} />
-              <Route path="/stats" element={<Stats/>} />
-              <Route path="/transactions" element={<Transactions/>} />
-            </Routes>
+    <FetchContext.Provider value={setTriggerFetch}>
+      <TransactionsContext.Provider value={userTransactions}>
+        <CurrencyContext.Provider value={currencyRates}>
+          <div className='w-full h-[100dvh] relative flex flex-col exl:px-[20rem] xl:px-[12rem] lg:px-[10rem] md:px-[4rem] py-8 mobile:p-0 gap-4 items-center'>
+            <Navbar/>
+            <div className='w-full h-0 flex-1 overflow-hidden flex flex-col gap-4 mobile:px-4'>
+              <Routes>
+                <Route path="/" element={<Dashboard/>} />
+                <Route path="/stats" element={<Stats/>} />
+                <Route path="/transactions" element={<Transactions/>} />
+              </Routes>
+            </div>
           </div>
-        </div>
-      </CurrencyContext.Provider>
-    </TransactionsContext.Provider>
+        </CurrencyContext.Provider>
+      </TransactionsContext.Provider>
+    </FetchContext.Provider>
   );
 };
 
-export { TransactionsContext, CurrencyContext, Application as default };
+export { TransactionsContext, CurrencyContext, FetchContext, Application as default };

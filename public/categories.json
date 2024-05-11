@@ -24,6 +24,8 @@
       "crypto": "crypto",
       "etf": "etf"
     },
-    "other": "other"
+    "other": {
+      "other": "other"
+    }
   }
 }

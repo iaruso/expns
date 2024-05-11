@@ -5,6 +5,7 @@ import jsonData from '../../../public/data.json';
 import { TransactionsContext, CurrencyContext } from './Application.jsx';
 import TransactionItem from '../../components/transactions/TransactionItem.jsx';
 import Icon from '../../components/app/Icon.jsx';
+import Form from '../../components/transactions/Form.jsx';
 
 const Transactions = () => {
   const { t } = useTranslation();
@@ -14,6 +15,8 @@ const Transactions = () => {
   const [searchText, setSearchText] = useState('');
   const [selectedSort, setSelectedSort] = useState('');
   const [filteredTransactions, setFilteredTransactions] = useState([]);
+  const [editForm, setEditForm] = useState(false);
+  const [editFormData, setEditFormData] = useState({});
 
   const userTransactions = useContext(TransactionsContext);
   const currencyRates = useContext(CurrencyContext);
@@ -125,6 +128,10 @@ const Transactions = () => {
     }
   ];
 
+  useEffect(() => {
+    editFormData && setEditForm(!!Object.keys(editFormData).length);
+  }, [editFormData]);
+
   return (
     <>
       <div className='flex flex-col h-full gap-2 p-4 rounded-lg bg-white border-[0.05rem] mobile:border-[0.1rem] border-gallery'>
@@ -187,7 +194,7 @@ const Transactions = () => {
 
         </div>
         <div className='transactions-item-list flex flex-col flex-1 h-0 overflow-y-auto bg-white border-[0.05rem] mobile:border-[0.1rem] border-gallery rounded'>
-          {filteredTransactions.map(({ _id, title, date, amount, category, type, currency }) => (
+          {filteredTransactions.map(({ _id, title, date, amount, category, type, currency}) => (
             <TransactionItem
               key={_id}
               id={_id}
@@ -199,10 +206,14 @@ const Transactions = () => {
               currency={currency}
               localCurrency={localCurrency}
               currencyRates={currencyRates}
+              setEditFormData={setEditFormData}
             />
           ))}
         </div>
       </div>
+      {editForm && editFormData &&
+        <Form setShowForm={setEditForm} initialData={editFormData} edit={true}/>
+      }
     </>
   );
 };

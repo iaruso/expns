@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { convertCurrency } from '../../helpers/convertCurrency.js';
 import { currencySymbol } from '../../helpers/currencySymbol.js';
@@ -6,9 +6,8 @@ import { currencyFormat } from '../../helpers/currencyFormat.js';
 import Icon from '../app/Icon.jsx';
 import Form from './Form.jsx';
 
-const TransactionItem = ({ id, name, date, value, category, type, currency, localCurrency, currencyRates }) => {
+const TransactionItem = ({ id, name, date, value, category, type, currency, localCurrency, currencyRates, setEditFormData }) => {
   const { t, i18n } = useTranslation();
-  const [isEditing, setIsEditing] = useState(false);
 
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
@@ -24,7 +23,7 @@ const TransactionItem = ({ id, name, date, value, category, type, currency, loca
   };
 
   const handleEditClick = () => {
-    setIsEditing(true); // Set the state to show the edit form
+    setEditFormData({ id, name, date, value, category, type, currency });
   };
 
   return (
@@ -34,12 +33,6 @@ const TransactionItem = ({ id, name, date, value, category, type, currency, loca
       <span className='text-sm text-gray font-medium'>({formatDate(date)})</span>
       <span className='text-sm text-cod font-medium w-24 text-end tabular-nums'>{currencyLabel(currencyFormat(convertCurrency(value, currency, localCurrency, currencyRates), localCurrency), localCurrency)}</span>
       <Icon name={type.charAt(0).toUpperCase() + type.slice(1)} className='w-4 h-4 fill-chalice mt-[1px]'/>
-      {/* Conditionally render the Form component */}
-      {isEditing && (
-        <div className='fixed top-0 left-0 w-full h-full z-50 bg-white inset-0 flex items-center justify-center'>
-          <Form setShowForm={() => setIsEditing(false)} edit={true} initialData={{ id, name, date, value, category, type, currency }} />
-        </div>
-      )}
     </div>
   );
 };
