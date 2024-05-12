@@ -1,3 +1,4 @@
+import jsonData from '../../../public/data.json';
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { TransactionsContext } from '../../pages/application/Application';
@@ -5,12 +6,7 @@ import { FetchContext } from '../../pages/application/Application';
 import axios from 'axios';
 import Select from 'react-dropdown-select';
 import DatePicker from 'react-date-picker';
-import jsonData from '../../../public/data.json';
-import Return from '../icons/Return';
-import Delete from '../icons/Delete';
-import Euro from '../icons/Euro';
-import Dollar from '../icons/Dollar';
-import Pound from '../icons/Pound';
+import Icon from '../app/Icon';
 
 const Form = ({ setShowForm, edit = false, initialData }) => {
   const { t, i18n } = useTranslation();
@@ -187,12 +183,12 @@ const Form = ({ setShowForm, edit = false, initialData }) => {
         <form className='flex flex-col w-64 gap-2 p-4 rounded-lg bg-white border-[0.05rem] mobile:border-[0.1rem] border-gallery' onSubmit={handleSubmit}>
           <div className='h-8 gap-2 flex items-center'>
             <button className='w-8 h-8 rounded flex items-center justify-center bg-white border-[0.05rem] mobile:border-[0.1rem] border-gallery hover:bg-alabaster hover:duration-[0.4s]' onClick={(e) => {e.preventDefault(); setShowForm(false);}}>
-              <Return className='w-4 h-4 fill-chalice'/>
+              <Icon name='Return' className='w-4 h-4 fill-chalice'/>
             </button>
             <input type='text' ref={transactionName} required placeholder={t('app.form.name')} className={`h-8 w-0 flex-1 px-2 py-1 text-sm font-semibold text-cod border-[0.05rem] mobile:border-[0.1rem] ${!edit ? 'border-gallery' : 'border-white focus:border-gallery hover:border-gallery'} rounded bg-white placeholder:text-alto hover:bg-alabaster hover:duration-[0.4s] ease-in-out`}/>
             { edit &&
               <button className='w-8 h-8 rounded flex items-center justify-center bg-[#E95656] hover:bg-[#D93F3F] hover:duration-[0.4s]' onClick={handleDelete}>
-                <Delete className='w-4 h-4 fill-white'/>
+                <Icon name='Delete' className='w-4 h-4 fill-white'/>
               </button>
             }
           </div>
@@ -232,9 +228,9 @@ const Form = ({ setShowForm, edit = false, initialData }) => {
               className={`h-8 w-full p-0 text-sm font-semibold text-cod border-[0.05rem] mobile:border-[0.1rem] border-gallery rounded bg-white placeholder:text-alto hover:bg-alabaster hover:duration-[0.4s] ease-in-out`}/>
             <div className='h-8 relative w-full'>
               <input type='text' placeholder={t('app.form.amount')} value={transactionAmount} onChange={handleChange} className='h-8 w-full flex-1 px-2 py-1 text-sm font-semibold text-cod border-[0.05rem] mobile:border-[0.1rem] border-gallery rounded bg-white placeholder:text-alto hover:bg-alabaster hover:duration-[0.4s] ease-in-out'/>
-              { currency === 'usd' && <Dollar className='w-4 h-4 fill-chalice absolute right-2 top-2'/> } 
-              { currency === 'eur' && <Euro className='w-4 h-4 fill-chalice absolute right-2 top-2'/> } 
-              { currency === 'gbp' && <Pound className='w-4 h-4 fill-chalice absolute right-2 top-2'/> }
+              { currency === 'usd' && <Icon name='Dollar' className='w-4 h-4 fill-chalice absolute right-2 top-2'/> } 
+              { currency === 'eur' && <Icon name='Euro' className='w-4 h-4 fill-chalice absolute right-2 top-2'/> } 
+              { currency === 'gbp' && <Icon name='Pound' className='w-4 h-4 fill-chalice absolute right-2 top-2'/> }
             </div>
           </div>
           <div className='h-8 gap-2 flex items-center'>

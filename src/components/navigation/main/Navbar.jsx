@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
 import { Link } from 'react-router-dom';
-import Logo from '../../icons/Logo.jsx';
+import Icon from '../../app/Icon.jsx';
 
 const Navbar = () => {
 	const { t } = useTranslation();
@@ -26,7 +26,7 @@ const Navbar = () => {
 		<nav className='w-full flex items-center justify-between h-12 py-2 border-b-[0.05rem] mobile:border-b-[0.1rem] border-gallery sticky top-0 bg-white px-8 md:px-32 xl:px-40 exl:px-48 z-50 mobile:h-16'>
 			<div className='flex items-center gap-4'>
 				<ScrollLink href='#intro-section' to='intro-section' offset={offset} spy={true} smooth={true} duration={400} className='flex items-center gap-1 cursor-pointer'>
-					<Logo className='w-3 h-3 mobile:h-6 mobile:w-6'/>
+					<Icon name='Logo' className='w-3 h-3 mobile:h-6 mobile:w-6'/>
 					<span className='text-sm mobile:text-[1.25rem] font-extrabold text-persian'>Expns</span>
 				</ScrollLink>
 				<div className='hidden items-center gap-1 h6 md:flex'>

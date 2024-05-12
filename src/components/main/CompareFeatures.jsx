@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import Check from '../icons/Check.jsx';
+import Icon from '../app/Icon.jsx';
 
 const FeatureHeader = ({ titlePath }) => {
   const { t } = useTranslation();
@@ -26,7 +26,7 @@ const FeatureRow = ({ featurePath, checks }) => {
       {checks.map((checkValue, index) => (
         <div key={index} className='flex items-center justify-center'>
           {typeof checkValue === 'boolean' ? (
-            checkValue ? <Check className='w-6 h-6 fill-shaft'/> : ''
+            checkValue ? <Icon name='Check' className='w-6 h-6 fill-shaft'/> : ''
           ) : (
             <p className='text-base text-cod font-semibold'>{t(checkValue)}</p>
           )}

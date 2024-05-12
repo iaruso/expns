@@ -32,10 +32,6 @@ const Transactions = () => {
       const typeFilter = selectedType === 'all' || selectedType === '' || transaction.type === selectedType;
       const categoryFilter = selectedCategory === 'all' || selectedCategory === '' || transaction.category === selectedCategory;
       const searchTextFilter = transaction.title.toLowerCase().includes(searchText.toLowerCase());
-      console.log("Transaction:", transaction);
-      console.log("Type Filter:", typeFilter);
-      console.log("Category Filter:", categoryFilter);
-      console.log("Search Text Filter:", searchTextFilter);
       return typeFilter && categoryFilter && searchTextFilter;
     });
   
