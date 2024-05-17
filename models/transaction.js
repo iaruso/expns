@@ -42,7 +42,15 @@ const TransactionSchema = new mongoose.Schema({
   date: {
     type: Date,
     required: true,
-    trim: true
+    trim: true,
+    set: (value) => {
+      const parts = value.split('-');
+      if (parts.length === 3) {
+        return new Date(`${parts[1]}-${parts[0]}-${parts[2]}`);
+      } else {
+        return value;
+      }
+    }
   }
 }, { timestamps: false });
 
