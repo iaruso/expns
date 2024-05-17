@@ -1,26 +1,28 @@
 import jsonData from '../../../public/data.json';
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
-import { TransactionsContext } from '../../pages/application/Application';
-import { FetchContext } from '../../pages/application/Application';
 import axios from 'axios';
 import Select from 'react-dropdown-select';
 import DatePicker from 'react-date-picker';
+import { TransactionsContext } from '../../pages/application/Application';
+import { FetchContext } from '../../pages/application/Application';
+import { useNotifications } from '../notification/NotificationContainer';
 import Icon from '../app/Icon';
 
 const Form = ({ setShowForm, edit = false, initialData }) => {
   const { t, i18n } = useTranslation();
   const userTransactions = useContext(TransactionsContext);
   const setTriggerFetch = useContext(FetchContext);
-  const [transactionDate, setTransactionDate] = useState(new Date());
+  const [transactionDate, setTransactionDate] = useState('');
   const [locale, setLocale] = useState(i18n.language);
   const [currency, setCurrency] = useState(localStorage.getItem('currency') || 'usd');
   const transactionName = useRef(null);
   const transactionDescription = useRef(null);
-  const [transactionAmount, setTransactionAmount] = useState('');
+  const [transactionAmount, setTransactionAmount] = useState();
   const [selectedType, setSelectedType] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState([]);
   const [selectionDefined, setSelectionDefined] = useState(false);
+  const addNotification = useNotifications();
 
   const typesOptions = [
     { value: 'incomes', label: t('types.incomes') },
@@ -49,7 +51,6 @@ const Form = ({ setShowForm, edit = false, initialData }) => {
     : allCategories;
 
   useEffect(() => {
-    console.log(categoriesOptions);
     if (edit && initialData) {
       setCurrency(initialData.currency);
       const transactionToUpdate = userTransactions.find(transaction => transaction._id === initialData.id);
@@ -77,11 +78,9 @@ const Form = ({ setShowForm, edit = false, initialData }) => {
     filteredCategories = selectedType
     ? Object.keys(jsonData.categories[selectedType] || {}).map(category => ({ type: selectedType, category }))
     : allCategories;
-    console.log(selectedType);
   }, [selectedType]);
 
   const handleTypeChange = (val) => {
-    console.log(val);
     setSelectedType(val[0]?.value);
   };
 
@@ -135,15 +134,16 @@ const Form = ({ setShowForm, edit = false, initialData }) => {
       if (edit) {
         const response = await axios.put(`https://expns-api.vercel.app/api/update-transaction/${initialData.id}`, requestData, { headers });
         if (response.status === 200) {
-          setTriggerFetch(true);
+          setTriggerFetch(1);
           handleCloseForm();
+          addNotification('update', 'Transaction ' + initialData.name + ' updated!');
         }
       } else {
         const response = await axios.post('https://expns-api.vercel.app/api/add-transaction', requestData, { headers });
-        console.log(response.status);
         if (response.status === 200) {
-          setTriggerFetch(true);
+          setTriggerFetch(1);
           handleCloseForm();
+          addNotification('create', 'Transaction ' + requestData.title + ' deleted!');
         }
       }
     } catch (error) {
@@ -165,8 +165,9 @@ const Form = ({ setShowForm, edit = false, initialData }) => {
     try {
       const response = await axios.delete(`https://expns-api.vercel.app/api/delete-transaction/${initialData.id}`, { headers });
       if (response.status === 200) {
-        setTriggerFetch(true);
+        setTriggerFetch(1);
         handleCloseForm();
+        addNotification('delete', 'Transaction ' + initialData.name + ' deleted!');
       }
     } catch (error) {
       console.error('Error:', error);
@@ -237,7 +238,7 @@ const Form = ({ setShowForm, edit = false, initialData }) => {
             <input type='text' ref={transactionDescription} placeholder={t('app.form.description')} className='h-8 flex-1 px-2 py-1 text-sm font-semibold text-cod border-[0.05rem] mobile:border-[0.1rem] border-gallery rounded bg-white placeholder:text-alto hover:bg-alabaster hover:duration-[0.4s] ease-in-out'/>
           </div>
           <button type='submit' className='h-8 flex items-center justify-center rounded bg-royal text-white hover:bg-persian hover:duration-[0.4s] ease-in-out text-sm font-semibold'>
-            {t('app.form.create')}
+            {edit ? t('app.form.save') : t('app.form.create')}
           </button>
         </form>
       </div>

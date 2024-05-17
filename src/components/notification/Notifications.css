@@ -1,0 +1,65 @@
+.notification-container {
+  position: fixed;
+  z-index: 1000;
+  bottom: 2rem;
+  right: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.notification {
+  background-color: var(--color);
+  color: white;
+  height: 2rem;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  border-radius: 0.25rem;
+  font-size: 0.625rem;
+  font-weight: 600;
+  font-family: 'Urbanist', sans-serif;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  animation: notificationAnimation 10.1s 1 ease-in-out;
+}
+
+@keyframes notificationAnimation {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.notification:hover {
+  background-color: var(--hover-color);
+}
+
+.notification.success, .notification.create {
+  --color: #3A4AD9;
+  --hover-color: #2433C2;
+}
+
+.notification.info, .notification.update {
+  --color: #7F7F7F;
+  --hover-color: #5A5A5A;
+}
+
+.notification.error, .notification.delete {
+  --color: #E95656;
+  --hover-color: #C63C3C;
+}
+
+.notification.warning {
+  --color: #E59721;
+  --hover-color: #C37A1A;
+}

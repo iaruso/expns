@@ -1,7 +1,8 @@
 import categoriesData from '../../../public/categories.json';
-import React, { useContext, useState, useMemo, useEffect } from 'react';
+import React, { useContext, useState, useMemo, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import ScrollContainer from 'react-indiana-drag-scroll';
 import { TransactionsContext, CurrencyContext } from './Application.jsx';
 import CategoryCard from '../../components/dashsboard/CategoryCard.jsx';
 import { convertCurrency } from '../../helpers/convertCurrency';
@@ -146,7 +147,7 @@ const Dashboard = () => {
           </div>
         ))}
       </div>
-      <div className='flex flex-col flex-1 gap-2 p-4 rounded-lg bg-white border-[0.05rem] mobile:border-[0.1rem] border-gallery'>
+      <div className='flex flex-col flex-1 h-0 gap-2 p-4 rounded-lg bg-white border-[0.05rem] mobile:border-[0.1rem] border-gallery'>
         <div className='flex items-center justify-between h-6'>
           <h2 className='font-bold text-cod text-tiny'>{t('app.dashboard.transactions.title')}</h2>
           <div className='flex items-center h-6 gap-1'>
@@ -155,7 +156,7 @@ const Dashboard = () => {
             </Link>
           </div>
         </div>
-        <div className='transactions-item-list flex flex-col flex-1 overflow-y-auto bg-white border-[0.05rem] mobile:border-[0.1rem] border-gallery rounded'>
+        <div className='transactions-item-list flex h-0 flex-col flex-1 overflow-y-auto bg-white border-[0.05rem] mobile:border-[0.1rem] border-gallery rounded'>
           {sortedTransactions.map(({ _id, title, date, amount, category, type, currency }) => (
             <TransactionItem
               key={_id}
@@ -187,9 +188,9 @@ const Dashboard = () => {
             ))}
           </div>
         </div>
-        <div className='flex gap-2 items-center overflow-y-auto'>
+        <ScrollContainer className='scroll-container flex gap-2 items-center overflow-y-auto cursor-grab'>
           {renderCategories()}
-        </div>
+        </ScrollContainer>
       </div>
       {editForm && editFormData &&
         <Form setShowForm={setEditForm} initialData={editFormData} edit={true}/>

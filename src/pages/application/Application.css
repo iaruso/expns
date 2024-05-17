@@ -29,6 +29,11 @@
   position: relative;
 }
 
+.transactions-item-list {
+  height: 0;
+  flex: 1;
+}
+
 .transactions-item-list > div {
   border-bottom: 0.05rem solid #F0F0F0;
 }

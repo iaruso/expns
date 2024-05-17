@@ -6,6 +6,7 @@ import Stats from './Stats';
 import Transactions from './Transactions';
 import Navbar from '../../components/navigation/app/Navbar';
 import axios from 'axios';
+import { useNotifications } from '../../components/notification/NotificationContainer'; // Import the hook to use notifications
 
 const FetchContext = createContext();
 const TransactionsContext = createContext();
@@ -13,9 +14,10 @@ const CurrencyContext = createContext();
 
 const Application = () => {
   const navigate = useNavigate();
+  const addNotification = useNotifications(); // Use the notification hook
   const [userTransactions, setUserTransactions] = useState([]);
   const [currencyRates, setCurrencyRates] = useState({});
-  const [triggerFetch, setTriggerFetch] = useState(true);
+  const [triggerFetch, setTriggerFetch] = useState(0); // 0 - Load data, 1 - Reload data, 2 - Do nothing
 
   useEffect(() => {
     const expiryTime = localStorage.getItem('expiryTime');
@@ -26,47 +28,48 @@ const Application = () => {
     if (currentTime > parseInt(expiryTime)) {
       navigate('/login');
     }
+  }, [navigate]);
 
-    const fetchUserData = async () => {
-      if (!triggerFetch) {
-        return;
+  const fetchUserData = async () => {
+    if (triggerFetch === 2) {
+      return;
+    }
+    try {
+      const userId = localStorage.getItem('userId');
+      const accessToken = localStorage.getItem('accessToken');
+      if (!userId || !accessToken) {
+        throw new Error("User ID or access token not found in local storage");
       }
-      try {
-        const userId = localStorage.getItem('userId');
-        const accessToken = localStorage.getItem('accessToken');
-        if (!userId || !accessToken) {
-          throw new Error("User ID or access token not found in local storage");
-        }
 
-        const transactionsPromise = axios.get('https://expns-api.vercel.app/api/get-transactions', {
-          headers: {
-            'user-id': userId,
-            'x-access-token': accessToken
-          }
-        });
-        
-        const currencyRatesPromise = axios.get('https://expns-api.vercel.app/api/rates');
-
-        const [transactionsResponse, currencyRatesResponse] = await Promise.all([transactionsPromise, currencyRatesPromise]);
-        
-        if (transactionsResponse.status === 204) {
-          setUserTransactions([]);
-        } else if (transactionsResponse.status === 200) {
-          const transactions = transactionsResponse.data;
-          setUserTransactions(transactions);
-          setTriggerFetch(false);
-        } else {
-          // Notify user of error
+      const transactionsPromise = axios.get('https://expns-api.vercel.app/api/get-transactions', {
+        headers: {
+          'user-id': userId,
+          'x-access-token': accessToken
         }
-        
+      });
+      
+      const currencyRatesPromise = axios.get('https://expns-api.vercel.app/api/rates');
+
+      const [transactionsResponse, currencyRatesResponse] = await Promise.all([transactionsPromise, currencyRatesPromise]);
+
+      if (transactionsResponse.status === 204) {
+        setUserTransactions([]);
+      } else if (transactionsResponse.status === 200) {
+        const transactions = transactionsResponse.data;
+        setUserTransactions(transactions);
         const rates = currencyRatesResponse.data[0]?.rates || {};
         setCurrencyRates(rates);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        // Notify user of error
+        if (triggerFetch === 0) addNotification('success', 'User data loaded!');
+        setTriggerFetch(2);
+      } else {
+        addNotification('error', 'Failed to fetch user transactions.');
       }
-    };
+    } catch (error) {
+      addNotification('error', `Error fetching data: ${error.message}`);
+    }
+  };
 
+  useEffect(() => {
     fetchUserData();
   }, [triggerFetch]);
 

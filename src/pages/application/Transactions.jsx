@@ -48,7 +48,6 @@ const Transactions = () => {
     } else if (selectedSort === 'sort_name_desc') {
       filtered.sort((a, b) => b.title.localeCompare(a.title));
     }
-    console.log("Filtered Transactions:", filtered);
     setFilteredTransactions(filtered);
   };
   
