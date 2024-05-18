@@ -11,10 +11,10 @@ export const useNotifications = () => {
 const NotificationProvider = ({ children, position = 'top-right' }) => {
   const [notifications, setNotifications] = useState([]);
 
-  const addNotification = useCallback((type, value) => {
+  const addNotification = useCallback((type, icon, value) => {
     setNotifications(prev => [
       ...prev,
-      { id: Date.now(), type, value },
+      { id: Date.now(), type, icon, value },
     ]);
   }, []);
 
@@ -30,6 +30,7 @@ const NotificationProvider = ({ children, position = 'top-right' }) => {
             key={notification.id}
             id={notification.id}
             type={notification.type}
+            icon={notification.icon}
             value={notification.value}
             onRemove={removeNotification}
           />

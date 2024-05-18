@@ -6,7 +6,7 @@ import Stats from './Stats';
 import Transactions from './Transactions';
 import Navbar from '../../components/navigation/app/Navbar';
 import axios from 'axios';
-import { useNotifications } from '../../components/notification/NotificationContainer'; // Import the hook to use notifications
+import { useNotifications } from '../../components/notification/NotificationContainer';
 
 const FetchContext = createContext();
 const TransactionsContext = createContext();
@@ -14,10 +14,11 @@ const CurrencyContext = createContext();
 
 const Application = () => {
   const navigate = useNavigate();
-  const addNotification = useNotifications(); // Use the notification hook
+  const addNotification = useNotifications();
   const [userTransactions, setUserTransactions] = useState([]);
   const [currencyRates, setCurrencyRates] = useState({});
   const [triggerFetch, setTriggerFetch] = useState(0); // 0 - Load data, 1 - Reload data, 2 - Do nothing
+  const [dataLoaded, setDataLoaded] = useState(false);
 
   useEffect(() => {
     const expiryTime = localStorage.getItem('expiryTime');
@@ -59,10 +60,11 @@ const Application = () => {
         setUserTransactions(transactions);
         const rates = currencyRatesResponse.data[0]?.rates || {};
         setCurrencyRates(rates);
-        if (triggerFetch === 0) addNotification('success', 'User data loaded!');
+        if (triggerFetch === 0) addNotification('success', 'Check', 'User data loaded!');
         setTriggerFetch(2);
+        setDataLoaded(true);
       } else {
-        addNotification('error', 'Failed to fetch user transactions.');
+        addNotification('error', 'Info', 'Failed to fetch user transactions.');
       }
     } catch (error) {
       addNotification('error', `Error fetching data: ${error.message}`);
@@ -77,16 +79,20 @@ const Application = () => {
     <FetchContext.Provider value={setTriggerFetch}>
       <TransactionsContext.Provider value={userTransactions}>
         <CurrencyContext.Provider value={currencyRates}>
-          <div className='w-full h-[100dvh] relative flex flex-col exl:px-[20rem] xl:px-[12rem] lg:px-[10rem] md:px-[4rem] py-8 mobile:p-0 gap-4 items-center'>
+          {dataLoaded &&
+            <>
             <Navbar/>
-            <div className='w-full h-0 flex-1 overflow-hidden flex flex-col gap-4 mobile:px-4'>
-              <Routes>
-                <Route path="/" element={<Dashboard/>} />
-                <Route path="/stats" element={<Stats/>} />
-                <Route path="/transactions" element={<Transactions/>} />
-              </Routes>
-            </div>
-          </div>
+              <div className='app-container w-full relative flex flex-col exl:px-[20rem] xl:px-[12rem] lg:px-[10rem] md:px-[4rem] py-4 mobile:px-0 gap-4 items-center'>
+                <div className='w-full h-0 flex-1 overflow-hidden flex flex-col gap-4 mobile:px-4'>
+                  <Routes>
+                    <Route path="/" element={<Dashboard/>} />
+                    <Route path="/stats" element={<Stats/>} />
+                    <Route path="/transactions" element={<Transactions/>} />
+                  </Routes>
+                </div>
+              </div>
+            </>
+          }
         </CurrencyContext.Provider>
       </TransactionsContext.Provider>
     </FetchContext.Provider>

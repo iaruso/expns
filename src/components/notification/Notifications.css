@@ -1,7 +1,7 @@
 .notification-container {
   position: fixed;
   z-index: 1000;
-  bottom: 2rem;
+  bottom: 1rem;
   right: 2rem;
   display: flex;
   flex-direction: column;
@@ -12,10 +12,11 @@
   background-color: var(--color);
   color: white;
   height: 2rem;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem;
   display: flex;
   align-items: center;
   justify-content: start;
+  gap: 0.25rem;
   border-radius: 0.25rem;
   font-size: 0.625rem;
   font-weight: 600;
@@ -23,21 +24,13 @@
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
   animation: notificationAnimation 10.1s 1 ease-in-out;
+  position: relative;
+  opacity: 0;
 }
 
-@keyframes notificationAnimation {
-  0% {
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
+.notification svg {
+  fill: white;
+  width: 0.75rem;
 }
 
 .notification:hover {
@@ -62,4 +55,29 @@
 .notification.warning {
   --color: #E59721;
   --hover-color: #C37A1A;
+}
+
+@keyframes notificationAnimation {
+  0% {
+    opacity: 0;
+    bottom: -2rem;
+    right: -2rem;
+    transform: rotate(-15deg);
+  }
+  2% {
+    opacity: 1;
+    bottom: 0;
+    right: 0;
+    transform: rotate(0deg);
+  }
+  98% {
+    opacity: 1;
+    bottom: 0;
+    right: 0;
+    transform: rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    bottom: -4rem;
+  }
 }

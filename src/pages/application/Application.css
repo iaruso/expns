@@ -3,6 +3,7 @@
   transition: all 0.2s ease-in-out;
   visibility: visible;
 }
+
 [data-title]:after {
   content: attr(data-title);
   position: absolute;
@@ -25,8 +26,13 @@
   background-color: #FFFFFF;
   border: 0.05rem solid #F0F0F0;
 }
+
 [data-title] {
   position: relative;
+}
+
+.app-container {
+  height: calc(100vh - 3rem);
 }
 
 .transactions-item-list {

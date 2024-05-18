@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
 import './Notifications.css';
+import React, { useEffect } from 'react';
+import Icon from '../app/Icon';
 
-const Notification = ({ id, type, value, onRemove }) => {
+const Notification = ({ id, type, icon, value, onRemove }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       onRemove(id);
@@ -12,6 +13,7 @@ const Notification = ({ id, type, value, onRemove }) => {
 
   return (
     <div className={`notification ${type}`} onClick={() => onRemove(id)}>
+      <Icon name={icon} />
       {value}
     </div>
   );
