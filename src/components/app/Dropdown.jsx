@@ -4,13 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Icon from './Icon';
 
-const Dropdown = forwardRef(({setOpenDropdown}, ref) => {
+const Dropdown = forwardRef(() => {
   const { t, i18n } = useTranslation();
   const [languageBool, setLanguageBool] = useState(null);
   const [currency, setCurrency] = useState(localStorage.getItem('currency') || 'usd');
   const navigate = useNavigate();
   const handleLogout = async (e) => {
-    setOpenDropdown(false);
     e.preventDefault();
     const refreshToken = localStorage.getItem('refreshToken');
     try {
@@ -45,7 +44,7 @@ const Dropdown = forwardRef(({setOpenDropdown}, ref) => {
   };
   
   return (
-    <div ref={ref} className='flex flex-col absolute top-14 right-0 mobile:right-0 w-fit min-w-24 p-2 rounded bg-white border-gallery border-[0.05rem] mobile:border-[0.1rem] mobile:top-16'>
+    <>
       <ul className='flex flex-col w-auto gap-2'>
         <li className='rounded w-full h-8 flex items-center bg-sand'>
           <button 
@@ -86,7 +85,7 @@ const Dropdown = forwardRef(({setOpenDropdown}, ref) => {
           <Icon name='Logout' className='w-4 h-4 fill-red-600'/>
         </li>
       </ul>
-    </div>
+    </>
   );
 });
 

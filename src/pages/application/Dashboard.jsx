@@ -130,7 +130,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className='flex gap-4 items-center w-full sm-mobile:!grid-cols-1 mobile:grid mobile:grid-cols-2'>
+      <div className='flex gap-4 items-center w-full mobile:grid mobile:grid-cols-2'>
         {[
           { title: 'balance', value: balance, showIcon: false},
           { title: 'incomes', value: totalIncomes, showIcon: true },
@@ -138,7 +138,7 @@ const Dashboard = () => {
           { title: 'investments', value: totalInvestments, showIcon: true }
         ].map(({ title, value, showIcon }) => (
           <div key={title} data-title={t(`app.dashboard.${title}.description`)} className={`dashboard-card w-full flex flex-1 gap-2 p-4 rounded-lg items-center justify-between bg-${title !== 'balance' ? 'white' : 'royal balance-card'} border-[0.05rem] mobile:border-[0.1rem] border-${title !== 'balance' ? 'gallery' : 'persian'}
-          cursor-default`}>
+          cursor-help`}>
             <div className='flex flex-col gap-2'>
               <h2 className={`text-${title !== 'balance' ? 'cod' : 'white'} text-tiny font-semibold`}>{t(`app.dashboard.${title}.title`)}</h2>
               <span className={`text-${title !== 'balance' ? 'cod' : 'white'} text-base font-bold tabular-nums`}>{currencyLabel(currencyFormat(value, localCurrency), localCurrency)}</span>

@@ -1,60 +1,102 @@
 .notification-container {
   position: fixed;
   z-index: 1000;
-  bottom: 1rem;
-  right: 2rem;
+  bottom: 0;
+  right: 0;
+  padding-bottom: 1rem;
+  padding-right: 2rem;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  height: 6.5rem;
+  overflow: hidden;
+  justify-content: flex-end;
+  align-items: flex-end;
 }
 
 .notification {
+  display: flex;
+  flex-direction: column;
+  min-height: 2rem;
+  opacity: 0;
+  animation: notificationAnimation 10.1s ease-in-out;
+  border-radius: 0.25rem;
+  background-color: var(--bg-color);
+  border: 1px solid var(--color);
+  position: relative;
+}
+
+.notification-timer {
+  height: 0.125rem;
   background-color: var(--color);
-  color: white;
-  height: 2rem;
-  padding: 0.5rem;
+  margin: 0 1px;
+  width: 0%;
+  border-radius: 0.25rem;
+  animation: notificationTimer 10.1s ease-in-out;
+}
+
+.notification-content {
+  color: var(--color);
+  padding: 0.125rem 0.5rem 0.25rem 0.5rem;
   display: flex;
   align-items: center;
   justify-content: start;
   gap: 0.25rem;
-  border-radius: 0.25rem;
   font-size: 0.625rem;
   font-weight: 600;
   font-family: 'Urbanist', sans-serif;
-  cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
-  animation: notificationAnimation 10.1s 1 ease-in-out;
-  position: relative;
-  opacity: 0;
+  height: 0;
+  flex: 1;
 }
 
 .notification svg {
-  fill: white;
+  fill: var(--color);
   width: 0.75rem;
-}
-
-.notification:hover {
-  background-color: var(--hover-color);
 }
 
 .notification.success, .notification.create {
   --color: #3A4AD9;
-  --hover-color: #2433C2;
+  --bg-color: #FAFAFF;
+  --close-color: #F0F0FD;
 }
 
 .notification.info, .notification.update {
   --color: #7F7F7F;
-  --hover-color: #5A5A5A;
+  --bg-color: #F8F8F8;
+  --close-color: #F0F0F0;
 }
 
 .notification.error, .notification.delete {
   --color: #E95656;
-  --hover-color: #C63C3C;
+  --bg-color: #FFF8F8;
+  --close-color: #FFF0F0;
 }
 
 .notification.warning {
   --color: #E59721;
-  --hover-color: #C37A1A;
+  --bg-color: #FFFAF8;
+  --close-color: #FFFAF0;
+}
+
+.notification .close-notification {
+  margin-left: auto;
+  min-width: 1rem;
+  height: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 0.25rem;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.close-notification:hover {
+  background-color: var(--close-color);
+}
+
+.close-notification svg {
+  fill: var(--color);
+  width: 0.625rem;
 }
 
 @keyframes notificationAnimation {
@@ -64,13 +106,25 @@
     right: -2rem;
     transform: rotate(-15deg);
   }
-  2% {
+  4% {
     opacity: 1;
     bottom: 0;
     right: 0;
     transform: rotate(0deg);
   }
-  98% {
+  80% {
+    opacity: 1;
+  }
+  84% {
+    opacity: 0;
+  }
+  88% {
+    opacity: 1;
+  }
+  92% {
+    opacity: 0;
+  }
+  96% {
     opacity: 1;
     bottom: 0;
     right: 0;
@@ -79,5 +133,14 @@
   100% {
     opacity: 0;
     bottom: -4rem;
+  }
+}
+
+@keyframes notificationTimer {
+  0% {
+    width: calc(100% - 2px);
+  }
+  100% {
+    width: 0;
   }
 }

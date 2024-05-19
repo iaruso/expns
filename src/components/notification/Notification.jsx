@@ -12,9 +12,15 @@ const Notification = ({ id, type, icon, value, onRemove }) => {
   }, [id, onRemove]);
 
   return (
-    <div className={`notification ${type}`} onClick={() => onRemove(id)}>
-      <Icon name={icon} />
-      {value}
+    <div className={`notification ${type}`}>
+      <div className='notification-timer'></div>
+      <div className='notification-content'>
+        <Icon name={icon} />
+        {value}
+        <div className='close-notification' onClick={() => onRemove(id)}>
+          <Icon name='Close' />
+        </div>
+      </div>
     </div>
   );
 };

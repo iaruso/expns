@@ -352,7 +352,12 @@ export default {
 				amount: 'Valor',
 				description: 'Descrição (opcional)',
 				create: 'Criar',
-				save: 'Guardar'
+				save: 'Guardar',
+				notification: {
+					create: 'Transação criada com sucesso.',
+					update: 'Transação atualizada com sucesso.',
+					delete: 'Transação eliminada com sucesso.'
+				}
 			}
 		}
   }

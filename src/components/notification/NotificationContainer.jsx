@@ -8,7 +8,7 @@ export const useNotifications = () => {
   return useContext(NotificationContext);
 };
 
-const NotificationProvider = ({ children, position = 'top-right' }) => {
+const NotificationProvider = ({ children, position = 'bottom-right' }) => {
   const [notifications, setNotifications] = useState([]);
 
   const addNotification = useCallback((type, icon, value) => {
@@ -41,4 +41,5 @@ const NotificationProvider = ({ children, position = 'top-right' }) => {
   );
 };
 
+export { NotificationProvider };
 export default NotificationProvider;

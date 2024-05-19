@@ -81,14 +81,16 @@ const Application = () => {
         <CurrencyContext.Provider value={currencyRates}>
           {dataLoaded &&
             <>
-            <Navbar/>
-              <div className='app-container w-full relative flex flex-col exl:px-[20rem] xl:px-[12rem] lg:px-[10rem] md:px-[4rem] py-4 mobile:px-0 gap-4 items-center'>
-                <div className='w-full h-0 flex-1 overflow-hidden flex flex-col gap-4 mobile:px-4'>
-                  <Routes>
-                    <Route path="/" element={<Dashboard/>} />
-                    <Route path="/stats" element={<Stats/>} />
-                    <Route path="/transactions" element={<Transactions/>} />
-                  </Routes>
+              <div className='application-container'>
+                <Navbar/>
+                <div className='app-container w-full relative flex flex-col md:px-[10vw] xl:px-[20vw] exl:px-[25vw] py-4 mobile:px-0 gap-4 items-center'>
+                  <div className='w-full h-0 flex-1 overflow-hidden flex flex-col gap-4 mobile:px-4'>
+                    <Routes>
+                      <Route path="/" element={<Dashboard/>} />
+                      <Route path="/stats" element={<Stats/>} />
+                      <Route path="/transactions" element={<Transactions/>} />
+                    </Routes>
+                  </div>
                 </div>
               </div>
             </>

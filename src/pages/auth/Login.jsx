@@ -6,16 +6,15 @@ import { HelmetProvider, Helmet } from 'react-helmet-async';
 import axios from 'axios';
 import { gsap } from 'gsap';
 import Logo from '../../components/icons/Logo';
+import { useNotifications } from '../../components/notification/NotificationContainer';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [checked, setChecked] = useState(false);
-  const [hasWrong, setHasWrong] = useState(false);
-  const [hasFailed, setHasFailed] = useState(false);
-  const [hasSucceeded, setHasSucceeded] = useState(false);
   const [warning, setWarning] = useState(false);
   const [isLogging, setIsLogging] = useState(false)
+  const addNotification = useNotifications();
   const navigate = useNavigate();
   const { t } = useTranslation();
 
@@ -67,31 +66,17 @@ const Login = () => {
         const expiryTime = new Date().getTime() + 30 * 60 * 1000;
         localStorage.setItem('expiryTime', expiryTime);
       }
-        setHasSucceeded(true);
-        !warning ? setWarning(true) : null;
-        setTimeout(() => {
-          animateCard();
-        }, 1000);
-        setTimeout(() => {
-          setIsLogging(false);
-          navigate('/app/');
-        }, 3000);
+        addNotification('success', 'Check', t('auth.login.reqs.succeeded'));
+        setIsLogging(false);
+        navigate('/app/');
       }
     } catch (error) {
       if (error.response && error.response.status === 401) {
-        setHasWrong(true);
-        !warning ? setWarning(true) : null;
-        setTimeout(() => {
-          animateCard();
-          setIsLogging(false);
-        }, 1000);
+        addNotification('error', 'Info', t('auth.login.reqs.wrong'));
+        setIsLogging(false);
       } else {
-        setHasFailed(true);
-        !warning ? setWarning(true) : null;
-        setTimeout(() => {
-          animateCard();
-          setIsLogging(false);
-        }, 1000);
+        addNotification('error', 'Info', t('auth.login.reqs.failed'));
+        setIsLogging(false);
       }
     }
   };
@@ -101,12 +86,6 @@ const Login = () => {
       animateCard()
     }
   }, [warning]);
-
-  useEffect(() => {
-    setHasWrong(false);
-    setHasFailed(false);
-    setHasSucceeded(false);
-  }, [email, password]);
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -136,26 +115,6 @@ const Login = () => {
             <button type='submit' className='h-8 mobile:h-12 rounded px-2 py-1 bg-royal hover:bg-persian hover:duration-[0.4s] ease-in-out text-white text-sm mobile:text-[1.25rem] font-semibold'>{t('auth.login.cta')}</button>
           </form>
           <p className='text-gray text-xs mobile:text-base font-semibold flex gap-1 w-full justify-center'>{t('auth.login.alt')}<Link to='/register' className='text-cod hover:underline'>{t('auth.login.alt_opt')}</Link></p>
-          {warning ?
-              <>
-              { !email || !password || !emailRegex.test(email) ?
-                <div className='warning-card fixed bottom-4 min-h-8 bg-white w-56 rounded border-gallery border-[0.05rem] mobile:border-[0.1rem] p-4 gap-2 hover:duration-[0.4s] ease-in-out cursor-pointer hover:bg-sand opacity-0' onClick={() => setWarning(false)}>
-                  <p className='text-gray text-xs mobile:text-base font-semibold'>{t('auth.login.reqs.warning')}</p>
-                </div>
-              :
-              <>
-                { hasFailed || hasWrong || hasSucceeded ?
-                  <div className='warning-card fixed bottom-4 min-h-8 bg-white w-56 rounded border-gallery border-[0.05rem] mobile:border-[0.1rem] p-4 gap-2 hover:duration-[0.4s] ease-in-out cursor-pointer hover:bg-sand opacity-0' onClick={() => setWarning(false)}>
-                    { hasFailed ? <p className='text-gray text-xs mobile:text-base font-semibold'>{t('auth.login.reqs.failed')}</p> : null }
-                    { hasWrong ? <p className='text-gray text-xs mobile:text-base font-semibold'>{t('auth.login.reqs.wrong')}</p> : null }
-                    { hasSucceeded ? <p className='text-gray text-xs mobile:text-base font-semibold'>{t('auth.login.reqs.succeeded')}</p> : null }
-                  </div>
-                : null}
-              </>
-              }
-              </>
-              : null
-            }
         </div>
       </div>
     </HelmetProvider>

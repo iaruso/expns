@@ -28,7 +28,7 @@ export default function Main() {
 	return (
 		<>
 			<Navbar/>
-			<div id='intro-section' className='main-intro md:min-h-[400px] w-full flex flex-col py-8 gap-8 px-8 md:px-32 xl:px-40 exl:px-48 mobile:pb-0'>
+			<div id='intro-section' className='main-intro md:min-h-[400px] w-full flex flex-col py-8 gap-8 md:px-[10vw] xl:px-[20vw] exl:px-[25vw] mobile:pb-0'>
 				<h1 className='mobile:hidden block text-[4rem] leading-[4.75rem] text-cod font-extrabold'><Translator path={'main.intro.title'}/></h1>
 				<h1 className='mobile:block hidden text-[3rem] leading-[3.5rem] text-cod font-extrabold'>{t('main.intro.title_mobile')}</h1>
 				<img src='./main_intro.jpg' alt='Intro cover' className='flex-1 h-0 object-cover object-top rounded-lg max-h-[40vh]'/>
@@ -57,7 +57,7 @@ export default function Main() {
 					</div>
 				</div>
 			</div>
-			<div id='features-section' className='md:min-h-[400px] w-full h-auto flex flex-col py-8 gap-8 px-8 md:px-32 xl:px-40 exl:px-48 mobile:pb-0'>
+			<div id='features-section' className='md:min-h-[400px] w-full h-auto flex flex-col py-8 gap-8 md:px-[10vw] xl:px-[20vw] exl:px-[25vw] mobile:pb-0'>
 				<h2 className='text-[3rem] mobile:text-[2rem] text-cod font-extrabold'>{t('main.features.title')}</h2>
 				<img src='./graphic.png' alt='Features cover' className='object-cover object-top rounded-lg'/>
 				<div className='flex h-[6rem] mobile:h-auto gap-8 mobile:gap-4 mobile:flex-col'>
@@ -75,13 +75,13 @@ export default function Main() {
 					</div>
 				</div>
 			</div>
-			<div id='pricing-section' className='w-full h-auto flex flex-col py-8 gap-8 px-8 md:px-32 xl:px-40 exl:px-48 mobile:pb-0'>
+			<div id='pricing-section' className='w-full h-auto flex flex-col py-8 gap-8 md:px-[10vw] xl:px-[20vw] exl:px-[25vw] mobile:pb-0'>
 				<h2 className='text-[3rem] mobile:text-[2rem] text-cod font-extrabold'>{t('main.pricing.title')}</h2>
 				<PricingCards/>
 				<h3 className='text-[2rem] mobile:text-[1.5rem] text-cod font-bold'>{t('main.pricing.features.title')}</h3>
 				<CompareFeatures/>
 			</div>
-			<div id='about-section' className='w-full h-auto flex flex-col py-8 gap-8 px-8 md:px-32 xl:px-40 exl:px-48'>
+			<div id='about-section' className='w-full h-auto flex flex-col py-8 gap-8 md:px-[10vw] xl:px-[20vw] exl:px-[25vw]'>
 				<h2 className='text-[3rem] mobile:text-[2rem] text-cod font-extrabold'>{t('main.about.title')}</h2>
 				<div className='flex flex-col gap-8 lg:grid grid-cols-2 grid-rows-1'>
 					<img src='./team.jpg' alt='Team image' className='max-h-[20rem] lg:max-h-none lg:h-auto w-full col-span-1 row-span-1 rounded-lg object-cover object-center'/>

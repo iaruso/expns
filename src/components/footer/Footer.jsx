@@ -22,7 +22,7 @@ const Footer = () => {
   };
 
 	return (
-		<footer className='w-full flex flex-col py-8 px-8 md:px-32 xl:px-40 exl:px-48 border-t-[0.05rem] mobile:border-t-[0.1rem] border-gallery gap-8'>
+		<footer className='w-full flex flex-col py-8 md:px-[10vw] xl:px-[20vw] exl:px-[25vw] border-t-[0.05rem] mobile:border-t-[0.1rem] border-gallery gap-8'>
 			<div className='flex gap-8 flex-wrap'>
 				<div className='flex flex-col mobile:flex-row flex-1 gap-4 mobile:items-center mobile:flex-none mobile:w-full'>
 					<LogoFooter className='w-8 h-8 mobile:w-24 mobile:h-24'/>

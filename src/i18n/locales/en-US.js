@@ -355,7 +355,12 @@ export default {
 				amount: 'Amount',
 				description: 'Description (optional)',
 				create: 'Create',
-				save: 'Save changes'
+				save: 'Save changes',
+				notification: {
+					create: 'Transaction created successfully.',
+					update: 'Transaction updated successfully.',
+					delete: 'Transaction deleted successfully.',
+				}
 			}
 		}
   }

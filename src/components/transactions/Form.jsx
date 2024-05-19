@@ -137,14 +137,18 @@ const Form = ({ setShowForm, edit = false, initialData }) => {
         if (response.status === 200) {
           setTriggerFetch(1);
           handleCloseForm();
-          addNotification('update', 'Edit', 'Transaction ' + initialData.name + ' updated!');
+          addNotification('update', 'Edit', t('app.form.notification.update'));
+        } if (response.status === 403) {
+          window.location.reload();
         }
       } else {
         const response = await axios.post('https://expns-api.vercel.app/api/add-transaction', requestData, { headers });
         if (response.status === 200) {
           setTriggerFetch(1);
           handleCloseForm();
-          addNotification('create', 'Check', 'Transaction ' + requestData.title + ' deleted!');
+          addNotification('create', 'Check', t('app.form.notification.create'));
+        } if (response.status === 403) {
+          window.location.reload();
         }
       }
     } catch (error) {
@@ -168,7 +172,9 @@ const Form = ({ setShowForm, edit = false, initialData }) => {
       if (response.status === 200) {
         setTriggerFetch(1);
         handleCloseForm();
-        addNotification('delete', 'Delete', 'Transaction ' + initialData.name + ' deleted!');
+        addNotification('delete', 'Delete', t('app.form.notification.delete'));
+      } if (response.status === 403) {
+        window.location.reload();
       }
     } catch (error) {
       console.error('Error:', error);

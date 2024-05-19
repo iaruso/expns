@@ -31,8 +31,15 @@
   position: relative;
 }
 
+.application-container {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  width: 100dvw;
+}
+
 .app-container {
-  height: calc(100vh - 3rem);
+  height: calc(100dvh - 3rem);
 }
 
 .transactions-item-list {
@@ -82,6 +89,10 @@
   .dashboard-card[data-title]:after {
     left: -0.1rem;
     width: calc(100% + 0.2rem);
+  }
+
+  .app-container {
+    height: calc(100dvh - 4rem);
   }
 }
 
@@ -379,10 +390,17 @@ input[type=number] {
   font-variant-numeric: tabular-nums;
 }
 
+.react-date-picker__inputGroup input::placeholder, .react-date-picker__inputGroup__divider {
+  color: #D6D6D6;
+}
+
 @media screen and (max-width: 768px) {
   .react-date-picker__calendar {
     border-width: 0.1rem !important;
     left: -0.1rem !important;
   }
   
+  .application-container {
+    flex-direction: column-reverse;
+  }
 }

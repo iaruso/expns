@@ -9,7 +9,7 @@ import './i18n/index.js';
 const root = createRoot(document.getElementById('root'));
 
 root.render(
-  <NotificationContainer position="top-right">
+  <NotificationContainer>
     <App />
   </NotificationContainer>
 );
