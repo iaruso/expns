@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import Main from './pages/main/Main.jsx';
 import Login from './pages/auth/Login.jsx';
 import Register from './pages/auth/Register.jsx';
@@ -25,6 +26,11 @@ export default function App() {
 
   return (
     <>
+      <HelmetProvider>
+        <Helmet>
+          <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta>
+        </Helmet>
+      </HelmetProvider>
       <div className='flex flex-col items-center w-full'>
         <Router>
           <Routes>

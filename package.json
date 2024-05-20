@@ -9,6 +9,7 @@
     "build": "vite build --base=./"
   },
   "dependencies": {
+    "@types/react-helmet": "^6.1.11",
     "axios": "^1.6.8",
     "gsap": "^3.12.5",
     "i18next": "^23.2.11",

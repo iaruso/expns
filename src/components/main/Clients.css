@@ -21,13 +21,13 @@
 }
 
 .clients-grid > div:first-child {
-  animation: slideRight 30s linear infinite;
-  animation-delay: -300s;
+  animation: slideRight 60s linear infinite;
+  animation-delay: -60s;
 }
 
 .clients-grid > div:last-child {
-  animation: slideRight2 30s linear infinite;
-  animation-delay: -15s;
+  animation: slideRight2 60s linear infinite;
+  animation-delay: -30s;
 }
 
 .clients-grid:hover > div {

@@ -23,7 +23,7 @@ const Navbar = () => {
     };
   }, []);
 	return (
-		<nav className='w-full flex items-center justify-between h-12 py-2 border-b-[0.05rem] mobile:border-b-[0.1rem] border-gallery sticky top-0 bg-white md:px-[10vw] xl:px-[20vw] exl:px-[25vw] z-50 mobile:h-16'>
+		<nav className='w-full flex items-center justify-between h-12 py-2 border-b-[0.05rem] mobile:border-b-[0.1rem] border-gallery sticky top-0 bg-white mobile:px-4 md:px-[10vw] xl:px-[20vw] exl:px-[25vw] z-50 mobile:h-16'>
 			<div className='flex items-center gap-4'>
 				<ScrollLink href='#intro-section' to='intro-section' offset={offset} spy={true} smooth={true} duration={400} className='flex items-center gap-1 cursor-pointer'>
 					<Icon name='Logo' className='w-3 h-3 mobile:h-6 mobile:w-6'/>

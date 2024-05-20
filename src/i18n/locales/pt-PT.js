@@ -82,8 +82,8 @@ export default {
 					label: 'Utilizadores'
 				},
 				experience: {
-					stats: '+4',
-					label: 'Anos no mercado'
+					stats: '+4A',
+					label: 'No mercado'
 				}
 			},
 			features: {

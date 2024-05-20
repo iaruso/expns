@@ -403,4 +403,18 @@ input[type=number] {
   .application-container {
     flex-direction: column-reverse;
   }
+
+  .filters-container > div:nth-child(1),
+  .filters-container > div:nth-child(2),
+  .filters-container > div:nth-child(4) {
+    order: 3;
+  }
+
+  .transaction-text-search {
+    flex-basis: calc(100% - 3rem) !important;
+  }
+
+  .form-selectors > div {
+    width: 100%;
+  }
 }

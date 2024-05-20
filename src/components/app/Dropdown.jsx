@@ -46,15 +46,15 @@ const Dropdown = forwardRef(() => {
   return (
     <>
       <ul className='flex flex-col w-auto gap-2'>
-        <li className='rounded w-full h-8 flex items-center bg-sand'>
+        <li className='rounded w-full h-8 mobile:h-10 flex items-center bg-sand'>
           <button 
-            className={`rounded w-12 ${languageBool ? 'text-gray hover:bg-alabaster hover:duration-[0.4s] ease-in-out' : 'text-white bg-royal pointer-events-none'} h-8 text-xs font-semibold mobile:text-sm flex items-center justify-center`} 
+            className={`rounded w-12 mobile:w-15 ${languageBool ? 'text-gray hover:bg-alabaster hover:duration-[0.4s] ease-in-out' : 'text-white bg-royal pointer-events-none'} h-8 mobile:h-10 text-xs font-semibold mobile:text-sm flex items-center justify-center`} 
             onClick={toggleLanguage}
           >
             PT
           </button>
           <button 
-            className={`rounded w-12 ${languageBool ? 'text-white bg-royal pointer-events-none' : 'text-gray hover:bg-alabaster hover:duration-[0.4s] ease-in-out'} h-8 text-xs font-semibold mobile:text-sm flex items-center justify-center`} 
+            className={`rounded w-12 mobile:w-15 ${languageBool ? 'text-white bg-royal pointer-events-none' : 'text-gray hover:bg-alabaster hover:duration-[0.4s] ease-in-out'} h-8 mobile:h-10 text-xs font-semibold mobile:text-sm flex items-center justify-center`} 
             onClick={toggleLanguage}
           >
             EN
@@ -62,26 +62,26 @@ const Dropdown = forwardRef(() => {
         </li>
         <li className='rounded w-full h-8 flex items-center bg-sand'>
           <button 
-            className={`rounded w-8 ${currency === 'usd' ? 'text-white bg-royal pointer-events-none' : 'text-gray hover:bg-alabaster hover:duration-[0.4s] ease-in-out'} h-8 text-xs font-semibold mobile:text-sm flex items-center justify-center`} 
+            className={`rounded w-8 mobile:w-10 ${currency === 'usd' ? 'text-white bg-royal pointer-events-none' : 'text-gray hover:bg-alabaster hover:duration-[0.4s] ease-in-out'} h-8 mobile:h-10 text-xs font-semibold mobile:text-sm flex items-center justify-center`} 
             onClick={() => toggleCurrency('usd')}
           >
             USD
           </button>
           <button 
-            className={`rounded w-8 ${currency === 'eur' ? 'text-white bg-royal pointer-events-none' : 'text-gray hover:bg-alabaster hover:duration-[0.4s] ease-in-out'} h-8 text-xs font-semibold mobile:text-sm flex items-center justify-center`} 
+            className={`rounded w-8 mobile:w-10 ${currency === 'eur' ? 'text-white bg-royal pointer-events-none' : 'text-gray hover:bg-alabaster hover:duration-[0.4s] ease-in-out'} h-8 mobile:h-10 text-xs font-semibold mobile:text-sm flex items-center justify-center`} 
             onClick={() => toggleCurrency('eur')}
           >
             EUR
           </button>
           <button 
-            className={`rounded w-8 ${currency === 'gbp' ? 'text-white bg-royal pointer-events-none' : 'text-gray hover:bg-alabaster hover:duration-[0.4s] ease-in-out'} h-8 text-xs font-semibold mobile:text-sm flex items-center justify-center`} 
+            className={`rounded w-8 mobile:w-10 ${currency === 'gbp' ? 'text-white bg-royal pointer-events-none' : 'text-gray hover:bg-alabaster hover:duration-[0.4s] ease-in-out'} h-8 mobile:h-10 text-xs font-semibold mobile:text-sm flex items-center justify-center`} 
             onClick={() => toggleCurrency('gbp')}
           >
             GBP
           </button>
         </li>
-        <li className='group rounded w-full hover:bg-red-50 h-8 mobile:h-8 px-2 py-1 flex items-center hover:duration-[0.4s] ease-in-out cursor-pointer' onClick={handleLogout}>
-          <span className='w-full text-red-600 hover:duration-[0.4s] ease-in-out text-xs font-semibold mobile:text-tiny mobile:text-end'>{t('navbar.app.logout')}</span>
+        <li className='group rounded w-full hover:bg-red-50 mobile:bg-red-50 h-8 mobile:h-10 px-2 py-1 flex items-center justify-between hover:duration-[0.4s] ease-in-out cursor-pointer' onClick={handleLogout}>
+          <span className='w-full text-red-600 hover:duration-[0.4s] ease-in-out text-xs font-semibold mobile:text-tiny'>{t('navbar.app.logout')}</span>
           <Icon name='Logout' className='w-4 h-4 fill-red-600'/>
         </li>
       </ul>

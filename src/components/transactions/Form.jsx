@@ -66,6 +66,14 @@ const Form = ({ setShowForm, edit = false, initialData }) => {
     }
   }, [edit, initialData]);
 
+  const handleBeforeInput = (e) => {
+    const input = e.target.value + e.data;
+    const re = /^\d{0,10}(\.\d{0,2})?$/;
+    if (!re.test(input) && e.data !== null) {
+      e.preventDefault();
+    }
+  };
+
   const handleChange = (e) => {
     const input = e.target.value;
     const re = /^\d{0,10}(\.\d{0,2})?$/;
@@ -188,7 +196,7 @@ const Form = ({ setShowForm, edit = false, initialData }) => {
   return (
     <>
       <div className='fixed w-full h-full z-50 bg-white inset-0 flex items-center justify-center'>
-        <form className='flex flex-col w-64 gap-2 p-4 rounded-lg bg-white border-[0.05rem] mobile:border-[0.1rem] border-gallery' onSubmit={handleSubmit}>
+        <form className='flex flex-col w-64 mobile:w-[80vw] gap-2 p-4 rounded-lg bg-white border-[0.05rem] mobile:border-[0.1rem] border-gallery' onSubmit={handleSubmit}>
           <div className='h-8 gap-2 flex items-center'>
             <button className='w-8 h-8 rounded flex items-center justify-center bg-white border-[0.05rem] mobile:border-[0.1rem] border-gallery hover:bg-alabaster hover:duration-[0.4s]' onClick={(e) => {e.preventDefault(); setShowForm(false);}}>
               <Icon name='Return' className='w-4 h-4 fill-chalice'/>
@@ -235,7 +243,7 @@ const Form = ({ setShowForm, edit = false, initialData }) => {
             <DatePicker onChange={setTransactionDate} value={transactionDate} locale={locale} required
               className={`h-8 w-full p-0 text-sm font-semibold text-cod border-[0.05rem] mobile:border-[0.1rem] border-gallery rounded bg-white placeholder:text-alto hover:bg-alabaster hover:duration-[0.4s] ease-in-out`}/>
             <div className='h-8 relative w-full'>
-              <input type='text' placeholder={t('app.form.amount')} value={transactionAmount} onChange={handleChange} className='h-8 w-full flex-1 px-2 py-1 text-sm font-semibold text-cod border-[0.05rem] mobile:border-[0.1rem] border-gallery rounded bg-white placeholder:text-alto hover:bg-alabaster hover:duration-[0.4s] ease-in-out'/>
+              <input type='text' placeholder={t('app.form.amount')} value={transactionAmount} onBeforeInput={handleBeforeInput} onChange={handleChange} className='h-8 w-full flex-1 px-2 py-1 text-sm font-semibold text-cod border-[0.05rem] mobile:border-[0.1rem] border-gallery rounded bg-white placeholder:text-alto hover:bg-alabaster hover:duration-[0.4s] ease-in-out'/>
               { currency === 'usd' && <Icon name='Dollar' className='w-4 h-4 fill-chalice absolute right-2 top-2'/> } 
               { currency === 'eur' && <Icon name='Euro' className='w-4 h-4 fill-chalice absolute right-2 top-2'/> } 
               { currency === 'gbp' && <Icon name='Pound' className='w-4 h-4 fill-chalice absolute right-2 top-2'/> }

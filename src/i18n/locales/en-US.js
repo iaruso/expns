@@ -82,8 +82,8 @@ export default {
 					label: 'Satisfied users'
 				},
 				experience: {
-					stats: '+4',
-					label: 'Years on the market'
+					stats: '+4Y',
+					label: 'On the market'
 				}
 			},
 			features: {

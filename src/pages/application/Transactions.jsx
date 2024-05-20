@@ -130,7 +130,7 @@ const Transactions = () => {
   return (
     <>
       <div className='flex flex-col h-full gap-2 p-4 rounded-lg bg-white border-[0.05rem] mobile:border-[0.1rem] border-gallery'>
-        <div className='flex items-center h-8 gap-1'>
+        <div className='filters-container flex items-center h-8 gap-1 mobile:flex-wrap mobile:h-auto mobile:justify-end'>
           <Select
             className='type-select'
             options={[
@@ -165,7 +165,7 @@ const Transactions = () => {
             clearable
             closeOnSelect
           />
-          <input type='text' placeholder={t('app.transactions.search')} className='h-8 flex-1 px-2 py-1 text-sm font-semibold text-cod border-[0.05rem] mobile:border-[0.1rem] border-gallery rounded bg-white placeholder:text-alto hover:bg-alabaster hover:duration-[0.4s] ease-in-out'
+          <input type='text' placeholder={t('app.transactions.search')} className='transaction-text-search mobile:order-1 h-8 flex-1 px-2 py-1 text-sm font-semibold text-cod border-[0.05rem] mobile:border-[0.1rem] border-gallery rounded bg-white placeholder:text-alto hover:bg-alabaster hover:duration-[0.4s] ease-in-out'
             value={searchText}
             onChange={e => setSearchText(e.target.value)}
           />
@@ -179,7 +179,7 @@ const Transactions = () => {
             clearable
             closeOnSelect
           />
-          <button className='h-8 w-8 flex items-center justify-center rounded border-[0.05rem] mobile:border-[0.1rem] border-gallery bg-white hover:bg-alabaster hover:duration-[0.4s] ease-in-out'
+          <button className='mobile:order-1 h-8 w-8 flex items-center justify-center rounded border-[0.05rem] mobile:border-[0.1rem] border-gallery bg-white hover:bg-alabaster hover:duration-[0.4s] ease-in-out'
             onClick={() => {
               resetFilters()
             }}
