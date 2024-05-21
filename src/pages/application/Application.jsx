@@ -39,7 +39,7 @@ const Application = () => {
       const userId = localStorage.getItem('userId');
       const accessToken = localStorage.getItem('accessToken');
       if (!userId || !accessToken) {
-        throw new Error("User ID or access token not found in local storage");
+        throw new Error('User ID or access token not found in local storage');
       }
 
       const transactionsPromise = axios.get('https://expns-api.vercel.app/api/get-transactions', {
@@ -87,9 +87,9 @@ const Application = () => {
                   <div className='app-container w-full relative flex flex-col md:px-[10vw] xl:px-[20vw] exl:px-[25vw] py-4 mobile:px-0 gap-4 items-center'>
                     <div className='w-full h-0 flex-1 overflow-hidden flex flex-col gap-4 mobile:px-4'>
                       <Routes>
-                        <Route path="/" element={<Dashboard/>} />
-                        <Route path="/stats" element={<Stats/>} />
-                        <Route path="/transactions" element={<Transactions/>} />
+                        <Route path='/' element={<Dashboard/>} />
+                        <Route path='/stats' element={<Stats/>} />
+                        <Route path='/transactions' element={<Transactions/>} />
                       </Routes>
                     </div>
                   </div>

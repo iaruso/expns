@@ -394,6 +394,22 @@ input[type=number] {
   color: #D6D6D6;
 }
 
+/* Google charts */
+.stats-content, .stats-content > div:not(:first-child) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.stats-content rect {
+  fill: none !important;
+}
+
+.stats-content text {
+  font-family: 'Urbanist', sans-serif !important;
+  font-weight: 600 !important;
+}
+
 @media screen and (max-width: 768px) {
   .react-date-picker__calendar {
     border-width: 0.1rem !important;

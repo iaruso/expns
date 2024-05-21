@@ -76,7 +76,7 @@ const Form = ({ setShowForm, edit = false, initialData }) => {
 
   const handleChange = (e) => {
     const input = e.target.value;
-    const re = /^\d{0,10}(\.\d{0,2})?$/;
+    const re = /^\d{0,7}(\.\d{0,2})?$/;
     if (re.test(input) || input === '') {
       setTransactionAmount(input);
     }
