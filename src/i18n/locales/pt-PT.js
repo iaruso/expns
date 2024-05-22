@@ -299,12 +299,16 @@ export default {
 				transactions: {
 					title: 'Transações',
 					see_all: 'Ver tudo',
+					no_transactions: 'Sem transações para mostrar. Comece por criar uma nova transação.'
 				},
 				categories: {
-					title: 'Vista categorizada',
-					incomes: 'Rendimentos',
-					expenses: 'Despesas',
-					investments: 'Investimentos',
+					title: 'Categorias',
+					type: {
+						all: 'Todas',
+						incomes: 'Rendimentos',
+						expenses: 'Despesas',
+						investments: 'Investimentos'
+					}
 				},
 			},
 			stats: {
@@ -320,7 +324,7 @@ export default {
 					week: '1W',
 					month: '1M',
 					year: '1Y',
-					custom: 'Custom'
+					all: 'All'
 				}
 			},
 			transactions: {
@@ -344,7 +348,8 @@ export default {
 					date: 'Data da transação',
 					min: 'Min',
 					max: 'Max'
-				}			
+				},
+				no_transactions: 'Sem transações para mostrar. Comece por criar uma nova transação.'
 			},
 			form: {
 				name: 'Nome da transação',

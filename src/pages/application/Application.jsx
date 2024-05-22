@@ -19,6 +19,7 @@ const Application = () => {
   const [currencyRates, setCurrencyRates] = useState({});
   const [triggerFetch, setTriggerFetch] = useState(0); // 0 - Load data, 1 - Reload data, 2 - Do nothing
   const [dataLoaded, setDataLoaded] = useState(false);
+  const dataLoadedFromStorage = localStorage.getItem('data-loaded') || false;
 
   useEffect(() => {
     const expiryTime = localStorage.getItem('expiryTime');
@@ -60,9 +61,10 @@ const Application = () => {
         setUserTransactions(transactions);
         const rates = currencyRatesResponse.data[0]?.rates || {};
         setCurrencyRates(rates);
-        if (triggerFetch === 0) addNotification('success', 'Check', 'User data loaded!');
+        if (triggerFetch === 0 && !dataLoadedFromStorage) addNotification('success', 'Check', 'User data loaded!');
         setTriggerFetch(2);
         setDataLoaded(true);
+        localStorage.setItem('data-loaded', true);
       } else {
         addNotification('error', 'Info', 'Failed to fetch user transactions.');
       }

@@ -21,6 +21,8 @@ const Dropdown = forwardRef(() => {
         localStorage.removeItem('accessToken');
         localStorage.removeItem('refreshToken');
         localStorage.removeItem('expiryTime');
+        localStorage.removeItem('currency');
+        localStorage.removeItem('data-loaded');
         navigate('/login');
       }
     } catch (error) {

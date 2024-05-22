@@ -26,7 +26,7 @@ const FeatureRow = ({ featurePath, checks }) => {
       {checks.map((checkValue, index) => (
         <div key={index} className='flex items-center justify-center'>
           {typeof checkValue === 'boolean' ? (
-            checkValue ? <Icon name='Check' className='w-6 h-6 fill-shaft'/> : ''
+            checkValue ? <Icon name='Check' className='w-6 h-6 mobile:w-4 mobile:h-4 fill-shaft'/> : ''
           ) : (
             <p className='text-base text-cod font-semibold'>{t(checkValue)}</p>
           )}

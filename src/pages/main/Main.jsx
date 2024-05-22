@@ -61,17 +61,17 @@ export default function Main() {
 				<h2 className='text-[3rem] mobile:text-[2rem] text-cod font-extrabold'>{t('main.features.title')}</h2>
 				<img src='./graphic.png' alt='Features cover' className='object-cover object-top rounded-lg'/>
 				<div className='flex h-[6rem] mobile:h-auto gap-8 mobile:gap-4 mobile:flex-col'>
-					<div className='flex p-2 gap-2 w-full justify-center items-center rounded-lg border-[0.05rem] mobile:border-[0.1rem] border-gallery'>
-						<Finance className='w-12 h-12 fill-chalice'/>
-						<p className='text-[1.25rem] text-cod font-semibold'>{t('main.features.cards.finance')}</p>
+					<div className='flex p-2 gap-2 mobile:h-16 w-full justify-center items-center rounded-lg border-[0.05rem] mobile:border-[0.1rem] border-gallery'>
+						<Finance className='w-12 h-12 mobile:w-6 mobile:h-6 fill-chalice'/>
+						<p className='text-[1.25rem] mobile:text-tiny text-cod font-semibold'>{t('main.features.cards.finance')}</p>
 					</div>
-					<div className='flex p-2 gap-2 w-full justify-center items-center rounded-lg border-[0.05rem] mobile:border-[0.1rem] border-gallery'>
-						<Currency className='w-12 h-12 fill-chalice'/>
-						<p className='text-[1.25rem] text-cod font-semibold'>{t('main.features.cards.currency')}</p>
+					<div className='flex p-2 gap-2 mobile:h-16 w-full justify-center items-center rounded-lg border-[0.05rem] mobile:border-[0.1rem] border-gallery'>
+						<Currency className='w-12 h-12 mobile:w-6 mobile:h-6 fill-chalice'/>
+						<p className='text-[1.25rem] mobile:text-tiny text-cod font-semibold'>{t('main.features.cards.currency')}</p>
 					</div>
-					<div className='flex p-2 gap-2 w-full justify-center items-center rounded-lg border-[0.05rem] mobile:border-[0.1rem] border-gallery'>
-						<Data className='w-12 h-12 fill-chalice'/>
-						<p className='text-[1.25rem] text-cod font-semibold'>{t('main.features.cards.data')}</p>
+					<div className='flex p-2 gap-2 mobile:h-16 w-full justify-center items-center rounded-lg border-[0.05rem] mobile:border-[0.1rem] border-gallery'>
+						<Data className='w-12 h-12 mobile:w-6 mobile:h-6 fill-chalice'/>
+						<p className='text-[1.25rem] mobile:text-tiny text-cod font-semibold'>{t('main.features.cards.data')}</p>
 					</div>
 				</div>
 			</div>

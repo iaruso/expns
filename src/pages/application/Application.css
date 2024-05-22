@@ -408,6 +408,16 @@ input[type=number] {
 .stats-content text {
   font-family: 'Urbanist', sans-serif !important;
   font-weight: 600 !important;
+  color: #1A1A1A !important;
+}
+
+.stats-content svg > g:nth-child(3) text {
+  fill: #1A1A1A !important;
+}
+
+.stats-content svg > g:nth-child(3) path {
+  fill: #5A5A5A;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 768px) {
@@ -424,6 +434,7 @@ input[type=number] {
   .filters-container > div:nth-child(2),
   .filters-container > div:nth-child(4) {
     order: 3;
+    flex: 1;
   }
 
   .transaction-text-search {

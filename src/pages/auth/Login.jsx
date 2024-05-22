@@ -31,6 +31,7 @@ const Login = () => {
   };
 
   useEffect(() => {
+    localStorage.removeItem('data-loaded');
     const expiryTime = localStorage.getItem('expiryTime');
     const currentTime = new Date().getTime();
     if (currentTime < parseInt(expiryTime) && expiryTime) {

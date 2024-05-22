@@ -130,7 +130,7 @@ const Transactions = () => {
   return (
     <>
       <div className='flex flex-col h-full gap-2 p-4 rounded-lg bg-white border-[0.05rem] mobile:border-[0.1rem] border-gallery'>
-        <div className='filters-container flex items-center h-8 gap-1 mobile:flex-wrap mobile:h-auto mobile:justify-end'>
+        <div className='filters-container flex items-center h-8 gap-1 mobile:gap-2 mobile:flex-wrap mobile:h-auto mobile:justify-end'>
           <Select
             className='type-select'
             options={[
@@ -179,16 +179,18 @@ const Transactions = () => {
             clearable
             closeOnSelect
           />
-          <button className='mobile:order-1 h-8 w-8 flex items-center justify-center rounded border-[0.05rem] mobile:border-[0.1rem] border-gallery bg-white hover:bg-alabaster hover:duration-[0.4s] ease-in-out'
+          <button className='mobile:order-3 h-8 w-8 flex items-center justify-center rounded border-[0.05rem] mobile:border-[0.1rem] border-gallery bg-white hover:bg-alabaster hover:duration-[0.4s] ease-in-out'
             onClick={() => {
               resetFilters()
             }}
           >
             <Icon name='Reset' className='w-4 h-4 fill-chalice'/>
           </button>
-
         </div>
         <div className='transactions-item-list flex flex-col flex-1 h-0 overflow-y-auto bg-white border-[0.05rem] mobile:border-[0.1rem] border-gallery rounded'>
+          {filteredTransactions.length === 0 && 
+            <p className='text-sm text-gray font-semibold text-center p-4 my-auto mx-[10vw]'>{t('app.transactions.no_transactions')}</p>
+          }
           {filteredTransactions.map(({ _id, title, date, amount, category, type, currency}) => (
             <TransactionItem
               key={_id}

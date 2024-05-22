@@ -132,8 +132,14 @@ input {
   }
 }
 
-@media screen and (min-width: 300px) and (max-width: 456px) {
+@media screen and (min-width: 340px) and (max-width: 600px) {
   html {
     font-size: calc(12px + (16 - 12) * (100vw - 300px) / (1080 - 300));
+  }
+}
+
+@media screen and (min-width: 200px) and (max-width: 339px) {
+  html {
+    font-size: calc(10px + (16 - 10) * (100vw - 300px) / (1080 - 300));
   }
 }

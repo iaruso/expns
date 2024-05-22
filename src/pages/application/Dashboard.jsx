@@ -15,7 +15,7 @@ import Form from '../../components/transactions/Form.jsx';
 const Button = ({ label, onClick, selected }) => {
   return (
     <button
-      className={`h-6 flex px-2 py-1 text-xs font-semibold text-gray items-center justify-center rounded border-[0.05rem] mobile:border-[0.1rem] border-gallery hover:bg-alabaster hover:duration-[0.4s] ease-in-out ${selected ? 'bg-alabaster' : 'bg-white'}`}
+      className={`h-6 flex px-2 py-1 text-xs font-semibold items-center justify-center rounded border-[0.05rem] mobile:border-[0.1rem] border-gallery hover:bg-alabaster hover:duration-[0.4s] ease-in-out ${selected ? 'bg-alabaster text-cod' : 'bg-white text-gray'}`}
       onClick={onClick}
     >
       {label}
@@ -157,6 +157,9 @@ const Dashboard = () => {
           </div>
         </div>
         <div className='transactions-item-list flex h-0 flex-col flex-1 overflow-y-auto bg-white border-[0.05rem] mobile:border-[0.1rem] border-gallery rounded'>
+          {sortedTransactions.length === 0 && 
+            <p className='text-sm text-gray font-semibold text-center p-4 my-auto mx-[10vw]'>{t('app.dashboard.transactions.no_transactions')}</p>
+          }
           {sortedTransactions.map(({ _id, title, date, amount, category, type, currency }) => (
             <TransactionItem
               key={_id}

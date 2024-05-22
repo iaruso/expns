@@ -28,43 +28,45 @@ const Footer = () => {
 					<LogoFooter className='w-8 h-8 mobile:w-24 mobile:h-24'/>
 					<p className='text-xs mobile:text-tiny text-shaft font-medium max-w-[25vw] mobile:max-w-none'>{t('footer.disclaimer')}</p>
 				</div>
-				<div className='flex flex-col w-32 gap-2'>
-					<p className='text-sm mobile:text-base text-cod font-bold'>{t('footer.features.title')}</p>
-					<ul className='text-xs mobile:text-tiny text-cod font-medium flex flex-col gap-1'>
-						<li className='hover:text-gray hover:duration-[0.4s] ease-in-out cursor-pointer'>{t('footer.features.list.0')}</li>
-						<li className='hover:text-gray hover:duration-[0.4s] ease-in-out cursor-pointer'>{t('footer.features.list.1')}</li>
-						<li className='hover:text-gray hover:duration-[0.4s] ease-in-out cursor-pointer'>{t('footer.features.list.2')}</li>
-						<li className='hover:text-gray hover:duration-[0.4s] ease-in-out cursor-pointer'>{t('footer.features.list.3')}</li>
-						<li className='hover:text-gray hover:duration-[0.4s] ease-in-out cursor-pointer'>{t('footer.features.list.4')}</li>
-						<li className='hover:text-gray hover:duration-[0.4s] ease-in-out cursor-pointer'>{t('footer.features.list.5')}</li>
-					</ul>
-				</div>
-				<div className='flex flex-col w-32 gap-2'>
-					<p className='text-sm mobile:text-base text-cod font-bold'>{t('footer.resources.title')}</p>
-					<ul className='text-xs mobile:text-tiny text-cod font-medium flex flex-col gap-1'>
-						<li className='hover:text-gray hover:duration-[0.4s] ease-in-out cursor-pointer'>{t('footer.resources.list.0')}</li>
-						<li className='hover:text-gray hover:duration-[0.4s] ease-in-out cursor-pointer'>{t('footer.resources.list.1')}</li>
-						<li className='hover:text-gray hover:duration-[0.4s] ease-in-out cursor-pointer'>{t('footer.resources.list.2')}</li>
-						<li className='hover:text-gray hover:duration-[0.4s] ease-in-out cursor-pointer'>{t('footer.resources.list.3')}</li>
-						<li className='hover:text-gray hover:duration-[0.4s] ease-in-out cursor-pointer'>{t('footer.resources.list.4')}</li>
-					</ul>
-				</div>
-				<div className='flex flex-col w-32 gap-2'>
-					<p className='text-sm mobile:text-base text-cod font-bold'>{t('footer.learn.title')}</p>
-					<ul className='text-xs mobile:text-tiny text-cod font-medium flex flex-col gap-1'>
-						<li className='hover:text-gray hover:duration-[0.4s] ease-in-out cursor-pointer'>{t('footer.learn.list.0')}</li>
-						<li className='hover:text-gray hover:duration-[0.4s] ease-in-out cursor-pointer'>{t('footer.learn.list.1')}</li>
-						<li className='hover:text-gray hover:duration-[0.4s] ease-in-out cursor-pointer'>{t('footer.learn.list.2')}</li>
-						<li className='hover:text-gray hover:duration-[0.4s] ease-in-out cursor-pointer'>{t('footer.learn.list.3')}</li>
-						<li className='hover:text-gray hover:duration-[0.4s] ease-in-out cursor-pointer'>{t('footer.learn.list.4')}</li>
-					</ul>
-				</div>
-				<div className='flex flex-col w-32 gap-2'>
-					<p className='text-sm mobile:text-base text-cod font-bold'>{t('footer.start.title')}</p>
-					<ul className='text-xs mobile:text-tiny text-cod font-medium flex flex-col gap-1'>
-					<li className='hover:text-gray hover:duration-[0.4s] ease-in-out cursor-pointer'>{t('footer.start.list.0')}</li>
-						<li className='hover:text-gray hover:duration-[0.4s] ease-in-out cursor-pointer'>{t('footer.start.list.1')}</li>
-					</ul>
+				<div className='mobile:grid-cols-2 gap-8 flex flex-wrap'>
+					<div className='flex flex-col md:w-32 mobile:w-[calc(50%-1rem)] gap-2'>
+						<p className='text-sm mobile:text-base text-cod font-bold'>{t('footer.features.title')}</p>
+						<ul className='text-xs mobile:text-tiny text-cod font-medium flex flex-col gap-1'>
+							<li className='hover:text-gray hover:duration-[0.4s] ease-in-out cursor-pointer'>{t('footer.features.list.0')}</li>
+							<li className='hover:text-gray hover:duration-[0.4s] ease-in-out cursor-pointer'>{t('footer.features.list.1')}</li>
+							<li className='hover:text-gray hover:duration-[0.4s] ease-in-out cursor-pointer'>{t('footer.features.list.2')}</li>
+							<li className='hover:text-gray hover:duration-[0.4s] ease-in-out cursor-pointer'>{t('footer.features.list.3')}</li>
+							<li className='hover:text-gray hover:duration-[0.4s] ease-in-out cursor-pointer'>{t('footer.features.list.4')}</li>
+							<li className='hover:text-gray hover:duration-[0.4s] ease-in-out cursor-pointer'>{t('footer.features.list.5')}</li>
+						</ul>
+					</div>
+					<div className='flex flex-col md:w-32 mobile:w-[calc(50%-1rem)] gap-2'>
+						<p className='text-sm mobile:text-base text-cod font-bold'>{t('footer.resources.title')}</p>
+						<ul className='text-xs mobile:text-tiny text-cod font-medium flex flex-col gap-1'>
+							<li className='hover:text-gray hover:duration-[0.4s] ease-in-out cursor-pointer'>{t('footer.resources.list.0')}</li>
+							<li className='hover:text-gray hover:duration-[0.4s] ease-in-out cursor-pointer'>{t('footer.resources.list.1')}</li>
+							<li className='hover:text-gray hover:duration-[0.4s] ease-in-out cursor-pointer'>{t('footer.resources.list.2')}</li>
+							<li className='hover:text-gray hover:duration-[0.4s] ease-in-out cursor-pointer'>{t('footer.resources.list.3')}</li>
+							<li className='hover:text-gray hover:duration-[0.4s] ease-in-out cursor-pointer'>{t('footer.resources.list.4')}</li>
+						</ul>
+					</div>
+					<div className='flex flex-col md:w-32 mobile:w-[calc(50%-1rem)] gap-2'>
+						<p className='text-sm mobile:text-base text-cod font-bold'>{t('footer.learn.title')}</p>
+						<ul className='text-xs mobile:text-tiny text-cod font-medium flex flex-col gap-1'>
+							<li className='hover:text-gray hover:duration-[0.4s] ease-in-out cursor-pointer'>{t('footer.learn.list.0')}</li>
+							<li className='hover:text-gray hover:duration-[0.4s] ease-in-out cursor-pointer'>{t('footer.learn.list.1')}</li>
+							<li className='hover:text-gray hover:duration-[0.4s] ease-in-out cursor-pointer'>{t('footer.learn.list.2')}</li>
+							<li className='hover:text-gray hover:duration-[0.4s] ease-in-out cursor-pointer'>{t('footer.learn.list.3')}</li>
+							<li className='hover:text-gray hover:duration-[0.4s] ease-in-out cursor-pointer'>{t('footer.learn.list.4')}</li>
+						</ul>
+					</div>
+					<div className='flex flex-col md:w-32 mobile:w-[calc(50%-1rem)] gap-2'>
+						<p className='text-sm mobile:text-base text-cod font-bold'>{t('footer.start.title')}</p>
+						<ul className='text-xs mobile:text-tiny text-cod font-medium flex flex-col gap-1'>
+						<li className='hover:text-gray hover:duration-[0.4s] ease-in-out cursor-pointer'>{t('footer.start.list.0')}</li>
+							<li className='hover:text-gray hover:duration-[0.4s] ease-in-out cursor-pointer'>{t('footer.start.list.1')}</li>
+						</ul>
+					</div>
 				</div>
 			</div>
 			<div className='flex items-center justify-between h-8 mobile:h-10'>

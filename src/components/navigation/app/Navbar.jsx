@@ -69,7 +69,7 @@ const Navbar = () => {
             <div className={`settings-button flex items-center justify-center h-8 w-8 mobile:h-10 mobile:w-10 cursor-pointer rounded bg-sand hover:bg-alabaster hover:duration-[0.4s]`} ref={settingsRef} onClick={toggleDropdown}>
               <Icon name='Settings' className='w-4 h-4 mobile:h-5 mobile:w-5 fill-chalice' />
             </div>
-            <div ref={dropdownRef} style={{ display: 'none' }} className='flex flex-col absolute mobile:bottom-16 md:top-14 right-0 mobile:right-0 w-fit min-w-24 p-2 rounded bg-white border-gallery border-[0.05rem] mobile:border-[0.1rem]'>
+            <div ref={dropdownRef} style={{ display: 'none' }} className='flex flex-col absolute mobile:bottom-[calc(4.25rem+0.05rem)] md:top-14 right-0 mobile:right-0 w-fit min-w-24 p-2 rounded bg-white border-gallery border-[0.05rem] mobile:border-[0.1rem]'>
               <Dropdown/>
             </div>
           </div>

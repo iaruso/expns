@@ -299,6 +299,7 @@ export default {
 				transactions: {
 					title: 'Transactions',
 					see_all: 'See all',
+					no_transactions: 'No transactions found. Add a new transaction to get started.'
 				},
 				categories: {
 					title: 'Category overview',
@@ -323,7 +324,7 @@ export default {
 					week: '1W',
 					month: '1M',
 					year: '1Y',
-					custom: 'Custom'
+					all: 'All'
 				}
 			},
 			transactions: {
@@ -347,7 +348,8 @@ export default {
 					date: 'Date of transaction',
 					min: 'Min',
 					max: 'Max'
-				}			
+				},
+				no_transactions: 'No transactions found. Add a new transaction to get started.'
 			},
 			form: {
 				name: 'New transaction name',
