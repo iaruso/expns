@@ -50,13 +50,13 @@ const Dropdown = forwardRef(() => {
       <ul className='flex flex-col w-auto gap-2'>
         <li className='rounded w-full h-8 mobile:h-10 flex items-center bg-sand'>
           <button 
-            className={`rounded w-12 mobile:w-15 ${languageBool ? 'text-gray hover:bg-alabaster hover:duration-[0.4s] ease-in-out' : 'text-white bg-royal pointer-events-none'} h-8 mobile:h-10 text-xs font-semibold mobile:text-sm flex items-center justify-center`} 
+            className={`rounded w-12 mobile:w-[50%] ${languageBool ? 'text-gray hover:bg-alabaster hover:duration-[0.4s] ease-in-out' : 'text-white bg-royal pointer-events-none'} h-8 mobile:h-10 text-xs font-semibold mobile:text-sm flex items-center justify-center`} 
             onClick={toggleLanguage}
           >
             PT
           </button>
           <button 
-            className={`rounded w-12 mobile:w-15 ${languageBool ? 'text-white bg-royal pointer-events-none' : 'text-gray hover:bg-alabaster hover:duration-[0.4s] ease-in-out'} h-8 mobile:h-10 text-xs font-semibold mobile:text-sm flex items-center justify-center`} 
+            className={`rounded w-12 mobile:w-[50%] ${languageBool ? 'text-white bg-royal pointer-events-none' : 'text-gray hover:bg-alabaster hover:duration-[0.4s] ease-in-out'} h-8 mobile:h-10 text-xs font-semibold mobile:text-sm flex items-center justify-center`} 
             onClick={toggleLanguage}
           >
             EN
