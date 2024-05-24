@@ -6,9 +6,7 @@ import { useTranslation } from 'react-i18next'
 import Translator from '../../components/i18n/Translator.jsx';
 import Navbar from '../../components/navigation/main/Navbar.jsx';
 import Footer from '../../components/footer/Footer.jsx';
-import Finance from '../../components/icons/Finance.jsx';
-import Currency from '../../components/icons/Currency.jsx';
-import Data from '../../components/icons/Data.jsx';
+import Icon from '../../components/icons/Icon.jsx';
 import PricingCards from '../../components/main/PricingCards.jsx';
 import CompareFeatures from '../../components/main/CompareFeatures.jsx';
 import Highlights from '../../components/main/Highlights.jsx';
@@ -62,15 +60,15 @@ export default function Main() {
 				<img src='./graphic.png' alt='Features cover' className='object-cover object-top rounded-lg'/>
 				<div className='flex h-[6rem] mobile:h-auto gap-8 mobile:gap-4 mobile:flex-col'>
 					<div className='flex p-2 gap-2 mobile:h-16 w-full justify-center items-center rounded-lg border-[0.05rem] mobile:border-[0.1rem] border-gallery'>
-						<Finance className='w-12 h-12 mobile:w-6 mobile:h-6 fill-chalice'/>
+						<Icon name='Finance' className='w-12 h-12 mobile:w-6 mobile:h-6 fill-chalice'/>
 						<p className='text-[1.25rem] mobile:text-tiny text-cod font-semibold'>{t('main.features.cards.finance')}</p>
 					</div>
 					<div className='flex p-2 gap-2 mobile:h-16 w-full justify-center items-center rounded-lg border-[0.05rem] mobile:border-[0.1rem] border-gallery'>
-						<Currency className='w-12 h-12 mobile:w-6 mobile:h-6 fill-chalice'/>
+						<Icon name='Currency' className='w-12 h-12 mobile:w-6 mobile:h-6 fill-chalice'/>
 						<p className='text-[1.25rem] mobile:text-tiny text-cod font-semibold'>{t('main.features.cards.currency')}</p>
 					</div>
 					<div className='flex p-2 gap-2 mobile:h-16 w-full justify-center items-center rounded-lg border-[0.05rem] mobile:border-[0.1rem] border-gallery'>
-						<Data className='w-12 h-12 mobile:w-6 mobile:h-6 fill-chalice'/>
+						<Icon name='Data' className='w-12 h-12 mobile:w-6 mobile:h-6 fill-chalice'/>
 						<p className='text-[1.25rem] mobile:text-tiny text-cod font-semibold'>{t('main.features.cards.data')}</p>
 					</div>
 				</div>

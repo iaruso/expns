@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
 import { Link } from 'react-router-dom';
-import Icon from '../../app/Icon.jsx';
+import Icon from '../../icons/Icon.jsx';
 
 const Navbar = () => {
 	const { t } = useTranslation();

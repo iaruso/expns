@@ -1,6 +1,6 @@
 import './Notifications.css';
 import React, { useEffect } from 'react';
-import Icon from '../app/Icon';
+import Icon from '../icons/Icon';
 
 const Notification = ({ id, type, icon, value, onRemove }) => {
   useEffect(() => {

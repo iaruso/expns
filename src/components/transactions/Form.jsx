@@ -8,7 +8,7 @@ import { gsap } from 'gsap';
 import { TransactionsContext } from '../../pages/application/Application';
 import { FetchContext } from '../../pages/application/Application';
 import { useNotifications } from '../notification/NotificationContainer';
-import Icon from '../app/Icon';
+import Icon from '../icons/Icon';
 
 const Form = ({ setShowForm, edit = false, initialData }) => {
   const { t, i18n } = useTranslation();

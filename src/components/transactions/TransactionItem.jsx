@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { convertCurrency } from '../../helpers/convertCurrency.js';
 import { currencySymbol } from '../../helpers/currencySymbol.js';
 import { currencyFormat } from '../../helpers/currencyFormat.js';
-import Icon from '../app/Icon.jsx';
+import Icon from '../icons/Icon.jsx';
 
 const TransactionItem = ({ id, name, date, value, category, type, currency, localCurrency, currencyRates, setEditFormData }) => {
   const { t, i18n } = useTranslation();

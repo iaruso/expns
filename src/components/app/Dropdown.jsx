@@ -2,7 +2,7 @@ import React, { forwardRef, useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Icon from './Icon';
+import Icon from '../icons/Icon.jsx';
 
 const Dropdown = forwardRef(() => {
   const { t, i18n } = useTranslation();

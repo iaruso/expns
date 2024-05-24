@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Link, useMatch } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Dropdown from '../../app/Dropdown.jsx';
-import Icon from '../../app/Icon.jsx';
+import Icon from '../../icons/Icon.jsx';
 import Form from '../../transactions/Form.jsx';
 
 const Navbar = () => {

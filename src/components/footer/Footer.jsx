@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { gsap } from 'gsap';
 import LogoFooter from '../icons/LogoFooter';
 import Language from '../icons/Language';
 import Facebook from '../icons/Facebook';
@@ -16,10 +17,14 @@ const Footer = () => {
 	}, [i18n]);
   const toggleLanguage = () => {
     setLanguageBool(prevState => !prevState);
-    !languageBool ? i18n.changeLanguage('en-US') : i18n.changeLanguage('pt-PT');
-    window.scrollTo(0, 0);
-    window.location.reload();
+		gsap.to('body', { duration: 0.4, opacity: 0, onComplete: reloadPage });
   };
+
+	const reloadPage = () => {
+		!languageBool ? i18n.changeLanguage('en-US') : i18n.changeLanguage('pt-PT');
+		window.scrollTo(0, 0);
+		window.location.reload();
+	}
 
 	return (
 		<footer className='w-full flex flex-col py-8 mobile:px-4 md:px-[10vw] xl:px-[20vw] exl:px-[25vw] border-t-[0.05rem] mobile:border-t-[0.1rem] border-gallery gap-8'>

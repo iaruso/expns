@@ -9,7 +9,7 @@ import { convertCurrency } from '../../helpers/convertCurrency';
 import { currencySymbol } from '../../helpers/currencySymbol';
 import { currencyFormat } from '../../helpers/currencyFormat.js';
 import TransactionItem from '../../components/transactions/TransactionItem.jsx';
-import Icon from '../../components/app/Icon.jsx';
+import Icon from '../../components/icons/Icon.jsx';
 import Form from '../../components/transactions/Form.jsx';
 
 const Button = ({ label, onClick, selected }) => {

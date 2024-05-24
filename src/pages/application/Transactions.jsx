@@ -4,7 +4,7 @@ import Select from 'react-dropdown-select';
 import jsonData from '../../../public/data.json';
 import { TransactionsContext, CurrencyContext } from './Application.jsx';
 import TransactionItem from '../../components/transactions/TransactionItem.jsx';
-import Icon from '../../components/app/Icon.jsx';
+import Icon from '../../components/icons/Icon.jsx';
 import Form from '../../components/transactions/Form.jsx';
 
 const Transactions = () => {

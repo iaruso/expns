@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import Icon from '../app/Icon.jsx';
+import Icon from '../icons/Icon.jsx';
 
 const FeatureHeader = ({ titlePath }) => {
   const { t } = useTranslation();
