@@ -6,7 +6,6 @@ import Icon from '../../app/Icon.jsx';
 import Form from '../../transactions/Form.jsx';
 
 const Navbar = () => {
-  console.log('Application');
   const { t } = useTranslation();
   const matchDashboard = useMatch('/app/');
   const matchStats = useMatch('/app/stats');

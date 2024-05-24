@@ -1,5 +1,5 @@
 import './Auth.css';
-import React, { useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
@@ -8,27 +8,14 @@ import Logo from '../../components/icons/Logo';
 import { useNotifications } from '../../components/notification/NotificationContainer';
 
 const Login = () => {
+  const navigate = useNavigate();
+  const { t } = useTranslation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [checked, setChecked] = useState(false);
-  const [warning, setWarning] = useState(false);
   const [isLogging, setIsLogging] = useState(false)
   const addNotification = useNotifications();
-  const navigate = useNavigate();
-  const { t } = useTranslation();
-
-  const animateCard = () => {
-    gsap.fromTo(
-      '.warning-card',
-      { opacity: 0 },
-      {
-        opacity: 1,
-        duration: 0.6,
-        delay: 0.4,
-        ease: 'power1.inOut',
-      }
-    )
-  };
+  const authRef = useRef(null);
 
   useEffect(() => {
     localStorage.removeItem('data-loaded');
@@ -36,6 +23,8 @@ const Login = () => {
     const currentTime = new Date().getTime();
     if (currentTime < parseInt(expiryTime) && expiryTime) {
       navigate('/app/');
+    } else {
+      gsap.fromTo(authRef.current, { opacity: 0 }, { opacity: 1, duration: 0.8 });
     }
   }, []);
 
@@ -81,18 +70,10 @@ const Login = () => {
     }
   };
 
-  useEffect(() => {
-    if (warning) {
-      animateCard()
-    }
-  }, [warning]);
-
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
   return (
     <>
       <div className='w-full h-[100dvh] flex items-center justify-center px-16'>
-        <div className='w-64 p-4 gap-4 flex flex-col mobile:w-full mobile:gap-6'>
+        <div className='w-64 p-4 gap-4 flex flex-col mobile:w-full mobile:gap-6' ref={authRef}>
           <Link to='/' className='flex gap-1 justify-center items-center mx-auto h-8 mobile:h-16 mobile:gap-2'>
             <Logo className='w-4 mobile:w-10'/>
             <span className='text-tiny font-extrabold text-persian mobile:text-[2rem]'>Expns</span>

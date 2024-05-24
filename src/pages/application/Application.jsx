@@ -1,11 +1,12 @@
 import './Application.css';
 import React, { createContext, useEffect, useState } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import axios from 'axios';
+import { gsap } from 'gsap';
 import Dashboard from './Dashboard';
 import Stats from './Stats';
 import Transactions from './Transactions';
 import Navbar from '../../components/navigation/app/Navbar';
-import axios from 'axios';
 import { useNotifications } from '../../components/notification/NotificationContainer';
 
 const FetchContext = createContext();
@@ -14,6 +15,7 @@ const CurrencyContext = createContext();
 
 const Application = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const addNotification = useNotifications();
   const [userTransactions, setUserTransactions] = useState([]);
   const [currencyRates, setCurrencyRates] = useState({});
@@ -76,6 +78,10 @@ const Application = () => {
   useEffect(() => {
     fetchUserData();
   }, [triggerFetch]);
+
+  useEffect(() => {
+    if (dataLoaded) gsap.fromTo('.app-container', { opacity: 0 }, { opacity: 1, duration: 0.8 });
+  }, [location, dataLoaded]);
 
   return (
     <>

@@ -5,7 +5,7 @@ import { TransactionsContext, CurrencyContext } from './Application.jsx';
 import { convertCurrency } from '../../helpers/convertCurrency.js';
 
 const Stats = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const userTransactions = useContext(TransactionsContext);
   const currencyRates = useContext(CurrencyContext);
   const localCurrency = localStorage.getItem('currency') || 'usd';
@@ -17,7 +17,8 @@ const Stats = () => {
     is3D: false,
     legend: 'bottom',
     width: '100%',
-    height: '100%'
+    height: '100%',
+    colors: ['#2433c2', '#2635cb', '#3444d9', '#4c5ade', '#6470e2', '#7c86e7', '#939ceb', '#abb2ef', '#c3c8f4', '#dbdef8', '#f3f4fd', '#02030c', '#070924', '#0b103c', '#101654', '#141c6c', '#182383', '#1d299b']
   });
 
   useEffect(() => {
@@ -50,9 +51,9 @@ const Stats = () => {
       filteredTransactions.forEach(transaction => {
         const amount = transaction.amount;
         const currency = transaction.currency;
-        const categoryKey = transaction.category.toLowerCase() === "etf" ? 
-                            transaction.category.toUpperCase() : 
-                            transaction.category.charAt(0).toUpperCase() + transaction.category.slice(1);
+        const categoryKey = transaction.category.toLowerCase() === "other" ? 
+                            t(`categories.other`) : 
+                            t(`categories.${transaction.type}.${transaction.category.toLowerCase()}`);
   
         const currentAmount = categoryMap.get(categoryKey) || 0;
         categoryMap.set(categoryKey, currentAmount + convertCurrency(amount, currency, localCurrency, currencyRates));
@@ -109,6 +110,7 @@ const Stats = () => {
           options={options}
           width={'100%'}
           height={'90%'}
+          chartLanguage={i18n.language}
         />
       </div>
     </div>

@@ -79,6 +79,9 @@ const Dashboard = () => {
     let selectedCategories = {};
     userTransactions.forEach((transaction) => {
       const { category, amount } = transaction;
+      if (category === 'other') {
+        return null;
+      }
       const parsedAmount = parseFloat(amount);
       if (!isNaN(parsedAmount)) {
         selectedCategories[category] = (selectedCategories[category] || 0) + parsedAmount;

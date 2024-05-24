@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import Select from 'react-dropdown-select';
 import DatePicker from 'react-date-picker';
+import { gsap } from 'gsap';
 import { TransactionsContext } from '../../pages/application/Application';
 import { FetchContext } from '../../pages/application/Application';
 import { useNotifications } from '../notification/NotificationContainer';
@@ -11,6 +12,7 @@ import Icon from '../app/Icon';
 
 const Form = ({ setShowForm, edit = false, initialData }) => {
   const { t, i18n } = useTranslation();
+  const formRef = useRef(null);
   const userTransactions = useContext(TransactionsContext);
   const setTriggerFetch = useContext(FetchContext);
   const [transactionDate, setTransactionDate] = useState('');
@@ -193,10 +195,16 @@ const Form = ({ setShowForm, edit = false, initialData }) => {
     setShowForm(false);
   };
 
+  useEffect(() => {
+    if (formRef.current) {
+      gsap.fromTo(formRef.current, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.8 });
+    }
+  }, []);
+
   return (
     <>
       <div className='fixed w-full h-full z-50 bg-white inset-0 flex items-center justify-center'>
-        <form className='flex flex-col w-64 mobile:w-[80vw] gap-2 p-4 rounded-lg bg-white border-[0.05rem] mobile:border-[0.1rem] border-gallery' onSubmit={handleSubmit}>
+        <form className='flex flex-col w-64 mobile:w-[80vw] gap-2 p-4 rounded-lg bg-white border-[0.05rem] mobile:border-[0.1rem] border-gallery' onSubmit={handleSubmit} ref={formRef}>
           <div className='h-8 gap-2 flex items-center'>
             <button className='w-8 h-8 rounded flex items-center justify-center bg-white border-[0.05rem] mobile:border-[0.1rem] border-gallery hover:bg-alabaster hover:duration-[0.4s]' onClick={(e) => {e.preventDefault(); setShowForm(false);}}>
               <Icon name='Return' className='w-4 h-4 fill-chalice'/>

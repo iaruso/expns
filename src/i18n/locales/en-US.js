@@ -299,7 +299,7 @@ export default {
 				transactions: {
 					title: 'Transactions',
 					see_all: 'See all',
-					no_transactions: 'No transactions found. Add a new transaction to get started.'
+					no_transactions: 'No transactions found.'
 				},
 				categories: {
 					title: 'Category overview',
