@@ -1,11 +1,13 @@
 import React, { forwardRef, useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import { useNotifications } from '../notification/NotificationContainer.jsx';
 import axios from 'axios';
 import Icon from '../icons/Icon.jsx';
 
 const Dropdown = forwardRef(() => {
   const { t, i18n } = useTranslation();
+  const addNotification = useNotifications();
   const [languageBool, setLanguageBool] = useState(null);
   const [currency, setCurrency] = useState(localStorage.getItem('currency') || 'usd');
   const navigate = useNavigate();
@@ -17,6 +19,7 @@ const Dropdown = forwardRef(() => {
         data: { refreshToken: refreshToken }
       });
       if (response.status === 200) {
+        addNotification('success', 'Check', t('navbar.app.logout_message'));
         localStorage.removeItem('userId');
         localStorage.removeItem('accessToken');
         localStorage.removeItem('refreshToken');

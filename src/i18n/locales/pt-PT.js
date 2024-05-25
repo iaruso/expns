@@ -53,7 +53,8 @@ export default {
 				stats: 'Estatísticas',
 				transactions: 'Transações',
 				add: 'Criar transação',
-				logout: 'Sair'
+				logout: 'Sair',
+				logout_message: 'Sessão terminada com sucesso.'
 			}
     },
 		footer: {

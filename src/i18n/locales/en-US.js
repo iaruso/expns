@@ -53,7 +53,8 @@ export default {
 				stats: 'Stats',
 				transactions: 'Transactions',
 				add: 'Add transaction',
-				logout: 'Logout'
+				logout: 'Logout',
+				logout_message: 'You have been logged out.'
 			}
     },
 		footer: {
