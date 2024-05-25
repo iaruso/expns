@@ -25,6 +25,7 @@ const Form = ({ setShowForm, edit = false, initialData }) => {
   const [selectedCategory, setSelectedCategory] = useState([]);
   const [selectionDefined, setSelectionDefined] = useState(false);
   const addNotification = useNotifications();
+  const [nameChanged, setNameChanged] = useState(false);
 
   const typesOptions = [
     { value: 'incomes', label: t('types.incomes') },
@@ -201,6 +202,10 @@ const Form = ({ setShowForm, edit = false, initialData }) => {
     }
   }, []);
 
+  const handleNameInput = () => {
+    setNameChanged(true);
+  };
+
   return (
     <>
       <div className='fixed w-full h-full z-50 bg-white inset-0 flex items-center justify-center'>
@@ -209,7 +214,7 @@ const Form = ({ setShowForm, edit = false, initialData }) => {
             <button className='w-8 h-8 rounded flex items-center justify-center bg-white border-[0.05rem] mobile:border-[0.1rem] border-gallery hover:bg-alabaster hover:duration-[0.4s]' onClick={(e) => {e.preventDefault(); setShowForm(false);}}>
               <Icon name='Return' className='w-4 h-4 fill-chalice'/>
             </button>
-            <input type='text' ref={transactionName} required placeholder={t('app.form.name')} className={`h-8 w-0 flex-1 px-2 py-1 text-sm font-semibold text-cod border-[0.05rem] mobile:border-[0.1rem] ${!edit ? 'border-gallery' : 'border-white focus:border-gallery hover:border-gallery'} rounded bg-white placeholder:text-alto hover:bg-alabaster hover:duration-[0.4s] ease-in-out`}/>
+            <input type='text' ref={transactionName} required onChange={handleNameInput} placeholder={t('app.form.name')} className={`h-8 w-0 flex-1 px-2 py-1 text-sm font-semibold text-cod border-[0.05rem] mobile:border-[0.1rem] ${!edit || nameChanged ? 'border-gallery' : 'border-white focus:border-gallery hover:border-gallery'} rounded bg-white placeholder:text-alto hover:bg-alabaster hover:duration-[0.4s] ease-in-out`}/>
             { edit &&
               <button className='w-8 h-8 rounded flex items-center justify-center bg-[#E95656] hover:bg-[#D93F3F] hover:duration-[0.4s]' onClick={handleDelete}>
                 <Icon name='Delete' className='w-4 h-4 fill-white'/>

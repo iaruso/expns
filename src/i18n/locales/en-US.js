@@ -34,6 +34,11 @@ export default {
 			},
 			other: 'Other'
 		},
+		fetch: {
+			loaded: 'User data loaded!',
+			failed: 'Failed to fetch user transactions.',
+			error: 'Error fetching data.'
+		},
     navbar: {
       main: {
 				features: 'Features',

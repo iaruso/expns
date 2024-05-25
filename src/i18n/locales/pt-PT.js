@@ -34,6 +34,11 @@ export default {
 			},
 			other: 'Outros'
 		},
+		fetch: {
+			loaded: 'Dados do utilizador carregados!',
+			failed: 'Erro ao obter transações do utilizador.',
+			error: 'Erro ao obter dados.'
+		},
     navbar: {
 			main: {
 				features: 'Funcionalidades',

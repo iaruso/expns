@@ -63,15 +63,15 @@ const Application = () => {
         setUserTransactions(transactions);
         const rates = currencyRatesResponse.data[0]?.rates || {};
         setCurrencyRates(rates);
-        if (triggerFetch === 0 && !dataLoadedFromStorage) addNotification('success', 'Check', 'User data loaded!');
+        if (triggerFetch === 0 && !dataLoadedFromStorage) addNotification('success', 'Check', t('fetch.loaded'));
         setTriggerFetch(2);
         setDataLoaded(true);
         localStorage.setItem('data-loaded', true);
       } else {
-        addNotification('error', 'Info', 'Failed to fetch user transactions.');
+        addNotification('error', 'Info', t('fetch.failed'));
       }
     } catch (error) {
-      addNotification('error', `Error fetching data: ${error.message}`);
+      addNotification('error', 'Info', t('fetch.failed'));
     }
   };
 
