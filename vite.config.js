@@ -4,7 +4,7 @@ import { compression } from 'vite-plugin-compression2';
 import preload from 'vite-plugin-preload';
 
 export default defineConfig({
-  base: './',
+  base: '/',
   plugins: [
     react(),
     compression(),
