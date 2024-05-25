@@ -12,10 +12,14 @@ const NotificationProvider = ({ children, position = 'bottom-right' }) => {
   const [notifications, setNotifications] = useState([]);
 
   const addNotification = useCallback((type, icon, value) => {
-    setNotifications(prev => [
-      ...prev,
-      { id: Date.now(), type, icon, value },
-    ]);
+    setNotifications(prev => {
+      const newNotification = { id: Date.now(), type, icon, value };
+      if (prev.length >= 5) {
+        return [...prev.slice(1), newNotification];
+      } else {
+        return [...prev, newNotification];
+      }
+    });
   }, []);
 
   const removeNotification = useCallback(id => {

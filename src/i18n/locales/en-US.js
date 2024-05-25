@@ -258,14 +258,8 @@ export default {
 				alt: 'Already have an account?',
 				alt_opt: 'Log in',
 				reqs: {
-					title: 'Password must contain at least 8 characters, a number, an uppercase letter, a lowercase letter, and a symbol.',
-					warning: 'Please fill in all fields.',
-					password_warning: 'The password must include at least:',
-					number: 'a number.',
-					uppercase: 'an uppercase letter.',
-					lowercase: 'a lowercase letter.',
-					symbol: 'a symbol.',
-					length: 'eight characters.',
+					terms: 'Please accept the terms of service and privacy policy.',
+					min: 'Password must have at least: 8 characters, 1 symbol, 1 number, 1 uppercase letter.',
 					failed: 'Server error, please try again later.',
 					duplicated: 'Email already in use.',
 					succeeded: 'Account created successfully.'

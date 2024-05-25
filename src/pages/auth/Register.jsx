@@ -4,11 +4,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import { gsap } from 'gsap';
+import { useNotifications } from '../../components/notification/NotificationContainer';
 import Logo from '../../components/icons/Logo';
 
 const Register = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const addNotification = useNotifications();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [checked, setChecked] = useState(false);
@@ -18,10 +20,6 @@ const Register = () => {
   const [hasUppercase, setHasUppercase] = useState(false);
   const [hasLowercase, setHasLowercase] = useState(false);
   const [hasLength, setHasLength] = useState(false);
-  const [duplicatedEmail, setDuplicatedEmail] = useState(false);
-  const [hasFailed, setHasFailed] = useState(false);
-  const [hasSucceeded, setHasSucceeded] = useState(false);
-  const [warning, setWarning] = useState(false);
   const [isRegistering, setIsRegistering] = useState(false);
   const authRef = useRef(null);
 
@@ -37,17 +35,24 @@ const Register = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    
+    if (!checked) {
+      addNotification('error', 'Info', t('auth.register.reqs.terms'));
+      return;
+    }
 
     if (isRegistering) {
       return;
     }
+
     setIsRegistering(true);
   
     if (passwordLevel < 4) {
-      setWarning(true);
+      addNotification('error', 'Info', t('auth.register.reqs.min'));
+      setIsRegistering(false);
       return;
     }
-  
+
     try {
       const response = await axios.post('https://expns-api.vercel.app/api/auth/register', {
         email,
@@ -55,46 +60,26 @@ const Register = () => {
       });
   
       if (response.status === 201) {
-        setHasSucceeded(true);
-        !warning ? setWarning(true) : null;
-        setTimeout(() => {
-          animateCard();
-        }, 1000);
+        addNotification('success', 'Check', t('auth.register.reqs.succeeded'));
         setTimeout(() => {
           setIsRegistering(false);
           navigate('/login');
-        }, 3000);
+        }, 1000);
       }
     } catch (error) {
       if (error.response && error.response.status === 400) {
-        setDuplicatedEmail(true);
-        !warning ? setWarning(true) : null;
+        addNotification('error', 'Info', t('auth.register.reqs.duplicated'));
         setTimeout(() => {
-          animateCard();
           setIsRegistering(false);
         }, 1000);
       } else {
-        setHasFailed(true);
-        !warning ? setWarning(true) : null;
+        addNotification('error', 'Info', t('auth.register.reqs.failed'));
         setTimeout(() => {
-          animateCard();
           setIsRegistering(false);
         }, 1000);
       }
     }
   };
-
-  useEffect(() => {
-    if (warning) {
-      animateCard()
-    }
-  }, [warning]);
-
-  useEffect(() => {
-    setDuplicatedEmail(false);
-    setHasFailed(false);
-    setHasSucceeded(false);
-  }, [email, password, checked]);
 
   const checkPasswordStrength = (value) => {
     const hasNumber = /\d/.test(value);
@@ -117,8 +102,6 @@ const Register = () => {
     setPassword(e.target.value);
     checkPasswordStrength(e.target.value);
   };
-
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   return (
     <div className='w-full h-[100dvh] flex items-center justify-center px-16'>
@@ -148,38 +131,6 @@ const Register = () => {
           </button>
         </form>
         <p className='text-gray text-xs mobile:text-base font-semibold flex gap-1 w-full justify-center'>{t('auth.register.alt')}<Link to='/login' className='text-cod hover:underline'>{t('auth.register.alt_opt')}</Link></p>
-        {warning ?
-          <>
-          { !email || !password || !checked || !emailRegex.test(email) ?
-            <div className='warning-card fixed bottom-4 min-h-8 bg-white w-56 rounded border-gallery border-[0.05rem] mobile:border-[0.1rem] p-4 gap-2 hover:duration-[0.4s] ease-in-out cursor-pointer hover:bg-sand opacity-0' onClick={() => setWarning(false)}>
-              <p className='text-gray text-xs mobile:text-base font-semibold'>{t('auth.register.reqs.warning')}</p>
-            </div>
-          :
-          <>
-            { !hasNumber || !hasSymbol || !hasUppercase || !hasLowercase || !hasLength ?
-              <div className='warning-card fixed bottom-4 min-h-8 bg-white w-56 rounded border-gallery border-[0.05rem] mobile:border-[0.1rem] p-4 gap-2 hover:duration-[0.4s] ease-in-out cursor-pointer hover:bg-sand opacity-0' onClick={() => setWarning(false)}>
-                <p className='text-gray text-xs mobile:text-base font-semibold'>{t('auth.register.reqs.password_warning')}</p>
-                <ul className='list-[initial] py-2 px-4 mobile:px-8 '>
-                  { !hasNumber ? <li className='text-gray text-xs mobile:text-base font-semibold'>{t('auth.register.reqs.number')}</li> : null }
-                  { !hasSymbol ? <li className='text-gray text-xs mobile:text-base font-semibold'>{t('auth.register.reqs.symbol')}</li> : null }
-                  { !hasUppercase ? <li className='text-gray text-xs mobile:text-base font-semibold'>{t('auth.register.reqs.uppercase')}</li> : null }
-                  { !hasLowercase ? <li className='text-gray text-xs mobile:text-base font-semibold'>{t('auth.register.reqs.lowercase')}</li> : null }
-                  { !hasLength ? <li className='text-gray text-xs mobile:text-base font-semibold'>{t('auth.register.reqs.length')}</li> : null }
-                </ul>
-              </div>
-              : null}
-            { hasFailed || duplicatedEmail || hasSucceeded ?
-              <div className='warning-card fixed bottom-4 min-h-8 bg-white w-56 rounded border-gallery border-[0.05rem] mobile:border-[0.1rem] p-4 gap-2 duration-[0.4s] ease-in-out cursor-pointer hover:bg-sand opacity-0' onClick={() => setWarning(false)}>
-                { hasFailed ? <p className='text-gray text-xs mobile:text-base font-semibold'>{t('auth.register.reqs.failed')}</p> : null }
-                { duplicatedEmail ? <p className='text-gray text-xs mobile:text-base font-semibold'>{t('auth.register.reqs.duplicated')}</p> : null }
-                { hasSucceeded ? <p className='text-gray text-xs mobile:text-base font-semibold'>{t('auth.register.reqs.succeeded')}</p> : null }
-              </div>
-            : null}
-          </>
-          }
-          </>
-          : null
-        }
       </div>
     </div>
   );

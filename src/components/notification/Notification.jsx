@@ -8,7 +8,9 @@ const Notification = ({ id, type, icon, value, onRemove }) => {
       onRemove(id);
     }, 10000);
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+    };
   }, [id, onRemove]);
 
   return (

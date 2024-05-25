@@ -258,18 +258,12 @@ export default {
 				alt: 'Já tem uma conta?',
 				alt_opt: 'Entrar',
 				reqs: {
-					title: 'A senha deve conter pelo menos 8 caracteres, um número, uma letra maiúscula, uma letra minúscula e um símbolo.',
-					warning: 'Por favor, preencha todos os campos.',
-					password_warning: 'A senha deve incluir pelo menos:',
-					number: 'um número.',
-					uppercase: 'uma letra maiúscula.',
-					lowercase: 'uma leta minúscula.',
-					symbol: 'um símbolo.',
-					length: 'oito caracteres.',
+					terms: 'Por favor, aceite os termos de serviço e política de privacidade.',
+					min: 'A senha deve ter pelo menos 8 caracteres, 1 símbolo, 1 letra maíscula e 1 letra minúscula.',
 					failed: 'Erro no servidor, tente novamente mais tarde.',
 					duplicated: 'O email já está em uso.',
-					succeeded: 'Conta criada com sucesso.'
-				}
+					succeeded: 'Utilizador registado com sucesso.'
+				},
 			},
 			reset: {
 				message_before: 'Será enviado um email com instruções para recuperação da conta.',
