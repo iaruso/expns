@@ -1,6 +1,7 @@
 import './Application.css';
 import React, { createContext, useEffect, useState } from 'react';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import { gsap } from 'gsap';
 import Dashboard from './Dashboard';
@@ -14,6 +15,7 @@ const TransactionsContext = createContext();
 const CurrencyContext = createContext();
 
 const Application = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
   const addNotification = useNotifications();
