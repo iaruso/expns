@@ -34,11 +34,11 @@ const Dropdown = forwardRef(() => {
   };
 	
 	useEffect(() => {
-		i18n.language === 'en-US' ? setLanguageBool(true) : setLanguageBool(false);
+		i18n.language === 'en' ? setLanguageBool(true) : setLanguageBool(false);
 	}, [i18n]);
   const toggleLanguage = () => {
     setLanguageBool(prevState => !prevState);
-    !languageBool ? i18n.changeLanguage('en-US') : i18n.changeLanguage('pt-PT');
+    !languageBool ? i18n.changeLanguage('en') : i18n.changeLanguage('pt');
     window.location.reload();
   };
 

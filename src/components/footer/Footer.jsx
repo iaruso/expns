@@ -13,7 +13,7 @@ const Footer = () => {
 	const [languageBool, setLanguageBool] = useState(null);
 	
 	useEffect(() => {
-		i18n.language === 'en-US' ? setLanguageBool(true) : setLanguageBool(false);
+		i18n.language === 'en' ? setLanguageBool(true) : setLanguageBool(false);
 	}, [i18n]);
   const toggleLanguage = () => {
     setLanguageBool(prevState => !prevState);
@@ -21,7 +21,7 @@ const Footer = () => {
   };
 
 	const reloadPage = () => {
-		!languageBool ? i18n.changeLanguage('en-US') : i18n.changeLanguage('pt-PT');
+		!languageBool ? i18n.changeLanguage('en') : i18n.changeLanguage('pt');
 		window.scrollTo(0, 0);
 		window.location.reload();
 	}

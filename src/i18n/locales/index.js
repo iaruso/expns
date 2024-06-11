@@ -1,7 +1,7 @@
-import portugueseTranslations from './pt-PT'
-import englishTranslations from './en-US'
+import portugueseTranslations from './pt'
+import englishTranslations from './en'
 
 export default {
-  'pt-PT': portugueseTranslations,
-  'en-US': englishTranslations 
+  'pt': portugueseTranslations,
+  'en': englishTranslations 
 }
